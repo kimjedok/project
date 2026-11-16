@@ -36,41 +36,138 @@
             overflow-x: hidden;
         }
 
-        /* 초기 접속 인트로 스플래시 화면 */
+        /* 초기 접속 인트로 스플래시 화면 (흰 바탕 + 두 로고 융합 모션) */
         #intro-splash {
             position: fixed;
             inset: 0;
             z-index: 9999;
-            background-color: var(--navy-blue);
+            background-color: #FFFFFF;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            color: var(--bg-white);
-            animation: splashFadeOut 0.6s ease-in-out 1.1s forwards;
+            animation: splashFadeOut 0.65s ease-in-out 2.3s forwards;
             pointer-events: none;
         }
 
-        #intro-splash .splash-sub {
-            font-size: 0.85rem;
-            letter-spacing: 4px;
-            color: rgba(255, 255, 255, 0.8);
-            margin-bottom: 0.5rem;
-            animation: splashTextIn 0.6s ease-out forwards;
+        .splash-stage {
+            position: relative;
+            width: 340px;
+            height: 160px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        #intro-splash .splash-title {
-            font-size: 2.2rem;
+        .splash-logo {
+            position: absolute;
+            width: 128px;
+            height: 128px;
+            object-fit: contain;
+            mix-blend-mode: multiply;
+        }
+
+        /* 왼쪽: 한양대 로고 -> 중앙으로 이동 후 융합 */
+        .splash-logo.left {
+            animation: mergeFromLeft 1.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        /* 오른쪽: 해군 로고 -> 중앙으로 이동 후 융합 */
+        .splash-logo.right {
+            animation: mergeFromRight 1.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        /* 두 로고가 합쳐진 뒤 중앙에 피어나는 빛 파동 */
+        .splash-fusion-ring {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 2px solid var(--navy-blue);
+            opacity: 0;
+            animation: fusionPulse 1.1s ease-out 1.15s forwards;
+        }
+
+        .splash-caption {
+            margin-top: 1.1rem;
+            text-align: center;
+            opacity: 0;
+            animation: captionReveal 0.7s ease-out 1.25s forwards;
+        }
+
+        .splash-caption .sub {
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            color: var(--point-gray);
+            margin-bottom: 0.25rem;
+        }
+
+        .splash-caption .title {
+            font-size: 1.45rem;
             font-weight: 800;
-            letter-spacing: 2px;
-            border-bottom: 2px solid var(--point-gray);
-            padding-bottom: 0.4rem;
-            animation: splashTextIn 0.6s ease-out forwards;
+            letter-spacing: 1.5px;
+            color: var(--navy-blue);
         }
 
-        @keyframes splashTextIn {
-            from { opacity: 0; transform: translateY(12px); }
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes mergeFromLeft {
+            0% {
+                opacity: 0;
+                transform: translateX(-115px) scale(0.92);
+            }
+            30% {
+                opacity: 1;
+                transform: translateX(-82px) scale(1);
+            }
+            65% {
+                opacity: 1;
+                transform: translateX(-22px) scale(1.03);
+            }
+            100% {
+                opacity: 0.92;
+                transform: translateX(0px) scale(1.06);
+            }
+        }
+
+        @keyframes mergeFromRight {
+            0% {
+                opacity: 0;
+                transform: translateX(115px) scale(0.92);
+            }
+            30% {
+                opacity: 1;
+                transform: translateX(82px) scale(1);
+            }
+            65% {
+                opacity: 1;
+                transform: translateX(22px) scale(1.03);
+            }
+            100% {
+                opacity: 0.92;
+                transform: translateX(0px) scale(1.06);
+            }
+        }
+
+        @keyframes fusionPulse {
+            0% {
+                opacity: 0.65;
+                transform: scale(0.85);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(1.65);
+            }
+        }
+
+        @keyframes captionReveal {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         @keyframes splashFadeOut {
@@ -78,7 +175,7 @@
             to { opacity: 0; visibility: hidden; }
         }
 
-        /* 본문 요소 순차 등장 애니메이션 */
+        /* 본문 요소 순차 등장 애니메이션 (스플래시 종료 시점에 맞춰 조정) */
         @keyframes heroReveal {
             from {
                 opacity: 0;
@@ -92,27 +189,27 @@
 
         .anim-step-1 {
             opacity: 0;
-            animation: heroReveal 0.7s cubic-bezier(0.22, 1, 0.36, 1) 1.2s forwards;
+            animation: heroReveal 0.7s cubic-bezier(0.22, 1, 0.36, 1) 2.4s forwards;
         }
 
         .anim-step-2 {
             opacity: 0;
-            animation: heroReveal 0.7s cubic-bezier(0.22, 1, 0.36, 1) 1.35s forwards;
+            animation: heroReveal 0.7s cubic-bezier(0.22, 1, 0.36, 1) 2.55s forwards;
         }
 
         .anim-step-3 {
             opacity: 0;
-            animation: heroReveal 0.7s cubic-bezier(0.22, 1, 0.36, 1) 1.5s forwards;
+            animation: heroReveal 0.7s cubic-bezier(0.22, 1, 0.36, 1) 2.7s forwards;
         }
 
         .anim-step-4 {
             opacity: 0;
-            animation: heroReveal 0.8s cubic-bezier(0.22, 1, 0.36, 1) 1.65s forwards;
+            animation: heroReveal 0.8s cubic-bezier(0.22, 1, 0.36, 1) 2.85s forwards;
         }
 
         .anim-step-5 {
             opacity: 0;
-            animation: heroReveal 0.8s cubic-bezier(0.22, 1, 0.36, 1) 1.85s forwards;
+            animation: heroReveal 0.8s cubic-bezier(0.22, 1, 0.36, 1) 3.05s forwards;
         }
 
         /* 상단 내비게이션 */
@@ -499,7 +596,7 @@
             color: var(--bg-white);
         }
 
-        /* 2. 전력 (고정 비율 카드 리스트 UI - 필터 전환 시 흔들림 방지) */
+        /* 2. 전력 (고정 비율 카드 리스트 UI) */
         .fleet-tabs {
             display: flex;
             flex-wrap: wrap;
@@ -564,7 +661,6 @@
             background-color: var(--light-gray-bg);
         }
 
-        /* 1열: 함종 (절대 줄바꿈 되지 않도록 고정) */
         .fleet-col-type {
             font-weight: 800;
             color: var(--navy-blue);
@@ -573,7 +669,6 @@
             line-height: 1.7;
         }
 
-        /* 2열: 분류 기호 및 함급 + 만재배수량 */
         .fleet-col-class {
             line-height: 1.85;
             font-size: 0.94rem;
@@ -599,7 +694,6 @@
             margin-left: 0.25rem;
         }
 
-        /* 3열: 주요 특징 (상세 텍스트 + 사진 확장 영역) */
         .fleet-col-detail {
             display: flex;
             flex-direction: column;
@@ -610,35 +704,6 @@
             font-size: 0.94rem;
             color: var(--text-dark);
             line-height: 1.65;
-        }
-
-        .fleet-media-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
-            gap: 0.75rem;
-        }
-
-        .fleet-photo-box {
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
-            overflow: hidden;
-            background-color: var(--light-gray-bg);
-        }
-
-        .fleet-photo-box img {
-            width: 100%;
-            height: 140px;
-            object-fit: cover;
-            display: block;
-        }
-
-        .fleet-photo-caption {
-            padding: 0.35rem 0.6rem;
-            font-size: 0.78rem;
-            color: var(--point-gray);
-            font-weight: 600;
-            background-color: var(--bg-white);
-            border-top: 1px solid var(--border-color);
         }
 
         /* 이지스함 VR 체험 배너 */
@@ -807,10 +872,17 @@
 </head>
 <body>
 
-    <!-- 초기 접속 스플래시 화면 -->
+    <!-- 초기 접속 스플래시 화면 (흰 바탕 + 한양대·해군 로고 융합 모션) -->
     <div id="intro-splash">
-        <div class="splash-sub">REPUBLIC OF KOREA NAVY</div>
-        <div class="splash-title">ROK NAVY</div>
+        <div class="splash-stage">
+            <div class="splash-fusion-ring"></div>
+            <img src="hanyang_logo.png" alt="한양대학교 로고" class="splash-logo left">
+            <img src="navy_logo.png" alt="대한민국 해군 로고" class="splash-logo right">
+        </div>
+        <div class="splash-caption">
+            <div class="sub">HANYANG UNIVERSITY × ROK NAVY</div>
+            <div class="title">NAVAL STRATEGIC TECHNOLOGY</div>
+        </div>
     </div>
 
     <!-- 상단 탭 내비게이션 -->
@@ -945,7 +1017,7 @@
             </div>
         </section>
 
-        <!-- [탭 2] 전력 (고정 비율 카드 리스트 UI) -->
+        <!-- [탭 2] 전력 -->
         <section id="tab-forces" class="tab-panel">
             <div class="content-container">
                 <div class="section-header">
