@@ -499,7 +499,7 @@
             color: var(--bg-white);
         }
 
-        /* 2. 전력 (함정 체계) */
+        /* 2. 전력 (고정 비율 카드 리스트 UI - 필터 전환 시 흔들림 방지) */
         .fleet-tabs {
             display: flex;
             flex-wrap: wrap;
@@ -526,61 +526,119 @@
             color: var(--bg-white);
         }
 
-        .fleet-table-wrap {
-            overflow-x: auto;
+        .fleet-list-container {
             border: 1px solid var(--border-color);
-            border-radius: 4px;
+            border-radius: 6px;
+            overflow: hidden;
             margin-bottom: 1.75rem;
+            background-color: var(--bg-white);
         }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            text-align: left;
-            font-size: 0.95rem;
-        }
-
-        th {
+        .fleet-list-header {
+            display: grid;
+            grid-template-columns: 120px 260px 1fr;
             background-color: var(--navy-blue);
             color: var(--bg-white);
-            padding: 0.9rem 1.2rem;
             font-weight: 600;
-            white-space: nowrap;
+            font-size: 0.92rem;
+            padding: 0.9rem 1.25rem;
+            gap: 1rem;
         }
 
-        td {
-            padding: 0.95rem 1.2rem;
+        .fleet-item {
+            display: grid;
+            grid-template-columns: 120px 260px 1fr;
+            gap: 1rem;
+            padding: 1.25rem;
             border-bottom: 1px solid var(--border-color);
-            line-height: 1.85;
-            vertical-align: top;
+            align-items: start;
+            background-color: var(--bg-white);
+            transition: background-color 0.2s;
         }
 
-        tr:last-child td {
+        .fleet-item:last-child {
             border-bottom: none;
         }
 
-        tr:nth-child(even) {
+        .fleet-item:hover {
             background-color: var(--light-gray-bg);
+        }
+
+        /* 1열: 함종 (절대 줄바꿈 되지 않도록 고정) */
+        .fleet-col-type {
+            font-weight: 800;
+            color: var(--navy-blue);
+            font-size: 1rem;
+            white-space: nowrap;
+            line-height: 1.7;
+        }
+
+        /* 2열: 함급 및 분류 기호 + 만재배수량 */
+        .fleet-col-class {
+            line-height: 1.85;
+            font-size: 0.94rem;
         }
 
         .ship-badge {
             display: inline-block;
-            background-color: var(--bg-white);
+            background-color: var(--light-gray-bg);
             border: 1px solid var(--point-gray);
             color: var(--navy-blue);
-            font-size: 0.8rem;
+            font-size: 0.78rem;
             font-weight: 700;
-            padding: 0.1rem 0.5rem;
+            padding: 0.08rem 0.45rem;
             border-radius: 3px;
-            margin-right: 0.4rem;
+            margin-right: 0.35rem;
             line-height: 1.4;
         }
 
         .tonnage-tag {
             color: var(--point-gray);
-            font-size: 0.85rem;
+            font-size: 0.78rem;
+            font-weight: 500;
+            margin-left: 0.25rem;
+        }
+
+        /* 3열: 주요 특징 (상세 텍스트 + 함정 사진 확장 영역) */
+        .fleet-col-detail {
+            display: flex;
+            flex-direction: column;
+            gap: 0.85rem;
+        }
+
+        .fleet-desc {
+            font-size: 0.94rem;
+            color: var(--text-dark);
+            line-height: 1.65;
+        }
+
+        .fleet-media-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+            gap: 0.75rem;
+        }
+
+        .fleet-photo-box {
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            overflow: hidden;
+            background-color: var(--light-gray-bg);
+        }
+
+        .fleet-photo-box img {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .fleet-photo-caption {
+            padding: 0.35rem 0.6rem;
+            font-size: 0.78rem;
+            color: var(--point-gray);
             font-weight: 600;
-            margin-left: 0.3rem;
+            background-color: var(--bg-white);
+            border-top: 1px solid var(--border-color);
         }
 
         /* 이지스함 VR 체험 배너 */
@@ -737,6 +795,13 @@
             .hanyang-videos-grid {
                 grid-template-columns: 1fr;
             }
+            .fleet-list-header {
+                display: none;
+            }
+            .fleet-item {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+            }
         }
     </style>
 </head>
@@ -880,7 +945,7 @@
             </div>
         </section>
 
-        <!-- [탭 2] 전력 (함정 체계 + 이지스함 VR) -->
+        <!-- [탭 2] 전력 (고정 비율 카드 리스트 UI) -->
         <section id="tab-forces" class="tab-panel">
             <div class="content-container">
                 <div class="section-header">
@@ -897,86 +962,137 @@
                     <button class="filter-btn" onclick="filterFleet('patrol', this)">고속함·고속정</button>
                 </div>
 
-                <div class="fleet-table-wrap">
-                    <table id="fleetTable">
-                        <thead>
-                            <tr>
-                                <th>함종</th>
-                                <th>함급 및 분류 기호 (만재배수량)</th>
-                                <th>주요 특징 및 대표 함정</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr data-category="destroyer">
-                                <td><strong>구축함</strong></td>
-                                <td>
-                                    <span class="ship-badge">DDG</span> 정조대왕급 <span class="tonnage-tag">(12,000톤)</span><br>
-                                    <span class="ship-badge">DDG</span> 세종대왕급 <span class="tonnage-tag">(10,600톤)</span>
-                                </td>
-                                <td>이지스(Aegis) 전투체계를 탑재한 대한민국 해군의 핵심 기동함대 주력 전력 (KDDX 차세대 구축함 추진)</td>
-                            </tr>
-                            <tr data-category="destroyer">
-                                <td><strong>구축함</strong></td>
-                                <td>
-                                    <span class="ship-badge">DDH-II</span> 충무공이순신급 <span class="tonnage-tag">(5,520톤)</span><br>
-                                    <span class="ship-badge">DDH-I</span> 광개토대왕급 <span class="tonnage-tag">(3,900톤)</span>
-                                </td>
-                                <td>대공·대함·대잠 입체 작전 능력을 갖춘 한국형 다목적 구축함</td>
-                            </tr>
-                            <tr data-category="frigate">
-                                <td><strong>호위함</strong></td>
-                                <td>
-                                    <span class="ship-badge">FFG-III</span> 충남급 <span class="tonnage-tag">(4,300톤)</span><br>
-                                    <span class="ship-badge">FFG-II</span> 대구급 <span class="tonnage-tag">(3,600톤)</span><br>
-                                    <span class="ship-badge">FFG-I</span> 인천급 <span class="tonnage-tag">(3,200톤)</span>
-                                </td>
-                                <td>해역함대의 주력 전투함으로 대잠 능력과 대함·대공 방어력을 대폭 강화한 차기 호위함</td>
-                            </tr>
-                            <tr data-category="frigate">
-                                <td><strong>초계함</strong></td>
-                                <td>
-                                    <span class="ship-badge">PCC</span> 포항급 <span class="tonnage-tag">(1,220톤)</span>
-                                </td>
-                                <td>연안 경비 및 대잠 초계 임무를 수행해 온 핵심 연안 방어 전력</td>
-                            </tr>
-                            <tr data-category="submarine">
-                                <td><strong>잠수함</strong></td>
-                                <td>
-                                    <span class="ship-badge">SS-III</span> 도산안창호급 <span class="tonnage-tag">(수중 3,700톤)</span><br>
-                                    <span class="ship-badge">SS-II</span> 손원일급 <span class="tonnage-tag">(수중 1,860톤)</span><br>
-                                    <span class="ship-badge">SS-I</span> 장보고급 <span class="tonnage-tag">(수중 1,400톤)</span>
-                                </td>
-                                <td>3,000톤급 중형 잠수함(도산안창호급)부터 1,800톤·1,200톤급까지 운용하는 핵심 수중 전력</td>
-                            </tr>
-                            <tr data-category="amphibious">
-                                <td><strong>상륙함</strong></td>
-                                <td>
-                                    <span class="ship-badge">LPH</span> 독도급 <span class="tonnage-tag">(18,800톤)</span><br>
-                                    <span class="ship-badge">LST-II</span> 천왕봉급 <span class="tonnage-tag">(7,140톤)</span><br>
-                                    <span class="ship-badge">LST-I</span> 고준봉급 <span class="tonnage-tag">(4,250톤)</span>
-                                </td>
-                                <td>대형수송함(독도함·마라도함)을 중심으로 상륙작전 지휘 및 병력·장비 수송 수행</td>
-                            </tr>
-                            <tr data-category="amphibious">
-                                <td><strong>기뢰전함<br>지원함</strong></td>
-                                <td>
-                                    <span class="ship-badge">MLS-II</span> 남포급 <span class="tonnage-tag">(4,240톤)</span><br>
-                                    <span class="ship-badge">MSH</span> 양양급 <span class="tonnage-tag">(880톤)</span><br>
-                                    <span class="ship-badge">AOE-II</span> 소양급 <span class="tonnage-tag">(23,000톤)</span><br>
-                                    <span class="ship-badge">AOE-I</span> 천지급 <span class="tonnage-tag">(9,200톤)</span>
-                                </td>
-                                <td>기뢰 부설·소해함, 군수지원함, 수상함·잠수함 구조함(통영함·강화도함), 훈련함(한산도함)</td>
-                            </tr>
-                            <tr data-category="patrol">
-                                <td><strong>고속함<br>고속정</strong></td>
-                                <td>
-                                    <span class="ship-badge">PKG</span> 윤영하급 <span class="tonnage-tag">(570톤)</span><br>
-                                    <span class="ship-badge">PKMR</span> 참수리급(신형) <span class="tonnage-tag">(250톤)</span>
-                                </td>
-                                <td>연안 및 NLL 수호를 담당하는 고기동 유도탄고속함 및 신형 고속정 전력</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div class="fleet-list-container" id="fleetList">
+                    <div class="fleet-list-header">
+                        <div>함종</div>
+                        <div>함급 및 분류 기호 (만재배수량)</div>
+                        <div>주요 특징</div>
+                    </div>
+
+                    <!-- 구축함 (이지스) -->
+                    <div class="fleet-item" data-category="destroyer">
+                        <div class="fleet-col-type">구축함</div>
+                        <div class="fleet-col-class">
+                            <span class="ship-badge">DDG</span> 정조대왕급 <span class="tonnage-tag">(12,000톤)</span><br>
+                            <span class="ship-badge">DDG</span> 세종대왕급 <span class="tonnage-tag">(10,600톤)</span>
+                        </div>
+                        <div class="fleet-col-detail">
+                            <div class="fleet-desc">
+                                이지스(Aegis) 전투체계를 탑재한 대한민국 해군의 핵심 기동함대 주력 전력입니다. 다수의 탄도탄 및 항공 표적을 동시 탐지·추적·요격할 수 있으며, KDDX 차세대 구축함 사업도 함께 추진되고 있습니다.
+                            </div>
+                            <!-- 추후 사진 추가 시 아래 주석을 해제하고 이미지 경로(src)만 넣으세요 -->
+                            <!--
+                            <div class="fleet-media-grid">
+                                <div class="fleet-photo-box">
+                                    <img src="이미지주소" alt="정조대왕함">
+                                    <div class="fleet-photo-caption">정조대왕함 (DDG-995)</div>
+                                </div>
+                            </div>
+                            -->
+                        </div>
+                    </div>
+
+                    <!-- 구축함 (다목적) -->
+                    <div class="fleet-item" data-category="destroyer">
+                        <div class="fleet-col-type">구축함</div>
+                        <div class="fleet-col-class">
+                            <span class="ship-badge">DDH-II</span> 충무공이순신급 <span class="tonnage-tag">(5,520톤)</span><br>
+                            <span class="ship-badge">DDH-I</span> 광개토대왕급 <span class="tonnage-tag">(3,900톤)</span>
+                        </div>
+                        <div class="fleet-col-detail">
+                            <div class="fleet-desc">
+                                대공·대함·대잠 입체 작전 능력을 갖춘 한국형 다목적 구축함으로, 한반도 해역 방어는 물론 청해부대 등 원해 파병 임무에서도 핵심적인 역할을 수행합니다.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 호위함 -->
+                    <div class="fleet-item" data-category="frigate">
+                        <div class="fleet-col-type">호위함</div>
+                        <div class="fleet-col-class">
+                            <span class="ship-badge">FFG-III</span> 충남급 <span class="tonnage-tag">(4,300톤)</span><br>
+                            <span class="ship-badge">FFG-II</span> 대구급 <span class="tonnage-tag">(3,600톤)</span><br>
+                            <span class="ship-badge">FFG-I</span> 인천급 <span class="tonnage-tag">(3,200톤)</span>
+                        </div>
+                        <div class="fleet-col-detail">
+                            <div class="fleet-desc">
+                                해역함대의 주력 전투함으로 복합식 추진체계(하이브리드)를 통한 저소음 대잠 능력과 다기능 위상배열레이더 기반의 대공·대함 방어력을 대폭 강화한 차기 호위함 전력입니다.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 초계함 -->
+                    <div class="fleet-item" data-category="frigate">
+                        <div class="fleet-col-type">초계함</div>
+                        <div class="fleet-col-class">
+                            <span class="ship-badge">PCC</span> 포항급 <span class="tonnage-tag">(1,220톤)</span>
+                        </div>
+                        <div class="fleet-col-detail">
+                            <div class="fleet-desc">
+                                연안 경비 및 대잠 초계 임무를 수행해 온 핵심 연안 방어 전력입니다.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 잠수함 -->
+                    <div class="fleet-item" data-category="submarine">
+                        <div class="fleet-col-type">잠수함</div>
+                        <div class="fleet-col-class">
+                            <span class="ship-badge">SS-III</span> 도산안창호급 <span class="tonnage-tag">(수중 3,700톤)</span><br>
+                            <span class="ship-badge">SS-II</span> 손원일급 <span class="tonnage-tag">(수중 1,860톤)</span><br>
+                            <span class="ship-badge">SS-I</span> 장보고급 <span class="tonnage-tag">(수중 1,400톤)</span>
+                        </div>
+                        <div class="fleet-col-detail">
+                            <div class="fleet-desc">
+                                국내 독자 설계·건조된 3,000톤급 중형 잠수함(도산안창호급)부터 공기불요추진체계(AIP)를 탑재한 1,800톤급·1,200톤급까지 운용하는 핵심 수중 전략 전력입니다.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 상륙함 -->
+                    <div class="fleet-item" data-category="amphibious">
+                        <div class="fleet-col-type">상륙함</div>
+                        <div class="fleet-col-class">
+                            <span class="ship-badge">LPH</span> 독도급 <span class="tonnage-tag">(18,800톤)</span><br>
+                            <span class="ship-badge">LST-II</span> 천왕봉급 <span class="tonnage-tag">(7,140톤)</span><br>
+                            <span class="ship-badge">LST-I</span> 고준봉급 <span class="tonnage-tag">(4,250톤)</span>
+                        </div>
+                        <div class="fleet-col-detail">
+                            <div class="fleet-desc">
+                                대형수송함(독도함·마라도함)을 중심으로 상륙작전 지휘 통제 및 대규모 병력·상륙장갑차·헬기 수송과 재해·재난 구조 임무를 수행합니다.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 기뢰전함 / 지원함 -->
+                    <div class="fleet-item" data-category="amphibious">
+                        <div class="fleet-col-type">기뢰전함<br>지원함</div>
+                        <div class="fleet-col-class">
+                            <span class="ship-badge">MLS-II</span> 남포급 <span class="tonnage-tag">(4,240톤)</span><br>
+                            <span class="ship-badge">MSH</span> 양양급 <span class="tonnage-tag">(880톤)</span><br>
+                            <span class="ship-badge">AOE-II</span> 소양급 <span class="tonnage-tag">(23,000톤)</span><br>
+                            <span class="ship-badge">AOE-I</span> 천지급 <span class="tonnage-tag">(9,200톤)</span>
+                        </div>
+                        <div class="fleet-col-detail">
+                            <div class="fleet-desc">
+                                주요 항만과 해상 교통로를 보호하는 기뢰 부설·소해함, 원해 작전 지속 능력을 보장하는 군수지원함, 수상함·잠수함 구조함(통영함·강화도함), 훈련함(한산도함) 등으로 구성됩니다.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 고속함 / 고속정 -->
+                    <div class="fleet-item" data-category="patrol">
+                        <div class="fleet-col-type">고속함<br>고속정</div>
+                        <div class="fleet-col-class">
+                            <span class="ship-badge">PKG</span> 윤영하급 <span class="tonnage-tag">(570톤)</span><br>
+                            <span class="ship-badge">PKMR</span> 참수리급(신형) <span class="tonnage-tag">(250톤)</span>
+                        </div>
+                        <div class="fleet-col-detail">
+                            <div class="fleet-desc">
+                                연안 및 서해 NLL 최전선 수호를 담당하는 고기동 유도탄고속함 및 신형 고속정 전력입니다.
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- 이지스함 VR 체험 배너 -->
@@ -1071,7 +1187,6 @@
             });
         }
 
-        // 이미 로드된 두 개의 iframe 간 전환 시에도 이전 영상이 자동 정지되도록 YouTube API 상태 감지
         window.addEventListener('message', function(event) {
             if (!event.origin.includes('youtube.com')) return;
             try {
@@ -1087,7 +1202,6 @@
             } catch (e) {}
         });
 
-        // 고화질(1280x720 HD) 유튜브 썸네일 초기화 및 클릭 시 단일 영상 재생
         function initYouTubeFacades() {
             document.querySelectorAll('.yt-facade').forEach((container, idx) => {
                 const videoId = container.getAttribute('data-video-id');
@@ -1120,7 +1234,6 @@
                 container.addEventListener('click', function() {
                     if (container.querySelector('iframe')) return;
 
-                    // 기존 재생 중인 모든 영상 즉시 정지
                     pauseOtherVideos();
 
                     const iframe = document.createElement('iframe');
@@ -1131,7 +1244,6 @@
                     iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
                     iframe.allowFullscreen = true;
 
-                    // 유튜브 IFrame API에 상태 변경 이벤트 구독 등록
                     iframe.addEventListener('load', function() {
                         setTimeout(() => {
                             if (iframe.contentWindow) {
@@ -1174,12 +1286,12 @@
             document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
 
-            const rows = document.querySelectorAll('#fleetTable tbody tr');
-            rows.forEach(row => {
-                if (category === 'all' || row.getAttribute('data-category') === category) {
-                    row.style.display = '';
+            const items = document.querySelectorAll('#fleetList .fleet-item');
+            items.forEach(item => {
+                if (category === 'all' || item.getAttribute('data-category') === category) {
+                    item.style.display = '';
                 } else {
-                    row.style.display = 'none';
+                    item.style.display = 'none';
                 }
             });
         }
