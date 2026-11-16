@@ -167,6 +167,10 @@
             white-space: nowrap;
         }
 
+        .nav-tab-btn.hanyang-tab {
+            color: var(--point-gray);
+        }
+
         .nav-tab-btn:hover {
             color: var(--navy-blue);
             background-color: var(--light-gray-bg);
@@ -616,6 +620,37 @@
             font-size: 0.9rem;
         }
 
+        /* 4. 한양해군 영상 그리드 */
+        .hanyang-videos-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .hanyang-video-card {
+            border: 1px solid var(--border-color);
+            border-top: 3px solid var(--navy-blue);
+            border-radius: 6px;
+            overflow: hidden;
+            background-color: #000;
+            box-shadow: 0 6px 18px rgba(14, 74, 132, 0.08);
+        }
+
+        .hanyang-video-embed {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+        }
+
+        .hanyang-video-embed iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
         /* 푸터 */
         footer {
             background-color: var(--bg-white);
@@ -644,14 +679,19 @@
                 padding: 0.75rem 1rem;
                 gap: 0.5rem;
             }
+            .nav-tabs {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
             .nav-tab-btn {
-                padding: 0.5rem 0.9rem;
-                font-size: 0.9rem;
+                padding: 0.5rem 0.75rem;
+                font-size: 0.88rem;
             }
             .home-hero h1 {
                 font-size: 1.9rem;
             }
-            .sub-videos-grid {
+            .sub-videos-grid,
+            .hanyang-videos-grid {
                 grid-template-columns: 1fr;
             }
         }
@@ -673,6 +713,7 @@
             <li><button class="nav-tab-btn" data-tab="organization" onclick="openTab('organization')">편제</button></li>
             <li><button class="nav-tab-btn" data-tab="forces" onclick="openTab('forces')">전력</button></li>
             <li><button class="nav-tab-btn" data-tab="news" onclick="openTab('news')">뉴스</button></li>
+            <li><button class="nav-tab-btn hanyang-tab" data-tab="hanyang" onclick="openTab('hanyang')">한양해군</button></li>
         </ul>
     </nav>
 
@@ -687,7 +728,7 @@
                 <!-- 메인 영상 -->
                 <div class="hero-video-wrap anim-step-4">
                     <div class="hero-video-embed">
-                        <iframe class="home-yt-player" src="https://www.youtube.com/embed/fRqTrPHP9nE?enablejsapi=1" title="대한민국 해군 메인 영상" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <iframe class="yt-player" src="https://www.youtube.com/embed/fRqTrPHP9nE?enablejsapi=1" title="대한민국 해군 메인 영상" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
                 </div>
 
@@ -695,12 +736,12 @@
                 <div class="sub-videos-grid anim-step-5">
                     <div class="sub-video-card">
                         <div class="sub-video-embed">
-                            <iframe class="home-yt-player" src="https://www.youtube.com/embed/ORiJx_mLj1Q?enablejsapi=1" title="대한민국 해군 대표 영상" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <iframe class="yt-player" src="https://www.youtube.com/embed/ORiJx_mLj1Q?enablejsapi=1" title="대한민국 해군 대표 영상" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         </div>
                     </div>
                     <div class="sub-video-card">
                         <div class="sub-video-embed">
-                            <iframe class="home-yt-player" src="https://www.youtube.com/embed/UGYBxcU4W2w?enablejsapi=1" title="대한민국 해군 소개 영상" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <iframe class="yt-player" src="https://www.youtube.com/embed/UGYBxcU4W2w?enablejsapi=1" title="대한민국 해군 소개 영상" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         </div>
                     </div>
                 </div>
@@ -928,6 +969,39 @@
                 </div>
             </div>
         </section>
+
+        <!-- [탭 4] 한양해군 -->
+        <section id="tab-hanyang" class="tab-panel">
+            <div class="content-container">
+                <div class="section-header">
+                    <div class="eng-title">04. Hanyang Navy</div>
+                    <h2>한양해군</h2>
+                </div>
+
+                <div class="hanyang-videos-grid">
+                    <div class="hanyang-video-card">
+                        <div class="hanyang-video-embed">
+                            <iframe class="yt-player" src="https://www.youtube.com/embed/qCJjdYokINs?enablejsapi=1" title="한양해군 영상 1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                    <div class="hanyang-video-card">
+                        <div class="hanyang-video-embed">
+                            <iframe class="yt-player" src="https://www.youtube.com/embed/qMJ2kb3W2UA?enablejsapi=1" title="한양해군 영상 2" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                    <div class="hanyang-video-card">
+                        <div class="hanyang-video-embed">
+                            <iframe class="yt-player" src="https://www.youtube.com/embed/pQKTFU6FIWo?enablejsapi=1" title="한양해군 영상 3" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                    <div class="hanyang-video-card">
+                        <div class="hanyang-video-embed">
+                            <iframe class="yt-player" src="https://www.youtube.com/embed/jiGTq_o7VmQ?enablejsapi=1" title="한양해군 영상 4" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
     <footer>
@@ -936,8 +1010,8 @@
     </footer>
 
     <script>
-        function pauseAllHomeVideos() {
-            document.querySelectorAll('.home-yt-player').forEach(iframe => {
+        function pauseAllVideos() {
+            document.querySelectorAll('.yt-player').forEach(iframe => {
                 if (iframe.contentWindow) {
                     iframe.contentWindow.postMessage(
                         JSON.stringify({ event: 'command', func: 'pauseVideo', args: [] }),
@@ -948,9 +1022,7 @@
         }
 
         function openTab(tabName) {
-            if (tabName !== 'home') {
-                pauseAllHomeVideos();
-            }
+            pauseAllVideos();
 
             document.querySelectorAll('.tab-panel').forEach(panel => {
                 panel.classList.remove('active');
