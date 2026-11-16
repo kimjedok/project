@@ -197,6 +197,86 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+        /* 고화질 유튜브 썸네일 플레이어 공통 */
+        .yt-facade {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            background-color: #000;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .yt-facade img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease, filter 0.3s ease;
+        }
+
+        .yt-facade:hover img {
+            transform: scale(1.02);
+            filter: brightness(0.92);
+        }
+
+        .yt-facade iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .yt-play-btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 68px;
+            height: 48px;
+            background-color: rgba(14, 74, 132, 0.9);
+            border: 1.5px solid rgba(255, 255, 255, 0.85);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.2s, transform 0.2s;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45);
+        }
+
+        .yt-facade:hover .yt-play-btn {
+            background-color: #FF0000;
+            border-color: #FF0000;
+            transform: translate(-50%, -50%) scale(1.06);
+        }
+
+        .yt-play-btn::after {
+            content: '';
+            display: block;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 10px 0 10px 18px;
+            border-color: transparent transparent transparent #FFFFFF;
+            margin-left: 3px;
+        }
+
+        .sub-video-card .yt-play-btn,
+        .hanyang-video-card .yt-play-btn {
+            width: 54px;
+            height: 38px;
+            border-radius: 10px;
+        }
+
+        .sub-video-card .yt-play-btn::after,
+        .hanyang-video-card .yt-play-btn::after {
+            border-width: 8px 0 8px 14px;
+        }
+
         /* 첫 페이지(홈) 히어로 영역 */
         .home-hero {
             background-color: var(--navy-blue);
@@ -242,21 +322,6 @@
             background-color: #000;
         }
 
-        .hero-video-embed {
-            position: relative;
-            width: 100%;
-            padding-bottom: 56.25%;
-        }
-
-        .hero-video-embed iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: 0;
-        }
-
         /* 메인 영상 아래 서브 영상 2개 그리드 */
         .sub-videos-grid {
             max-width: 860px;
@@ -272,21 +337,6 @@
             overflow: hidden;
             background-color: #000;
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
-        }
-
-        .sub-video-embed {
-            position: relative;
-            width: 100%;
-            padding-bottom: 56.25%;
-        }
-
-        .sub-video-embed iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: 0;
         }
 
         .home-quick-nav {
@@ -499,9 +549,10 @@
         }
 
         td {
-            padding: 0.9rem 1.2rem;
+            padding: 0.95rem 1.2rem;
             border-bottom: 1px solid var(--border-color);
-            line-height: 1.8;
+            line-height: 1.85;
+            vertical-align: top;
         }
 
         tr:last-child td {
@@ -523,6 +574,13 @@
             border-radius: 3px;
             margin-right: 0.4rem;
             line-height: 1.4;
+        }
+
+        .tonnage-tag {
+            color: var(--point-gray);
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-left: 0.3rem;
         }
 
         /* 이지스함 VR 체험 배너 */
@@ -636,21 +694,6 @@
             box-shadow: 0 6px 18px rgba(14, 74, 132, 0.08);
         }
 
-        .hanyang-video-embed {
-            position: relative;
-            width: 100%;
-            padding-bottom: 56.25%;
-        }
-
-        .hanyang-video-embed iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: 0;
-        }
-
         /* 푸터 */
         footer {
             background-color: var(--bg-white);
@@ -725,24 +768,18 @@
                 <h1 class="anim-step-2">The BEST Engine of Korea NAVY</h1>
                 <p class="anim-step-3">조국의 바다를 수호하고 세계 평화에 기여하는 필승해군 · 정예해군</p>
 
-                <!-- 메인 영상 -->
+                <!-- 메인 영상 (고화질 HD 썸네일) -->
                 <div class="hero-video-wrap anim-step-4">
-                    <div class="hero-video-embed">
-                        <iframe class="yt-player" src="https://www.youtube.com/embed/fRqTrPHP9nE?enablejsapi=1" title="대한민국 해군 메인 영상" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                    </div>
+                    <div class="yt-facade" data-video-id="fRqTrPHP9nE" data-title="대한민국 해군 메인 영상"></div>
                 </div>
 
-                <!-- 메인 영상 아래 소형 영상 2개 -->
+                <!-- 메인 영상 아래 소형 영상 2개 (고화질 HD 썸네일) -->
                 <div class="sub-videos-grid anim-step-5">
                     <div class="sub-video-card">
-                        <div class="sub-video-embed">
-                            <iframe class="yt-player" src="https://www.youtube.com/embed/ORiJx_mLj1Q?enablejsapi=1" title="대한민국 해군 대표 영상" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        </div>
+                        <div class="yt-facade" data-video-id="ORiJx_mLj1Q" data-title="대한민국 해군 대표 영상"></div>
                     </div>
                     <div class="sub-video-card">
-                        <div class="sub-video-embed">
-                            <iframe class="yt-player" src="https://www.youtube.com/embed/UGYBxcU4W2w?enablejsapi=1" title="대한민국 해군 소개 영상" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        </div>
+                        <div class="yt-facade" data-video-id="UGYBxcU4W2w" data-title="대한민국 해군 소개 영상"></div>
                     </div>
                 </div>
             </div>
@@ -865,57 +902,76 @@
                         <thead>
                             <tr>
                                 <th>함종 구분</th>
-                                <th>함급 / 분류 기호</th>
+                                <th>함급 / 분류 기호 · 만재배수량</th>
                                 <th>주요 특징 및 대표 함정</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr data-category="destroyer">
                                 <td><strong>구축함</strong></td>
-                                <td><span class="ship-badge">DDG</span> 정조대왕급 · 세종대왕급</td>
+                                <td>
+                                    <span class="ship-badge">DDG</span> 정조대왕급 <span class="tonnage-tag">(만재 약 12,000톤)</span><br>
+                                    <span class="ship-badge">DDG</span> 세종대왕급 <span class="tonnage-tag">(만재 약 10,600톤)</span>
+                                </td>
                                 <td>이지스(Aegis) 전투체계를 탑재한 대한민국 해군의 핵심 기동함대 주력 전력 (KDDX 차세대 구축함 추진)</td>
                             </tr>
                             <tr data-category="destroyer">
                                 <td><strong>구축함</strong></td>
-                                <td><span class="ship-badge">DDH</span> 충무공이순신급 · 광개토대왕급</td>
+                                <td>
+                                    <span class="ship-badge">DDH-II</span> 충무공이순신급 <span class="tonnage-tag">(만재 약 5,520톤)</span><br>
+                                    <span class="ship-badge">DDH-I</span> 광개토대왕급 <span class="tonnage-tag">(만재 약 3,900톤)</span>
+                                </td>
                                 <td>대공·대함·대잠 입체 작전 능력을 갖춘 한국형 다목적 구축함</td>
                             </tr>
                             <tr data-category="frigate">
                                 <td><strong>호위함</strong></td>
-                                <td><span class="ship-badge">FFG</span> 충남급 · 대구급 · 인천급</td>
+                                <td>
+                                    <span class="ship-badge">FFG-III</span> 충남급 <span class="tonnage-tag">(만재 약 4,300톤)</span><br>
+                                    <span class="ship-badge">FFG-II</span> 대구급 <span class="tonnage-tag">(만재 약 3,600톤)</span><br>
+                                    <span class="ship-badge">FFG-I</span> 인천급 <span class="tonnage-tag">(만재 약 3,200톤)</span>
+                                </td>
                                 <td>해역함대의 주력 전투함으로 대잠 능력과 대함·대공 방어력을 대폭 강화한 차기 호위함</td>
                             </tr>
                             <tr data-category="frigate">
                                 <td><strong>초계함</strong></td>
-                                <td><span class="ship-badge">PCC</span> 포항급</td>
+                                <td>
+                                    <span class="ship-badge">PCC</span> 포항급 <span class="tonnage-tag">(만재 약 1,220톤)</span>
+                                </td>
                                 <td>연안 경비 및 대잠 초계 임무를 수행해 온 핵심 연안 방어 전력</td>
                             </tr>
                             <tr data-category="submarine">
                                 <td><strong>잠수함</strong></td>
-                                <td><span class="ship-badge">SS</span> 도산안창호급 · 손원일급 · 장보고급</td>
+                                <td>
+                                    <span class="ship-badge">SS-III</span> 도산안창호급 <span class="tonnage-tag">(수중 약 3,700톤)</span><br>
+                                    <span class="ship-badge">SS-II</span> 손원일급 <span class="tonnage-tag">(수중 약 1,860톤)</span><br>
+                                    <span class="ship-badge">SS-I</span> 장보고급 <span class="tonnage-tag">(수중 약 1,400톤)</span>
+                                </td>
                                 <td>3,000톤급 중형 잠수함(도산안창호급)부터 1,800톤·1,200톤급까지 운용하는 핵심 수중 전력</td>
                             </tr>
                             <tr data-category="amphibious">
                                 <td><strong>상륙함</strong></td>
                                 <td>
-                                    <span class="ship-badge">LPH</span> 독도급<br>
-                                    <span class="ship-badge">LST</span> 천왕봉급·고준봉급
+                                    <span class="ship-badge">LPH</span> 독도급 <span class="tonnage-tag">(만재 약 18,800톤)</span><br>
+                                    <span class="ship-badge">LST-II</span> 천왕봉급 <span class="tonnage-tag">(만재 약 7,140톤)</span><br>
+                                    <span class="ship-badge">LST-I</span> 고준봉급 <span class="tonnage-tag">(만재 약 4,250톤)</span>
                                 </td>
                                 <td>대형수송함(독도함·마라도함)을 중심으로 상륙작전 지휘 및 병력·장비 수송 수행</td>
                             </tr>
                             <tr data-category="amphibious">
                                 <td><strong>기뢰전·지원함</strong></td>
                                 <td>
-                                    <span class="ship-badge">MLS/MSH</span> 원산·남포·양양급<br>
-                                    <span class="ship-badge">AOE</span> 소양·천지급
+                                    <span class="ship-badge">MLS-II</span> 남포급 <span class="tonnage-tag">(만재 약 4,240톤)</span><br>
+                                    <span class="ship-badge">MSH</span> 양양급 <span class="tonnage-tag">(만재 약 880톤)</span><br>
+                                    <span class="ship-badge">AOE-II</span> 소양급 <span class="tonnage-tag">(만재 약 23,000톤)</span><br>
+                                    <span class="ship-badge">AOE-I</span> 천지급 <span class="tonnage-tag">(만재 약 9,200톤)</span>
                                 </td>
                                 <td>기뢰 부설·소해함, 군수지원함, 수상함·잠수함 구조함(통영함·강화도함), 훈련함(한산도함)</td>
                             </tr>
                             <tr data-category="patrol">
                                 <td><strong>고속함·고속정</strong></td>
                                 <td>
-                                    <span class="ship-badge">PKG</span> 윤영하급<br>
-                                    <span class="ship-badge">PKMR</span> 참수리급(신형)
+                                    <span class="ship-badge">PKG</span> 윤영하급 <span class="tonnage-tag">(만재 약 570톤)</span><br>
+                                    <span class="ship-badge">PKMR</span> 참수리급(신형) <span class="tonnage-tag">(만재 약 250톤)</span>
                                 </td>
                                 <td>연안 및 NLL 수호를 담당하는 고기동 유도탄고속함 및 신형 고속정 전력</td>
                             </tr>
@@ -980,24 +1036,16 @@
 
                 <div class="hanyang-videos-grid">
                     <div class="hanyang-video-card">
-                        <div class="hanyang-video-embed">
-                            <iframe class="yt-player" src="https://www.youtube.com/embed/qCJjdYokINs?enablejsapi=1" title="한양해군 영상 1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        </div>
+                        <div class="yt-facade" data-video-id="qCJjdYokINs" data-title="한양해군 영상 1"></div>
                     </div>
                     <div class="hanyang-video-card">
-                        <div class="hanyang-video-embed">
-                            <iframe class="yt-player" src="https://www.youtube.com/embed/qMJ2kb3W2UA?enablejsapi=1" title="한양해군 영상 2" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        </div>
+                        <div class="yt-facade" data-video-id="qMJ2kb3W2UA" data-title="한양해군 영상 2"></div>
                     </div>
                     <div class="hanyang-video-card">
-                        <div class="hanyang-video-embed">
-                            <iframe class="yt-player" src="https://www.youtube.com/embed/pQKTFU6FIWo?enablejsapi=1" title="한양해군 영상 3" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        </div>
+                        <div class="yt-facade" data-video-id="pQKTFU6FIWo" data-title="한양해군 영상 3"></div>
                     </div>
                     <div class="hanyang-video-card">
-                        <div class="hanyang-video-embed">
-                            <iframe class="yt-player" src="https://www.youtube.com/embed/jiGTq_o7VmQ?enablejsapi=1" title="한양해군 영상 4" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        </div>
+                        <div class="yt-facade" data-video-id="jiGTq_o7VmQ" data-title="한양해군 영상 4"></div>
                     </div>
                 </div>
             </div>
@@ -1010,9 +1058,11 @@
     </footer>
 
     <script>
-        function pauseAllVideos() {
+        let activeIframe = null;
+
+        function pauseOtherVideos(exceptIframe = null) {
             document.querySelectorAll('.yt-player').forEach(iframe => {
-                if (iframe.contentWindow) {
+                if (iframe !== exceptIframe && iframe.contentWindow) {
                     iframe.contentWindow.postMessage(
                         JSON.stringify({ event: 'command', func: 'pauseVideo', args: [] }),
                         '*'
@@ -1021,8 +1071,87 @@
             });
         }
 
+        // 이미 로드된 두 개의 iframe 간 전환 시에도 이전 영상이 자동 정지되도록 YouTube API 상태 감지
+        window.addEventListener('message', function(event) {
+            if (!event.origin.includes('youtube.com')) return;
+            try {
+                const data = typeof event.data === 'string' ? JSON.parse(event.data) : event.data;
+                if (data.event === 'onStateChange' && data.info === 1) {
+                    document.querySelectorAll('.yt-player').forEach(iframe => {
+                        if (iframe.contentWindow === event.source) {
+                            activeIframe = iframe;
+                            pauseOtherVideos(iframe);
+                        }
+                    });
+                }
+            } catch (e) {}
+        });
+
+        // 고화질(1280x720 HD) 유튜브 썸네일 초기화 및 클릭 시 단일 영상 재생
+        function initYouTubeFacades() {
+            document.querySelectorAll('.yt-facade').forEach((container, idx) => {
+                const videoId = container.getAttribute('data-video-id');
+                const title = container.getAttribute('data-title') || 'YouTube Video';
+
+                const img = document.createElement('img');
+                img.src = `https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`;
+                img.alt = title;
+                img.loading = 'lazy';
+
+                img.onload = function() {
+                    if (img.naturalWidth <= 120) {
+                        img.src = `https://i.ytimg.com/vi/${videoId}/sddefault.jpg`;
+                    }
+                };
+                img.onerror = function() {
+                    if (img.src.includes('maxresdefault')) {
+                        img.src = `https://i.ytimg.com/vi/${videoId}/sddefault.jpg`;
+                    } else if (img.src.includes('sddefault')) {
+                        img.src = `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
+                    }
+                };
+
+                const playBtn = document.createElement('div');
+                playBtn.className = 'yt-play-btn';
+
+                container.appendChild(img);
+                container.appendChild(playBtn);
+
+                container.addEventListener('click', function() {
+                    if (container.querySelector('iframe')) return;
+
+                    // 기존 재생 중인 모든 영상 즉시 정지
+                    pauseOtherVideos();
+
+                    const iframe = document.createElement('iframe');
+                    iframe.className = 'yt-player';
+                    iframe.id = `yt-player-${idx}`;
+                    iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&enablejsapi=1&origin=${encodeURIComponent(window.location.origin)}`;
+                    iframe.title = title;
+                    iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+                    iframe.allowFullscreen = true;
+
+                    // 유튜브 IFrame API에 상태 변경 이벤트 구독 등록
+                    iframe.addEventListener('load', function() {
+                        setTimeout(() => {
+                            if (iframe.contentWindow) {
+                                iframe.contentWindow.postMessage(
+                                    JSON.stringify({ event: 'listening', id: iframe.id }),
+                                    '*'
+                                );
+                            }
+                        }, 300);
+                    });
+
+                    container.innerHTML = '';
+                    container.appendChild(iframe);
+                    activeIframe = iframe;
+                });
+            });
+        }
+
         function openTab(tabName) {
-            pauseAllVideos();
+            pauseOtherVideos();
 
             document.querySelectorAll('.tab-panel').forEach(panel => {
                 panel.classList.remove('active');
@@ -1054,6 +1183,8 @@
                 }
             });
         }
+
+        document.addEventListener('DOMContentLoaded', initYouTubeFacades);
     </script>
 </body>
 </html>
