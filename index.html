@@ -573,7 +573,7 @@
             line-height: 1.7;
         }
 
-        /* 2열: 함급 및 분류 기호 + 만재배수량 */
+        /* 2열: 분류 기호 및 함급 + 만재배수량 */
         .fleet-col-class {
             line-height: 1.85;
             font-size: 0.94rem;
@@ -599,7 +599,7 @@
             margin-left: 0.25rem;
         }
 
-        /* 3열: 주요 특징 (상세 텍스트 + 함정 사진 확장 영역) */
+        /* 3열: 주요 특징 (상세 텍스트 + 사진 확장 영역) */
         .fleet-col-detail {
             display: flex;
             flex-direction: column;
@@ -960,12 +960,13 @@
                     <button class="filter-btn" onclick="filterFleet('submarine', this)">잠수함</button>
                     <button class="filter-btn" onclick="filterFleet('amphibious', this)">상륙·기뢰·지원함</button>
                     <button class="filter-btn" onclick="filterFleet('patrol', this)">고속함·고속정</button>
+                    <button class="filter-btn" onclick="filterFleet('aviation', this)">항공전력</button>
                 </div>
 
                 <div class="fleet-list-container" id="fleetList">
                     <div class="fleet-list-header">
                         <div>함종</div>
-                        <div>함급 및 분류 기호 (만재배수량)</div>
+                        <div>분류 기호 및 함급 (만재배수량)</div>
                         <div>주요 특징</div>
                     </div>
 
@@ -980,15 +981,6 @@
                             <div class="fleet-desc">
                                 이지스(Aegis) 전투체계를 탑재한 대한민국 해군의 핵심 기동함대 주력 전력입니다. 다수의 탄도탄 및 항공 표적을 동시 탐지·추적·요격할 수 있으며, KDDX 차세대 구축함 사업도 함께 추진되고 있습니다.
                             </div>
-                            <!-- 추후 사진 추가 시 아래 주석을 해제하고 이미지 경로(src)만 넣으세요 -->
-                            <!--
-                            <div class="fleet-media-grid">
-                                <div class="fleet-photo-box">
-                                    <img src="이미지주소" alt="정조대왕함">
-                                    <div class="fleet-photo-caption">정조대왕함 (DDG-995)</div>
-                                </div>
-                            </div>
-                            -->
                         </div>
                     </div>
 
@@ -1090,6 +1082,20 @@
                         <div class="fleet-col-detail">
                             <div class="fleet-desc">
                                 연안 및 서해 NLL 최전선 수호를 담당하는 고기동 유도탄고속함 및 신형 고속정 전력입니다.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 항공전력 -->
+                    <div class="fleet-item" data-category="aviation">
+                        <div class="fleet-col-type">항공전력</div>
+                        <div class="fleet-col-class">
+                            <span class="ship-badge">초계기</span> P-8A 포세이돈 · P-3C/CK<br>
+                            <span class="ship-badge">작전헬기</span> MH-60R 시호크 · AW-159 · 링스
+                        </div>
+                        <div class="fleet-col-detail">
+                            <div class="fleet-desc">
+                                한반도 주변 해역의 광역 해상 감시·정찰과 적 잠수함 탐지·추적·격멸 등 입체적인 대잠수함 작전 및 해상 구조 임무를 수행하는 해군항공사령부의 핵심 항공 전력입니다.
                             </div>
                         </div>
                     </div>
