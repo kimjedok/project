@@ -145,7 +145,7 @@
             color: rgba(255, 255, 255, 0.88);
         }
 
-        /* 일반 유튜브 플레이어 프레임 */
+        /* 메인 유튜브 플레이어 프레임 */
         .hero-video-wrap {
             max-width: 860px;
             margin: 0 auto;
@@ -163,6 +163,38 @@
         }
 
         .hero-video-embed iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* 메인 영상 아래 서브 영상 2개 그리드 */
+        .sub-videos-grid {
+            max-width: 860px;
+            margin: 1.25rem auto 0;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.25rem;
+        }
+
+        .sub-video-card {
+            border: 1.5px solid var(--point-gray);
+            border-radius: 6px;
+            overflow: hidden;
+            background-color: #000;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        .sub-video-embed {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+        }
+
+        .sub-video-embed iframe {
             position: absolute;
             top: 0;
             left: 0;
@@ -528,6 +560,9 @@
             .home-hero h1 {
                 font-size: 1.9rem;
             }
+            .sub-videos-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -552,9 +587,24 @@
                 <h1>The BEST Engine of Korea NAVY</h1>
                 <p>조국의 바다를 수호하고 세계 평화에 기여하는 필승해군 · 정예해군</p>
 
+                <!-- 메인 영상 -->
                 <div class="hero-video-wrap">
                     <div class="hero-video-embed">
-                        <iframe src="https://www.youtube.com/embed/ORiJx_mLj1Q" title="대한민국 해군 대표 영상" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <iframe class="home-yt-player" src="https://www.youtube.com/embed/fRqTrPHP9nE?enablejsapi=1" title="대한민국 해군 메인 영상" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+
+                <!-- 메인 영상 아래 소형 영상 2개 -->
+                <div class="sub-videos-grid">
+                    <div class="sub-video-card">
+                        <div class="sub-video-embed">
+                            <iframe class="home-yt-player" src="https://www.youtube.com/embed/ORiJx_mLj1Q?enablejsapi=1" title="대한민국 해군 대표 영상" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                    <div class="sub-video-card">
+                        <div class="sub-video-embed">
+                            <iframe class="home-yt-player" src="https://www.youtube.com/embed/UGYBxcU4W2w?enablejsapi=1" title="대한민국 해군 소개 영상" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -779,7 +829,23 @@
     </footer>
 
     <script>
+        function pauseAllHomeVideos() {
+            document.querySelectorAll('.home-yt-player').forEach(iframe => {
+                if (iframe.contentWindow) {
+                    iframe.contentWindow.postMessage(
+                        JSON.stringify({ event: 'command', func: 'pauseVideo', args: [] }),
+                        '*'
+                    );
+                }
+            });
+        }
+
         function openTab(tabName) {
+            // 홈 탭에서 벗어날 때 재생 중인 모든 유튜브 영상 일시정지
+            if (tabName !== 'home') {
+                pauseAllHomeVideos();
+            }
+
             document.querySelectorAll('.tab-panel').forEach(panel => {
                 panel.classList.remove('active');
             });
