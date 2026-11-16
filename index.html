@@ -5,6 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>대한민국 해군 소개 | ROK NAVY</title>
     <style>
+        /* =========================================================
+           폰트 정의 (타이틀: 강한공군체 Bold / 본문: 강한공군 산스 Medium)
+           ========================================================= */
+        @font-face {
+            font-family: 'ROKAFSlabSerifBold';
+            src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-3@1.0/ROKAFSlabSerifBold.woff') format('woff');
+            font-weight: 700;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'ROKAFSansMedium';
+            src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-3@1.0/ROKAFSansMedium.woff') format('woff');
+            font-weight: 500;
+            font-style: normal;
+            font-display: swap;
+        }
+
         :root {
             --bg-white: #FFFFFF;
             --navy-blue: #0E4A84;
@@ -13,6 +32,8 @@
             --light-gray-bg: #F8F9FA;
             --border-color: #E2E5E8;
             --text-dark: #1E2328;
+            --font-title: 'ROKAFSlabSerifBold', serif;
+            --font-body: 'ROKAFSansMedium', 'Pretendard', -apple-system, BlinkMacSystemFont, 'Malgun Gothic', sans-serif;
         }
 
         * {
@@ -26,7 +47,7 @@
         }
 
         body {
-            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Malgun Gothic', sans-serif;
+            font-family: var(--font-body);
             background-color: var(--bg-white);
             color: var(--text-dark);
             line-height: 1.6;
@@ -37,7 +58,7 @@
         }
 
         /* =========================================================
-           초기 접속 인트로 (건축적 격자 & 수평선 상하 커튼 개방)
+           초기 접속 인트로 (선 없음 · 진동 없는 차분한 분할 개방)
            ========================================================= */
         #intro-splash {
             position: fixed;
@@ -47,10 +68,10 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            animation: splashCleanup 0.1s linear 3.0s forwards;
+            animation: splashCleanup 0.1s linear 2.95s forwards;
         }
 
-        /* 상하로 갈라지는 흰색 배경 커튼 패널 */
+        /* 상하로 부드럽게 열리는 흰색 배경 커튼 패널 (테두리 선 제거) */
         .horizon-curtain {
             position: fixed;
             left: 0;
@@ -62,14 +83,12 @@
 
         .horizon-curtain.top {
             top: 0;
-            border-bottom: 1px solid rgba(14, 74, 132, 0.12);
-            animation: curtainOpenTop 0.85s cubic-bezier(0.77, 0, 0.175, 1) 2.15s forwards;
+            animation: curtainOpenTop 0.8s ease-out 2.1s forwards;
         }
 
         .horizon-curtain.bottom {
             bottom: 0;
-            border-top: 1px solid rgba(14, 74, 132, 0.12);
-            animation: curtainOpenBottom 0.85s cubic-bezier(0.77, 0, 0.175, 1) 2.15s forwards;
+            animation: curtainOpenBottom 0.8s ease-out 2.1s forwards;
         }
 
         /* 중앙 무대 */
@@ -80,36 +99,23 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            animation: contentFadeOut 0.3s ease-in 1.95s forwards;
+            animation: contentFadeOut 0.35s ease-out 1.85s forwards;
         }
 
-        /* 상단: 수직 축선 + 좌우 순수 로고 영역 */
+        /* 상단: 좌우 순수 로고 영역 */
         .upper-logo-stage {
             display: flex;
             align-items: center;
             justify-content: center;
-            height: 145px;
-        }
-
-        .vertical-axis {
-            width: 1.5px;
-            height: 0;
-            background: linear-gradient(
-                to bottom,
-                transparent,
-                var(--navy-blue) 20%,
-                var(--navy-blue)
-            );
-            animation: verticalGrow 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.1s forwards;
+            gap: 2.5rem;
+            margin-bottom: 1.6rem;
         }
 
         .logo-wing {
-            width: 175px;
             overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 0 1.25rem;
         }
 
         .logo-wing img {
@@ -121,53 +127,39 @@
         }
 
         .logo-wing.left img {
-            transform: translateX(68px);
-            animation: wingSlideLeft 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.4s forwards;
+            transform: translateX(36px);
+            animation: wingSlideLeft 0.75s ease-out 0.2s forwards;
         }
 
         .logo-wing.right img {
-            transform: translateX(-68px);
-            animation: wingSlideRight 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.4s forwards;
+            transform: translateX(-36px);
+            animation: wingSlideRight 0.75s ease-out 0.2s forwards;
         }
 
-        /* 중앙 수평선 */
-        .horizon-axis {
-            width: 0;
-            height: 1.5px;
-            background: linear-gradient(
-                to right,
-                transparent,
-                var(--navy-blue) 15%,
-                var(--navy-blue) 85%,
-                transparent
-            );
-            animation: horizonGrow 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.25s forwards;
-        }
-
-        /* 하단: 단독 메인 타이틀 마스크 리빌 영역 */
+        /* 하단: 국문 + 영문 타이틀 영역 */
         .lower-title-stage {
-            overflow: hidden;
-            padding-top: 1.15rem;
             text-align: center;
-        }
-
-        .sole-main-title {
-            font-size: 1.35rem;
-            font-weight: 800;
-            color: var(--navy-blue);
-            letter-spacing: 5px;
             opacity: 0;
-            transform: translateY(-100%);
-            animation: titleDropReveal 0.75s cubic-bezier(0.22, 1, 0.36, 1) 0.85s forwards;
+            transform: translateY(10px);
+            animation: titleFadeUp 0.75s ease-out 0.65s forwards;
+        }
+
+        .kor-main-title {
+            font-family: var(--font-title);
+            font-size: 1.85rem;
+            font-weight: 700;
+            color: var(--navy-blue);
+            letter-spacing: 2px;
+            margin-bottom: 0.35rem;
+        }
+
+        .eng-sub-title {
+            font-family: var(--font-body);
+            font-size: 1.05rem;
+            font-weight: 500;
+            color: var(--point-gray);
+            letter-spacing: 2.2px;
             white-space: nowrap;
-        }
-
-        @keyframes verticalGrow {
-            to { height: 135px; }
-        }
-
-        @keyframes horizonGrow {
-            to { width: 460px; }
         }
 
         @keyframes wingSlideLeft {
@@ -178,16 +170,10 @@
             to { opacity: 1; transform: translateX(0); }
         }
 
-        @keyframes titleDropReveal {
-            0% {
-                opacity: 0;
-                transform: translateY(-90%);
-                letter-spacing: 5px;
-            }
-            100% {
+        @keyframes titleFadeUp {
+            to {
                 opacity: 1;
                 transform: translateY(0);
-                letter-spacing: 2.2px;
             }
         }
 
@@ -207,11 +193,11 @@
             to { visibility: hidden; }
         }
 
-        /* 본문 요소 순차 등장 애니메이션 */
+        /* 본문 요소 순차 등장 애니메이션 (진동 없이 차분한 페이드인) */
         @keyframes heroReveal {
             from {
                 opacity: 0;
-                transform: translateY(22px);
+                transform: translateY(14px);
             }
             to {
                 opacity: 1;
@@ -221,27 +207,27 @@
 
         .anim-step-1 {
             opacity: 0;
-            animation: heroReveal 0.7s cubic-bezier(0.22, 1, 0.36, 1) 2.25s forwards;
+            animation: heroReveal 0.65s ease-out 2.2s forwards;
         }
 
         .anim-step-2 {
             opacity: 0;
-            animation: heroReveal 0.7s cubic-bezier(0.22, 1, 0.36, 1) 2.4s forwards;
+            animation: heroReveal 0.65s ease-out 2.35s forwards;
         }
 
         .anim-step-3 {
             opacity: 0;
-            animation: heroReveal 0.7s cubic-bezier(0.22, 1, 0.36, 1) 2.55s forwards;
+            animation: heroReveal 0.65s ease-out 2.5s forwards;
         }
 
         .anim-step-4 {
             opacity: 0;
-            animation: heroReveal 0.8s cubic-bezier(0.22, 1, 0.36, 1) 2.7s forwards;
+            animation: heroReveal 0.7s ease-out 2.65s forwards;
         }
 
         .anim-step-5 {
             opacity: 0;
-            animation: heroReveal 0.8s cubic-bezier(0.22, 1, 0.36, 1) 2.9s forwards;
+            animation: heroReveal 0.7s ease-out 2.8s forwards;
         }
 
         /* 상단 내비게이션 */
@@ -260,10 +246,11 @@
         }
 
         .logo {
-            font-size: 1.25rem;
-            font-weight: 800;
+            font-family: var(--font-title);
+            font-size: 1.3rem;
+            font-weight: 700;
             color: var(--navy-blue);
-            letter-spacing: -0.5px;
+            letter-spacing: 0.5px;
             background: none;
             border: none;
             cursor: pointer;
@@ -286,13 +273,13 @@
             border: none;
             border-bottom: 3px solid transparent;
             color: var(--text-dark);
-            font-weight: 600;
-            font-size: 0.95rem;
+            font-weight: 500;
+            font-size: 0.96rem;
             padding: 0 1.2rem;
             height: 100%;
             cursor: pointer;
             transition: color 0.2s, background-color 0.2s, border-color 0.2s;
-            font-family: inherit;
+            font-family: var(--font-body);
             white-space: nowrap;
         }
 
@@ -308,7 +295,8 @@
         .nav-tab-btn.active {
             color: var(--navy-blue);
             border-bottom-color: var(--navy-blue);
-            font-weight: 800;
+            font-family: var(--font-title);
+            font-weight: 700;
         }
 
         /* 탭 패널 전환 애니메이션 */
@@ -427,10 +415,11 @@
         }
 
         .home-hero h1 {
+            font-family: var(--font-title);
             font-size: 2.75rem;
-            font-weight: 800;
+            font-weight: 700;
             margin-bottom: 0.75rem;
-            letter-spacing: -0.5px;
+            letter-spacing: -0.02em;
         }
 
         .home-hero p {
@@ -485,7 +474,7 @@
             text-align: left;
             cursor: pointer;
             transition: transform 0.2s, box-shadow 0.2s;
-            font-family: inherit;
+            font-family: var(--font-body);
         }
 
         .quick-card:hover {
@@ -497,13 +486,15 @@
             display: block;
             font-size: 0.75rem;
             color: var(--point-gray);
-            font-weight: 700;
+            font-weight: 500;
             margin-bottom: 0.25rem;
         }
 
         .quick-card strong {
+            font-family: var(--font-title);
             color: var(--navy-blue);
             font-size: 1.05rem;
+            font-weight: 700;
         }
 
         /* 공통 본문 컨테이너 */
@@ -527,15 +518,17 @@
         .section-header .eng-title {
             color: var(--point-gray);
             font-size: 0.85rem;
-            font-weight: 700;
+            font-weight: 500;
             letter-spacing: 1.5px;
             text-transform: uppercase;
         }
 
         .section-header h2 {
+            font-family: var(--font-title);
             color: var(--navy-blue);
-            font-size: 1.75rem;
-            font-weight: 800;
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
         }
 
         /* 공통 버튼 */
@@ -545,7 +538,7 @@
             color: var(--bg-white);
             padding: 0.75rem 1.5rem;
             text-decoration: none;
-            font-weight: 600;
+            font-weight: 500;
             font-size: 0.95rem;
             border-radius: 4px;
             transition: background-color 0.2s;
@@ -584,14 +577,17 @@
             display: inline-block;
             font-size: 0.75rem;
             color: var(--point-gray);
-            font-weight: 700;
+            font-weight: 500;
             margin-bottom: 0.4rem;
         }
 
         .unit-card h3 {
+            font-family: var(--font-title);
             color: var(--navy-blue);
-            font-size: 1.2rem;
+            font-size: 1.22rem;
+            font-weight: 700;
             margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
         }
 
         .unit-card p {
@@ -613,7 +609,7 @@
             align-items: center;
             gap: 4px;
             font-size: 0.82rem;
-            font-weight: 700;
+            font-weight: 500;
             color: var(--navy-blue);
             background-color: var(--light-gray-bg);
             border: 1px solid var(--navy-blue);
@@ -642,11 +638,11 @@
             color: var(--text-dark);
             padding: 0.5rem 1.1rem;
             font-size: 0.9rem;
-            font-weight: 600;
+            font-weight: 500;
             cursor: pointer;
             border-radius: 3px;
             transition: all 0.2s;
-            font-family: inherit;
+            font-family: var(--font-body);
         }
 
         .filter-btn.active, .filter-btn:hover {
@@ -668,7 +664,8 @@
             grid-template-columns: 120px 260px 1fr;
             background-color: var(--navy-blue);
             color: var(--bg-white);
-            font-weight: 600;
+            font-family: var(--font-title);
+            font-weight: 700;
             font-size: 0.92rem;
             padding: 0.9rem 1.25rem;
             gap: 1rem;
@@ -694,7 +691,8 @@
         }
 
         .fleet-col-type {
-            font-weight: 800;
+            font-family: var(--font-title);
+            font-weight: 700;
             color: var(--navy-blue);
             font-size: 1rem;
             white-space: nowrap;
@@ -712,7 +710,7 @@
             border: 1px solid var(--point-gray);
             color: var(--navy-blue);
             font-size: 0.78rem;
-            font-weight: 700;
+            font-weight: 500;
             padding: 0.08rem 0.45rem;
             border-radius: 3px;
             margin-right: 0.35rem;
@@ -757,7 +755,7 @@
             background-color: var(--navy-blue);
             color: var(--bg-white);
             font-size: 0.75rem;
-            font-weight: 700;
+            font-weight: 500;
             padding: 0.2rem 0.6rem;
             border-radius: 2px;
             margin-bottom: 0.5rem;
@@ -765,8 +763,10 @@
         }
 
         .vr-banner-text h3 {
+            font-family: var(--font-title);
             color: var(--navy-blue);
             font-size: 1.25rem;
+            font-weight: 700;
             margin-bottom: 0.3rem;
         }
 
@@ -794,14 +794,17 @@
             font-size: 0.8rem;
             color: var(--point-gray);
             margin-bottom: 0.5rem;
-            font-weight: 600;
+            font-weight: 500;
         }
 
         .news-card h3 {
+            font-family: var(--font-title);
             font-size: 1.08rem;
+            font-weight: 700;
             color: var(--text-dark);
             margin-bottom: 0.75rem;
-            line-height: 1.4;
+            line-height: 1.45;
+            letter-spacing: -0.02em;
         }
 
         .news-card p {
@@ -823,8 +826,10 @@
         }
 
         .news-banner-text h4 {
+            font-family: var(--font-title);
             color: var(--navy-blue);
-            font-size: 1.1rem;
+            font-size: 1.12rem;
+            font-weight: 700;
             margin-bottom: 0.25rem;
         }
 
@@ -860,7 +865,9 @@
         }
 
         footer strong {
+            font-family: var(--font-title);
             color: var(--navy-blue);
+            font-weight: 700;
         }
 
         footer .footer-sub {
@@ -872,39 +879,22 @@
 
         @media (max-width: 768px) {
             .upper-logo-stage {
-                height: 115px;
-            }
-            @keyframes verticalGrow {
-                to { height: 105px; }
-            }
-            @keyframes horizonGrow {
-                to { width: 310px; }
-            }
-            .logo-wing {
-                width: 135px;
-                padding: 0 0.75rem;
+                gap: 1.5rem;
+                margin-bottom: 1.25rem;
             }
             .logo-wing img {
                 width: 90px;
                 height: 90px;
             }
-            .sole-main-title {
-                font-size: 0.82rem;
+            .kor-main-title {
+                font-size: 1.35rem;
+                letter-spacing: 1px;
+            }
+            .eng-sub-title {
+                font-size: 0.72rem;
+                letter-spacing: 1px;
                 white-space: normal;
                 padding: 0 1rem;
-                line-height: 1.4;
-            }
-            @keyframes titleDropReveal {
-                0% {
-                    opacity: 0;
-                    transform: translateY(-90%);
-                    letter-spacing: 2px;
-                }
-                100% {
-                    opacity: 1;
-                    transform: translateY(0);
-                    letter-spacing: 1px;
-                }
             }
 
             nav {
@@ -940,7 +930,7 @@
 </head>
 <body>
 
-    <!-- 초기 접속 스플래시 화면 (건축적 격자 & 수평선 상하 커튼 개방) -->
+    <!-- 초기 접속 스플래시 화면 (선 없음 · 차분한 개방 연출) -->
     <div id="intro-splash">
         <div class="horizon-curtain top"></div>
         <div class="horizon-curtain bottom"></div>
@@ -950,14 +940,13 @@
                 <div class="logo-wing left">
                     <img src="hanyang_logo.png" alt="한양대학교 로고">
                 </div>
-                <div class="vertical-axis"></div>
                 <div class="logo-wing right">
                     <img src="navy_logo.png" alt="대한민국 해군 로고">
                 </div>
             </div>
-            <div class="horizon-axis"></div>
             <div class="lower-title-stage">
-                <div class="sole-main-title">NAVAL STRATEGIC TECHNOLOGY ENGINEERING</div>
+                <div class="kor-main-title">국방전략기술공학과</div>
+                <div class="eng-sub-title">NAVAL STRATEGIC TECHNOLOGY ENGINEERING</div>
             </div>
         </div>
     </div>
