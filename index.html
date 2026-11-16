@@ -36,6 +36,85 @@
             overflow-x: hidden;
         }
 
+        /* 초기 접속 인트로 스플래시 화면 */
+        #intro-splash {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background-color: var(--navy-blue);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--bg-white);
+            animation: splashFadeOut 0.6s ease-in-out 1.1s forwards;
+            pointer-events: none;
+        }
+
+        #intro-splash .splash-sub {
+            font-size: 0.85rem;
+            letter-spacing: 4px;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 0.5rem;
+            animation: splashTextIn 0.6s ease-out forwards;
+        }
+
+        #intro-splash .splash-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            border-bottom: 2px solid var(--point-gray);
+            padding-bottom: 0.4rem;
+            animation: splashTextIn 0.6s ease-out forwards;
+        }
+
+        @keyframes splashTextIn {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes splashFadeOut {
+            from { opacity: 1; visibility: visible; }
+            to { opacity: 0; visibility: hidden; }
+        }
+
+        /* 본문 요소 순차 등장 애니메이션 */
+        @keyframes heroReveal {
+            from {
+                opacity: 0;
+                transform: translateY(24px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .anim-step-1 {
+            opacity: 0;
+            animation: heroReveal 0.7s cubic-bezier(0.22, 1, 0.36, 1) 1.2s forwards;
+        }
+
+        .anim-step-2 {
+            opacity: 0;
+            animation: heroReveal 0.7s cubic-bezier(0.22, 1, 0.36, 1) 1.35s forwards;
+        }
+
+        .anim-step-3 {
+            opacity: 0;
+            animation: heroReveal 0.7s cubic-bezier(0.22, 1, 0.36, 1) 1.5s forwards;
+        }
+
+        .anim-step-4 {
+            opacity: 0;
+            animation: heroReveal 0.8s cubic-bezier(0.22, 1, 0.36, 1) 1.65s forwards;
+        }
+
+        .anim-step-5 {
+            opacity: 0;
+            animation: heroReveal 0.8s cubic-bezier(0.22, 1, 0.36, 1) 1.85s forwards;
+        }
+
         /* 상단 내비게이션 */
         nav {
             position: sticky;
@@ -61,15 +140,8 @@
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 8px;
             white-space: nowrap;
             flex-shrink: 0;
-        }
-
-        .logo span {
-            color: var(--point-gray);
-            font-weight: 500;
-            font-size: 0.9rem;
         }
 
         .nav-tabs {
@@ -425,6 +497,7 @@
         td {
             padding: 0.9rem 1.2rem;
             border-bottom: 1px solid var(--border-color);
+            line-height: 1.8;
         }
 
         tr:last-child td {
@@ -442,9 +515,10 @@
             color: var(--navy-blue);
             font-size: 0.8rem;
             font-weight: 700;
-            padding: 0.15rem 0.5rem;
+            padding: 0.1rem 0.5rem;
             border-radius: 3px;
             margin-right: 0.4rem;
+            line-height: 1.4;
         }
 
         /* 이지스함 VR 체험 배너 */
@@ -585,9 +659,15 @@
 </head>
 <body>
 
+    <!-- 초기 접속 스플래시 화면 -->
+    <div id="intro-splash">
+        <div class="splash-sub">REPUBLIC OF KOREA NAVY</div>
+        <div class="splash-title">ROK NAVY</div>
+    </div>
+
     <!-- 상단 탭 내비게이션 -->
     <nav>
-        <button class="logo" onclick="openTab('home')">ROK NAVY <span>| 대한민국 해군 소개</span></button>
+        <button class="logo" onclick="openTab('home')">ROK NAVY</button>
         <ul class="nav-tabs">
             <li><button class="nav-tab-btn active" data-tab="home" onclick="openTab('home')">홈</button></li>
             <li><button class="nav-tab-btn" data-tab="organization" onclick="openTab('organization')">편제</button></li>
@@ -600,19 +680,19 @@
         <!-- [탭 0] 첫 페이지 (홈) -->
         <section id="tab-home" class="tab-panel active">
             <div class="home-hero">
-                <div class="sub-badge">REPUBLIC OF KOREA NAVY</div>
-                <h1>The BEST Engine of Korea NAVY</h1>
-                <p>조국의 바다를 수호하고 세계 평화에 기여하는 필승해군 · 정예해군</p>
+                <div class="sub-badge anim-step-1">REPUBLIC OF KOREA NAVY</div>
+                <h1 class="anim-step-2">The BEST Engine of Korea NAVY</h1>
+                <p class="anim-step-3">조국의 바다를 수호하고 세계 평화에 기여하는 필승해군 · 정예해군</p>
 
                 <!-- 메인 영상 -->
-                <div class="hero-video-wrap">
+                <div class="hero-video-wrap anim-step-4">
                     <div class="hero-video-embed">
                         <iframe class="home-yt-player" src="https://www.youtube.com/embed/fRqTrPHP9nE?enablejsapi=1" title="대한민국 해군 메인 영상" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
                 </div>
 
                 <!-- 메인 영상 아래 소형 영상 2개 -->
-                <div class="sub-videos-grid">
+                <div class="sub-videos-grid anim-step-5">
                     <div class="sub-video-card">
                         <div class="sub-video-embed">
                             <iframe class="home-yt-player" src="https://www.youtube.com/embed/ORiJx_mLj1Q?enablejsapi=1" title="대한민국 해군 대표 영상" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -627,7 +707,7 @@
             </div>
 
             <div class="content-container" style="padding-top: 1rem;">
-                <div class="home-quick-nav">
+                <div class="home-quick-nav anim-step-5">
                     <button class="quick-card" onclick="openTab('organization')">
                         <span>01. ORGANIZATION</span>
                         <strong>편제 (주력부대) →</strong>
@@ -776,17 +856,26 @@
                             </tr>
                             <tr data-category="amphibious">
                                 <td><strong>상륙함</strong></td>
-                                <td><span class="ship-badge">LPH</span> 독도급 / <span class="ship-badge">LST</span> 천왕봉급·고준봉급</td>
+                                <td>
+                                    <span class="ship-badge">LPH</span> 독도급<br>
+                                    <span class="ship-badge">LST</span> 천왕봉급·고준봉급
+                                </td>
                                 <td>대형수송함(독도함·마라도함)을 중심으로 상륙작전 지휘 및 병력·장비 수송 수행</td>
                             </tr>
                             <tr data-category="amphibious">
                                 <td><strong>기뢰전·지원함</strong></td>
-                                <td><span class="ship-badge">MLS/MSH</span> 원산·남포·양양급 / <span class="ship-badge">AOE</span> 소양·천지급</td>
+                                <td>
+                                    <span class="ship-badge">MLS/MSH</span> 원산·남포·양양급<br>
+                                    <span class="ship-badge">AOE</span> 소양·천지급
+                                </td>
                                 <td>기뢰 부설·소해함, 군수지원함, 수상함·잠수함 구조함(통영함·강화도함), 훈련함(한산도함)</td>
                             </tr>
                             <tr data-category="patrol">
                                 <td><strong>고속함·고속정</strong></td>
-                                <td><span class="ship-badge">PKG</span> 윤영하급 / <span class="ship-badge">PKMR</span> 참수리급(신형)</td>
+                                <td>
+                                    <span class="ship-badge">PKG</span> 윤영하급<br>
+                                    <span class="ship-badge">PKMR</span> 참수리급(신형)
+                                </td>
                                 <td>연안 및 NLL 수호를 담당하는 고기동 유도탄고속함 및 신형 고속정 전력</td>
                             </tr>
                         </tbody>
@@ -842,7 +931,7 @@
     </main>
 
     <footer>
-        <p><strong>Hanyang University</strong> | The BEST Engine of Korea NAVY</p>
+        <p><strong>Hanyang University</strong> | Naval Strategic Technology Engineering 26</p>
         <p class="footer-sub">R.O.K.N. OCS 148th ㄱㄱㄹㅇㄱㅇㅇㅈㅇㅈㅊㅎ</p>
     </footer>
 
