@@ -78,7 +78,7 @@
             color: var(--text-dark);
             font-weight: 600;
             font-size: 0.95rem;
-            padding: 0 1.1rem;
+            padding: 0 1.2rem;
             height: 100%;
             cursor: pointer;
             transition: all 0.2s;
@@ -145,7 +145,7 @@
             color: rgba(255, 255, 255, 0.88);
         }
 
-        /* UI 숨김 및 조작 차단된 자동재생 영상 프레임 */
+        /* 일반 유튜브 플레이어 프레임 */
         .hero-video-wrap {
             max-width: 860px;
             margin: 0 auto;
@@ -154,14 +154,12 @@
             overflow: hidden;
             box-shadow: 0 16px 36px rgba(0, 0, 0, 0.35);
             background-color: #000;
-            position: relative;
         }
 
         .hero-video-embed {
             position: relative;
             width: 100%;
             padding-bottom: 56.25%;
-            overflow: hidden;
         }
 
         .hero-video-embed iframe {
@@ -171,63 +169,13 @@
             width: 100%;
             height: 100%;
             border: 0;
-            pointer-events: none;
-            transform: scale(1.18);
-        }
-
-        .video-shield {
-            position: absolute;
-            inset: 0;
-            z-index: 2;
-            background: transparent;
-        }
-
-        /* 초기 로딩 UI 가림막 */
-        .video-intro-cover {
-            position: absolute;
-            inset: 0;
-            z-index: 2;
-            background-color: var(--navy-blue);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: rgba(255, 255, 255, 0.85);
-            font-size: 0.95rem;
-            font-weight: 700;
-            letter-spacing: 3px;
-            transition: opacity 0.6s ease;
-            pointer-events: none;
-        }
-
-        /* 커스텀 소리 제어 버튼 */
-        .sound-toggle-btn {
-            position: absolute;
-            bottom: 16px;
-            right: 16px;
-            z-index: 3;
-            background-color: rgba(14, 74, 132, 0.9);
-            color: var(--bg-white);
-            border: 1.5px solid var(--bg-white);
-            padding: 0.55rem 1rem;
-            font-size: 0.88rem;
-            font-weight: 700;
-            border-radius: 4px;
-            cursor: pointer;
-            font-family: inherit;
-            transition: background-color 0.2s, transform 0.15s;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-        }
-
-        .sound-toggle-btn:hover {
-            background-color: var(--navy-dark);
-            transform: scale(1.03);
         }
 
         .home-quick-nav {
             max-width: 860px;
             margin: 2.5rem auto 0;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 1rem;
         }
 
@@ -414,6 +362,7 @@
             overflow-x: auto;
             border: 1px solid var(--border-color);
             border-radius: 4px;
+            margin-bottom: 1.75rem;
         }
 
         table {
@@ -456,23 +405,6 @@
             margin-right: 0.4rem;
         }
 
-        .ref-link-box {
-            margin-top: 1rem;
-            margin-bottom: 1.75rem;
-            text-align: right;
-            font-size: 0.88rem;
-        }
-
-        .ref-link-box a {
-            color: var(--navy-blue);
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        .ref-link-box a:hover {
-            text-decoration: underline;
-        }
-
         /* 이지스함 VR 체험 배너 */
         .vr-banner {
             background-color: var(--light-gray-bg);
@@ -510,66 +442,7 @@
             font-size: 0.94rem;
         }
 
-        /* 3. 해군 영상 아카이브 */
-        .video-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(460px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .video-card {
-            background-color: var(--bg-white);
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
-            overflow: hidden;
-            transition: box-shadow 0.2s;
-        }
-
-        .video-card:hover {
-            box-shadow: 0 8px 20px rgba(14, 74, 132, 0.08);
-        }
-
-        .video-embed {
-            position: relative;
-            width: 100%;
-            padding-bottom: 56.25%;
-            background-color: #000;
-        }
-
-        .video-embed iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: 0;
-        }
-
-        .video-info {
-            padding: 1.25rem 1.5rem;
-            border-top: 3px solid var(--navy-blue);
-        }
-
-        .video-category {
-            display: inline-block;
-            font-size: 0.78rem;
-            color: var(--point-gray);
-            font-weight: 700;
-            margin-bottom: 0.3rem;
-        }
-
-        .video-info h3 {
-            color: var(--navy-blue);
-            font-size: 1.15rem;
-            margin-bottom: 0.35rem;
-        }
-
-        .video-info p {
-            font-size: 0.9rem;
-            color: #555;
-        }
-
-        /* 4. 해군 관련 뉴스 */
+        /* 3. 해군 관련 뉴스 */
         .news-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -649,14 +522,11 @@
                 gap: 0.5rem;
             }
             .nav-tab-btn {
-                padding: 0.5rem 0.75rem;
+                padding: 0.5rem 0.9rem;
                 font-size: 0.9rem;
             }
             .home-hero h1 {
                 font-size: 1.9rem;
-            }
-            .video-grid {
-                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -670,7 +540,6 @@
             <li><button class="nav-tab-btn active" data-tab="home" onclick="openTab('home')">홈</button></li>
             <li><button class="nav-tab-btn" data-tab="organization" onclick="openTab('organization')">편제</button></li>
             <li><button class="nav-tab-btn" data-tab="forces" onclick="openTab('forces')">전력</button></li>
-            <li><button class="nav-tab-btn" data-tab="media" onclick="openTab('media')">영상</button></li>
             <li><button class="nav-tab-btn" data-tab="news" onclick="openTab('news')">뉴스</button></li>
         </ul>
     </nav>
@@ -685,10 +554,7 @@
 
                 <div class="hero-video-wrap">
                     <div class="hero-video-embed">
-                        <iframe id="heroPlayer" src="https://www.youtube.com/embed/ORiJx_mLj1Q?autoplay=1&mute=1&loop=1&playlist=ORiJx_mLj1Q&controls=0&modestbranding=1&rel=0&disablekb=1&playsinline=1&enablejsapi=1" title="대한민국 해군 대표 영상" allow="autoplay; encrypted-media"></iframe>
-                        <div class="video-shield"></div>
-                        <div id="videoIntroCover" class="video-intro-cover">ROK NAVY</div>
-                        <button id="soundToggleBtn" class="sound-toggle-btn" onclick="toggleHeroSound()">🔊 소리 켜기</button>
+                        <iframe src="https://www.youtube.com/embed/ORiJx_mLj1Q" title="대한민국 해군 대표 영상" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
                 </div>
             </div>
@@ -703,12 +569,8 @@
                         <span>02. NAVAL FORCES</span>
                         <strong>전력 · 이지스함 VR →</strong>
                     </button>
-                    <button class="quick-card" onclick="openTab('media')">
-                        <span>03. NAVY MEDIA</span>
-                        <strong>기동함대 · UDT · SSU →</strong>
-                    </button>
                     <button class="quick-card" onclick="openTab('news')">
-                        <span>04. NAVY NEWS</span>
+                        <span>03. NAVY NEWS</span>
                         <strong>해군 관련 뉴스 →</strong>
                     </button>
                 </div>
@@ -864,12 +726,6 @@
                     </table>
                 </div>
 
-                <div class="ref-link-box">
-                    <a href="https://namu.wiki/w/%ED%8B%80:%ED%98%84%EB%8C%80%EC%A0%84/%ED%95%9C%EA%B5%AD%20%ED%95%A8%EC%84%A0" target="_blank" rel="noopener noreferrer">
-                        ↗ 상세 한국 함선 분류 체계 전체보기 (나무위키 참고 자료)
-                    </a>
-                </div>
-
                 <!-- 이지스함 VR 체험 배너 -->
                 <div class="vr-banner">
                     <div class="vr-banner-text">
@@ -884,71 +740,11 @@
             </div>
         </section>
 
-        <!-- [탭 3] 해군 미디어 & 영상 -->
-        <section id="tab-media" class="tab-panel">
-            <div class="content-container">
-                <div class="section-header">
-                    <div class="eng-title">03. Navy Media</div>
-                    <h2>해군 주요 전력 · 부대 영상</h2>
-                </div>
-
-                <div class="video-grid">
-                    <!-- 해군 대표 영상 -->
-                    <div class="video-card">
-                        <div class="video-embed">
-                            <iframe src="https://www.youtube.com/embed/ORiJx_mLj1Q" title="대한민국 해군 대표 영상" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        </div>
-                        <div class="video-info">
-                            <span class="video-category">ROK NAVY OFFICIAL</span>
-                            <h3>대한민국 해군 대표 영상</h3>
-                            <p>조국의 바다를 지키는 필승해군·정예해군의 위용과 핵심 임무를 담은 공식 홍보 영상입니다.</p>
-                        </div>
-                    </div>
-
-                    <!-- 기동함대 영상 -->
-                    <div class="video-card">
-                        <div class="video-embed">
-                            <iframe src="https://www.youtube.com/embed/3jf5KkfdPAU" title="대한민국 해군 기동함대 영상" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        </div>
-                        <div class="video-info">
-                            <span class="video-category">TASK FLEET</span>
-                            <h3>기동함대 작전 및 전력</h3>
-                            <p>이지스 구축함을 주축으로 대양과 연안을 아우르는 기동함대의 입체 해상 작전 모습입니다.</p>
-                        </div>
-                    </div>
-
-                    <!-- UDT/SEAL 영상 -->
-                    <div class="video-card">
-                        <div class="video-embed">
-                            <iframe src="https://www.youtube.com/embed/mbUvRu_ZOd4" title="해군특수전전단 UDT/SEAL 영상" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        </div>
-                        <div class="video-info">
-                            <span class="video-category">SPECIAL WARFARE FLOTILLA</span>
-                            <h3>해군특수전전단 (UDT/SEAL)</h3>
-                            <p>불가능은 없다 — 육·해·공 전천후 특수작전을 수행하는 최정예 특수전전단의 훈련과 임무입니다.</p>
-                        </div>
-                    </div>
-
-                    <!-- SSU 영상 -->
-                    <div class="video-card">
-                        <div class="video-embed">
-                            <iframe src="https://www.youtube.com/embed/xU7NLAXHb4g" title="해군 해난구조전대 SSU 영상" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        </div>
-                        <div class="video-info">
-                            <span class="video-category">SEA SALVAGE & RESCUE UNIT</span>
-                            <h3>해군 해난구조전대 (SSU)</h3>
-                            <p>더 넓고 더 깊은 바다로 — 심해 잠수 및 해난 구조 작전을 전담하는 심해잠수사(SSU)의 활약상입니다.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- [탭 4] 해군 관련 뉴스 -->
+        <!-- [탭 3] 해군 관련 뉴스 -->
         <section id="tab-news" class="tab-panel">
             <div class="content-container">
                 <div class="section-header">
-                    <div class="eng-title">04. Navy News</div>
+                    <div class="eng-title">03. Navy News</div>
                     <h2>해군 관련 뉴스</h2>
                 </div>
 
@@ -983,23 +779,6 @@
     </footer>
 
     <script>
-        let isHeroMuted = true;
-
-        function toggleHeroSound() {
-            const iframe = document.getElementById('heroPlayer');
-            const btn = document.getElementById('soundToggleBtn');
-            if (!iframe || !iframe.contentWindow) return;
-
-            const command = isHeroMuted ? 'unMute' : 'mute';
-            iframe.contentWindow.postMessage(
-                JSON.stringify({ event: 'command', func: command, args: [] }),
-                '*'
-            );
-
-            isHeroMuted = !isHeroMuted;
-            btn.textContent = isHeroMuted ? '🔊 소리 켜기' : '🔇 음소거';
-        }
-
         function openTab(tabName) {
             document.querySelectorAll('.tab-panel').forEach(panel => {
                 panel.classList.remove('active');
@@ -1031,15 +810,6 @@
                 }
             });
         }
-
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                const cover = document.getElementById('videoIntroCover');
-                if (cover) {
-                    cover.style.opacity = '0';
-                }
-            }, 1800);
-        });
     </script>
 </body>
 </html>
