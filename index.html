@@ -145,6 +145,7 @@
             color: rgba(255, 255, 255, 0.88);
         }
 
+        /* UI 숨김 및 조작 차단된 자동재생 영상 프레임 */
         .hero-video-wrap {
             max-width: 860px;
             margin: 0 auto;
@@ -153,12 +154,14 @@
             overflow: hidden;
             box-shadow: 0 16px 36px rgba(0, 0, 0, 0.35);
             background-color: #000;
+            position: relative;
         }
 
         .hero-video-embed {
             position: relative;
             width: 100%;
             padding-bottom: 56.25%;
+            overflow: hidden;
         }
 
         .hero-video-embed iframe {
@@ -168,6 +171,39 @@
             width: 100%;
             height: 100%;
             border: 0;
+            pointer-events: none;
+            transform: scale(1.18);
+        }
+
+        .video-shield {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            background: transparent;
+        }
+
+        /* 커스텀 소리 제어 버튼 */
+        .sound-toggle-btn {
+            position: absolute;
+            bottom: 16px;
+            right: 16px;
+            z-index: 3;
+            background-color: rgba(14, 74, 132, 0.9);
+            color: var(--bg-white);
+            border: 1.5px solid var(--bg-white);
+            padding: 0.55rem 1rem;
+            font-size: 0.88rem;
+            font-weight: 700;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: inherit;
+            transition: background-color 0.2s, transform 0.15s;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        .sound-toggle-btn:hover {
+            background-color: var(--navy-dark);
+            transform: scale(1.03);
         }
 
         .home-quick-nav {
@@ -600,7 +636,9 @@
 
                 <div class="hero-video-wrap">
                     <div class="hero-video-embed">
-                        <iframe src="https://www.youtube.com/embed/ORiJx_mLj1Q" title="대한민국 해군 대표 영상" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <iframe id="heroPlayer" src="https://www.youtube.com/embed/ORiJx_mLj1Q?autoplay=1&mute=1&loop=1&playlist=ORiJx_mLj1Q&controls=0&modestbranding=1&rel=0&disablekb=1&playsinline=1&enablejsapi=1" title="대한민국 해군 대표 영상" allow="autoplay; encrypted-media"></iframe>
+                        <div class="video-shield"></div>
+                        <button id="soundToggleBtn" class="sound-toggle-btn" onclick="toggleHeroSound()">🔊 소리 켜기</button>
                     </div>
                 </div>
             </div>
@@ -864,25 +902,38 @@
     </footer>
 
     <script>
+        let isHeroMuted = true;
+
+        function toggleHeroSound() {
+            const iframe = document.getElementById('heroPlayer');
+            const btn = document.getElementById('soundToggleBtn');
+            if (!iframe || !iframe.contentWindow) return;
+
+            const command = isHeroMuted ? 'unMute' : 'mute';
+            iframe.contentWindow.postMessage(
+                JSON.stringify({ event: 'command', func: command, args: [] }),
+                '*'
+            );
+
+            isHeroMuted = !isHeroMuted;
+            btn.textContent = isHeroMuted ? '🔊 소리 켜기' : '🔇 음소거';
+        }
+
         function openTab(tabName) {
-            // 모든 탭 패널 숨기기
             document.querySelectorAll('.tab-panel').forEach(panel => {
                 panel.classList.remove('active');
             });
 
-            // 모든 상단 탭 버튼 비활성화
             document.querySelectorAll('.nav-tab-btn').forEach(btn => {
                 btn.classList.remove('active');
             });
 
-            // 선택한 탭 패널과 버튼 활성화
             document.getElementById('tab-' + tabName).classList.add('active');
             const activeBtn = document.querySelector(`.nav-tab-btn[data-tab="${tabName}"]`);
             if (activeBtn) {
                 activeBtn.classList.add('active');
             }
 
-            // 화면 상단으로 이동
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
