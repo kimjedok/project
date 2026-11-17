@@ -87,19 +87,19 @@
         .btn-primary{display:inline-block;background:var(--navy-blue);color:var(--bg-white);padding:.75rem 1.5rem;text-decoration:none;font-weight:600;font-size:.95rem;border-radius:4px;transition:background-color .2s;white-space:nowrap}
         .btn-primary:hover{background:var(--navy-dark)}
 
-        /* 편제 (가로형 와이드 직사각형 스크롤 리스트) */
+        /* 편제 -> 주력부대 (가로형 와이드 직사각형 스크롤 리스트) */
         .unit-list{display:flex;flex-direction:column;gap:1rem}
-        .unit-row{background:var(--bg-white);border:1px solid var(--border-color);border-left:5px solid var(--navy-blue);padding:1.5rem 1.75rem;border-radius:4px;display:flex;align-items:center;justify-content:space-between;gap:2rem;transition:.2s}
+        .unit-row{background:var(--bg-white);border:1px solid var(--border-color);border-left:5px solid var(--navy-blue);padding:1.5rem 1.75rem;border-radius:4px;display:flex;align-items:center;justify-content:space-between;gap:2.25rem;transition:.2s}
         .unit-row:hover{transform:translateX(4px);box-shadow:0 6px 18px rgba(14,74,132,.08);background:var(--light-gray-bg)}
-        .unit-head{min-width:240px;flex-shrink:0}
+        .unit-head{min-width:265px;flex-shrink:0;display:flex;flex-direction:column;align-items:flex-start}
         .unit-tag{display:inline-block;font-size:.76rem;color:var(--point-gray);font-weight:700;margin-bottom:.25rem;letter-spacing:.5px}
         .unit-head h3{color:var(--navy-blue);font-size:1.22rem;font-weight:800}
-        .unit-body{flex:1;font-size:.95rem;color:#3E444A;line-height:1.65}
-        .unit-links{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:flex-end;flex-shrink:0}
-        .unit-video-link{display:inline-flex;align-items:center;gap:4px;font-size:.83rem;font-weight:700;color:var(--navy-blue);background:var(--bg-white);border:1px solid var(--navy-blue);padding:.45rem .85rem;border-radius:3px;text-decoration:none;transition:.2s;white-space:nowrap}
+        .unit-links{margin-top:.65rem;display:flex;flex-wrap:wrap;gap:.45rem}
+        .unit-video-link{display:inline-flex;align-items:center;gap:4px;font-size:.8rem;font-weight:700;color:var(--navy-blue);background:var(--bg-white);border:1px solid var(--navy-blue);padding:.35rem .75rem;border-radius:3px;text-decoration:none;transition:.2s;white-space:nowrap}
         .unit-video-link:hover{background:var(--navy-blue);color:var(--bg-white)}
+        .unit-body{flex:1;font-size:.95rem;color:#3E444A;line-height:1.65}
 
-        /* 전력 */
+        /* 전력 -> 주요전력 */
         .fleet-tabs{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.5rem}
         .filter-btn{background:var(--bg-white);border:1px solid var(--point-gray);color:var(--text-dark);padding:.5rem 1.1rem;font-size:.9rem;font-weight:600;cursor:pointer;border-radius:3px;transition:.2s;font-family:inherit}
         .filter-btn.active,.filter-btn:hover{background:var(--navy-blue);border-color:var(--navy-blue);color:var(--bg-white)}
@@ -148,9 +148,8 @@
             .nav-tab-btn{padding:.5rem .75rem;font-size:.88rem}
             .home-hero h1{font-size:1.9rem}
             .sub-videos-grid,.hanyang-videos-grid{grid-template-columns:1fr}
-            .unit-row{flex-direction:column;align-items:flex-start;gap:.75rem;padding:1.25rem}
+            .unit-row{flex-direction:column;align-items:flex-start;gap:.85rem;padding:1.25rem}
             .unit-head{min-width:auto}
-            .unit-links{justify-content:flex-start;margin-top:.25rem}
             .fleet-list-header{display:none}
             .fleet-item{grid-template-columns:1fr;gap:.5rem}
         }
@@ -198,9 +197,7 @@
                 <h1 class="anim-step-2">The BEST Engine of Korea NAVY</h1>
                 <p class="anim-step-3">승리 앞에 겸손하며 패배를 모르는 애국한양 필승해군!</p>
                 <div class="hero-video-wrap anim-step-4">
-                    <div class="yt-auto-box">
-                        <iframe id="yt-hero-auto" class="yt-player" src="https://www.youtube.com/embed/fRqTrPHP9nE?autoplay=1&mute=1&playsinline=1&rel=0&enablejsapi=1" title="대한민국 해군 메인 영상" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                    </div>
+                    <div class="yt-auto-box" id="hero-auto-container"></div>
                 </div>
                 <div class="sub-videos-grid anim-step-5">
                     <div class="sub-video-card"><div class="yt-facade" data-video-id="ORiJx_mLj1Q" data-title="대한민국 해군 대표 영상"></div></div>
@@ -216,57 +213,85 @@
             </div>
         </section>
 
-        <!-- 편제 (가로형 와이드 직사각형 스크롤 리스트) -->
+        <!-- 편제 -> 본문 타이틀: 주력부대 -->
         <section id="tab-organization" class="tab-panel">
             <div class="content-container">
-                <div class="section-header"><div class="eng-title">01. Organization</div><h2>편제 (주력부대)</h2></div>
+                <div class="section-header"><div class="eng-title">01. Organization</div><h2>주력부대</h2></div>
                 <div class="unit-list">
                     <div class="unit-row">
-                        <div class="unit-head"><span class="unit-tag">동해 수호</span><h3>제1함대사령부</h3></div>
+                        <div class="unit-head">
+                            <span class="unit-tag">동해 수호</span>
+                            <h3>제1함대사령부</h3>
+                        </div>
                         <div class="unit-body">강원도 동해시에 위치하며, 동해 해역의 영해 수호와 해상 방위 작전을 전담하는 주력 함대입니다.</div>
                     </div>
                     <div class="unit-row">
-                        <div class="unit-head"><span class="unit-tag">서해 수호</span><h3>제2함대사령부</h3></div>
+                        <div class="unit-head">
+                            <span class="unit-tag">서해 수호</span>
+                            <h3>제2함대사령부</h3>
+                        </div>
                         <div class="unit-body">경기도 평택시에 위치하며, 서해 NLL(북방한계선) 사수 및 수도권 서측 해역 방어를 책임집니다.</div>
                     </div>
                     <div class="unit-row">
-                        <div class="unit-head"><span class="unit-tag">남해 수호</span><h3>제3함대사령부</h3></div>
+                        <div class="unit-head">
+                            <span class="unit-tag">남해 수호</span>
+                            <h3>제3함대사령부</h3>
+                        </div>
                         <div class="unit-body">전라남도 영암군에 위치하며, 남해 및 제주 해역의 해상 교통로 보호와 연안 방어를 수행합니다.</div>
                     </div>
                     <div class="unit-row">
-                        <div class="unit-head"><span class="unit-tag">대양 핵심 기동전력</span><h3>기동함대사령부</h3></div>
+                        <div class="unit-head">
+                            <span class="unit-tag">대양 핵심 기동전력</span>
+                            <h3>기동함대사령부</h3>
+                            <div class="unit-links">
+                                <a href="https://m.youtube.com/watch?si=L5ZwUt_22Gh-jWUt&v=3jf5KkfdPAU&feature=youtu.be" target="_blank" rel="noopener noreferrer" class="unit-video-link">▶ 기동함대 소개영상</a>
+                            </div>
+                        </div>
                         <div class="unit-body">이지스 구축함 등 최첨단 전투함을 주축으로 한반도 전역 및 원해 해상 교통로 보호와 대양 작전을 수행합니다.</div>
-                        <div class="unit-links"><a href="https://m.youtube.com/watch?si=L5ZwUt_22Gh-jWUt&v=3jf5KkfdPAU&feature=youtu.be" target="_blank" rel="noopener noreferrer" class="unit-video-link">▶ 기동함대 소개영상</a></div>
                     </div>
                     <div class="unit-row">
-                        <div class="unit-head"><span class="unit-tag">수중 전략전력</span><h3>잠수함사령부</h3></div>
+                        <div class="unit-head">
+                            <span class="unit-tag">수중 전략전력</span>
+                            <h3>잠수함사령부</h3>
+                        </div>
                         <div class="unit-body">경상남도 창원시 진해에 본부를 두고, 은밀한 수중 작전과 국가 전략 억제 임무를 수행합니다.</div>
                     </div>
                     <div class="unit-row">
-                        <div class="unit-head"><span class="unit-tag">입체 항공작전</span><h3>해군항공사령부</h3></div>
+                        <div class="unit-head">
+                            <span class="unit-tag">입체 항공작전</span>
+                            <h3>해군항공사령부</h3>
+                        </div>
                         <div class="unit-body">해상초계기 및 해상작전헬기를 운용하며 대잠수함 작전, 해상 감시·정찰 및 구조 임무를 담당합니다.</div>
                     </div>
                     <div class="unit-row">
-                        <div class="unit-head"><span class="unit-tag">특수작전 전력</span><h3>해군특수전전단 (UDT/SEAL)</h3></div>
-                        <div class="unit-body">전천후 특수타격, 폭발물 처리(EOD), 해난구조(SSU) 등 고난도 특수작전을 수행하는 최정예 부대입니다.</div>
-                        <div class="unit-links">
-                            <a href="https://youtu.be/mbUvRu_ZOd4?si=oIUmfcZxRCUeN_gF" target="_blank" rel="noopener noreferrer" class="unit-video-link">▶ UDT/SEAL 소개영상</a>
-                            <a href="https://youtu.be/xU7NLAXHb4g" target="_blank" rel="noopener noreferrer" class="unit-video-link">▶ SSU 소개영상</a>
+                        <div class="unit-head">
+                            <span class="unit-tag">특수작전 전력</span>
+                            <h3>해군특수전전단 (UDT/SEAL)</h3>
+                            <div class="unit-links">
+                                <a href="https://youtu.be/mbUvRu_ZOd4?si=oIUmfcZxRCUeN_gF" target="_blank" rel="noopener noreferrer" class="unit-video-link">▶ UDT/SEAL 소개영상</a>
+                                <a href="https://youtu.be/xU7NLAXHb4g" target="_blank" rel="noopener noreferrer" class="unit-video-link">▶ SSU 소개영상</a>
+                            </div>
                         </div>
+                        <div class="unit-body">전천후 특수타격, 폭발물 처리(EOD), 해난구조(SSU) 등 고난도 특수작전을 수행하는 최정예 부대입니다.</div>
                     </div>
                     <div class="unit-row">
-                        <div class="unit-head"><span class="unit-tag">국가전략기동부대</span><h3>해병대사령부</h3></div>
+                        <div class="unit-head">
+                            <span class="unit-tag">국가전략기동부대</span>
+                            <h3>해병대사령부</h3>
+                            <div class="unit-links">
+                                <a href="https://youtu.be/ZSD6pXe24Kc?si=qOuB10FLRhS0aAh6" target="_blank" rel="noopener noreferrer" class="unit-video-link">▶ 해병대 소개영상</a>
+                            </div>
+                        </div>
                         <div class="unit-body">상륙작전을 주임무로 하며, 서북도서 방어 및 신속기동부대로서 국가 위기 대응의 선봉에 섭니다.</div>
-                        <div class="unit-links"><a href="https://youtu.be/ZSD6pXe24Kc?si=qOuB10FLRhS0aAh6" target="_blank" rel="noopener noreferrer" class="unit-video-link">▶ 해병대 소개영상</a></div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- 전력 -->
+        <!-- 전력 -> 본문 타이틀: 주요전력 -->
         <section id="tab-forces" class="tab-panel">
             <div class="content-container">
-                <div class="section-header"><div class="eng-title">02. Naval Forces</div><h2>전력</h2></div>
+                <div class="section-header"><div class="eng-title">02. Naval Forces</div><h2>주요전력</h2></div>
                 <div class="fleet-tabs">
                     <button class="filter-btn active" onclick="filterFleet('all',this)">전체 보기</button>
                     <button class="filter-btn" onclick="filterFleet('destroyer',this)">구축함</button>
@@ -427,11 +452,22 @@
     </footer>
 
     <script>
+        function sendYTCommand(iframe, func, args = []) {
+            if (!iframe || !iframe.contentWindow) return;
+            iframe.contentWindow.postMessage(JSON.stringify({ event: 'command', func, args }), '*');
+        }
+
+        function registerYTListener(iframe) {
+            if (!iframe || !iframe.contentWindow) return;
+            const payload = JSON.stringify({ event: 'listening', id: iframe.id });
+            iframe.contentWindow.postMessage(payload, '*');
+            setTimeout(() => iframe.contentWindow?.postMessage(payload, '*'), 400);
+            setTimeout(() => iframe.contentWindow?.postMessage(payload, '*'), 1200);
+        }
+
         function pauseOtherVideos(except = null) {
             document.querySelectorAll('.yt-player').forEach(f => {
-                if (f !== except && f.contentWindow) {
-                    f.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'pauseVideo', args: [] }), '*');
-                }
+                if (f !== except) sendYTCommand(f, 'pauseVideo');
             });
         }
 
@@ -440,20 +476,34 @@
             try {
                 const d = typeof e.data === 'string' ? JSON.parse(e.data) : e.data;
                 if (d.event === 'onStateChange' && d.info === 1) {
-                    document.querySelectorAll('.yt-player').forEach(f => { if (f.contentWindow === e.source) pauseOtherVideos(f); });
+                    document.querySelectorAll('.yt-player').forEach(f => {
+                        if (f.contentWindow === e.source) pauseOtherVideos(f);
+                    });
                 }
             } catch {}
         });
 
+        function createYTIframe(id, videoId, title, autoMute = false) {
+            const f = document.createElement('iframe');
+            f.className = 'yt-player';
+            f.id = id;
+            const originParam = location.origin && location.origin !== 'null' ? `&origin=${encodeURIComponent(location.origin)}` : '';
+            const muteParam = autoMute ? '&mute=1&playsinline=1' : '';
+            f.src = `https://www.youtube.com/embed/${videoId}?autoplay=1${muteParam}&rel=0&enablejsapi=1${originParam}`;
+            f.title = title;
+            f.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+            f.allowFullscreen = true;
+            f.onload = () => {
+                registerYTListener(f);
+                setTimeout(() => sendYTCommand(f, 'playVideo'), 5100);
+            };
+            return f;
+        }
+
         function initYouTubePlayers() {
-            const hero = document.getElementById('yt-hero-auto');
-            if (hero) {
-                hero.onload = () => {
-                    hero.contentWindow?.postMessage(JSON.stringify({ event: 'listening', id: hero.id }), '*');
-                    setTimeout(() => {
-                        hero.contentWindow?.postMessage(JSON.stringify({ event: 'command', func: 'playVideo', args: [] }), '*');
-                    }, 5100);
-                };
+            const heroContainer = document.getElementById('hero-auto-container');
+            if (heroContainer) {
+                heroContainer.appendChild(createYTIframe('yt-hero-auto', 'fRqTrPHP9nE', '대한민국 해군 메인 영상', true));
             }
 
             document.querySelectorAll('.yt-facade').forEach((box, i) => {
@@ -471,17 +521,7 @@
                 box.onclick = () => {
                     if (box.querySelector('iframe')) return;
                     pauseOtherVideos();
-                    const f = document.createElement('iframe');
-                    f.className = 'yt-player';
-                    f.id = `yt-player-${i}`;
-                    f.src = `https://www.youtube.com/embed/${id}?autoplay=1&rel=0&enablejsapi=1`;
-                    f.title = title;
-                    f.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
-                    f.allowFullscreen = true;
-                    f.onload = () => {
-                        f.contentWindow?.postMessage(JSON.stringify({ event: 'listening', id: f.id }), '*');
-                        setTimeout(() => f.contentWindow?.postMessage(JSON.stringify({ event: 'command', func: 'playVideo', args: [] }), '*'), 5100);
-                    };
+                    const f = createYTIframe(`yt-player-${i}`, id, title, false);
                     box.innerHTML = '';
                     box.appendChild(f);
                 };
