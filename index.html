@@ -87,14 +87,14 @@
         .btn-primary{display:inline-block;background:var(--navy-blue);color:var(--bg-white);padding:.75rem 1.5rem;text-decoration:none;font-weight:600;font-size:.95rem;border-radius:4px;transition:background-color .2s;white-space:nowrap}
         .btn-primary:hover{background:var(--navy-dark)}
 
-        /* 편제 -> 주력부대 (가로형 와이드 직사각형 스크롤 리스트) */
+        /* 편제 -> 주력부대 */
         .unit-list{display:flex;flex-direction:column;gap:1rem}
         .unit-row{background:var(--bg-white);border:1px solid var(--border-color);border-left:5px solid var(--navy-blue);padding:1.5rem 1.75rem;border-radius:4px;display:flex;align-items:center;justify-content:space-between;gap:2.25rem;transition:.2s}
         .unit-row:hover{transform:translateX(4px);box-shadow:0 6px 18px rgba(14,74,132,.08);background:var(--light-gray-bg)}
         .unit-head{min-width:265px;flex-shrink:0;display:flex;flex-direction:column;align-items:flex-start}
         .unit-tag{display:inline-block;font-size:.76rem;color:var(--point-gray);font-weight:700;margin-bottom:.25rem;letter-spacing:.5px}
         .unit-head h3{color:var(--navy-blue);font-size:1.22rem;font-weight:800}
-        .unit-links{margin-top:.65rem;display:flex;flex-wrap:wrap;gap:.45rem}
+        .unit-links{margin-top:.65rem;display:flex;flex-direction:column;align-items:flex-start;gap:.45rem}
         .unit-video-link{display:inline-flex;align-items:center;gap:4px;font-size:.8rem;font-weight:700;color:var(--navy-blue);background:var(--bg-white);border:1px solid var(--navy-blue);padding:.35rem .75rem;border-radius:3px;text-decoration:none;transition:.2s;white-space:nowrap}
         .unit-video-link:hover{background:var(--navy-blue);color:var(--bg-white)}
         .unit-body{flex:1;font-size:.95rem;color:#3E444A;line-height:1.65}
@@ -197,7 +197,9 @@
                 <h1 class="anim-step-2">The BEST Engine of Korea NAVY</h1>
                 <p class="anim-step-3">승리 앞에 겸손하며 패배를 모르는 애국한양 필승해군!</p>
                 <div class="hero-video-wrap anim-step-4">
-                    <div class="yt-auto-box" id="hero-auto-container"></div>
+                    <div class="yt-auto-box">
+                        <div id="yt-hero-auto"></div>
+                    </div>
                 </div>
                 <div class="sub-videos-grid anim-step-5">
                     <div class="sub-video-card"><div class="yt-facade" data-video-id="ORiJx_mLj1Q" data-title="대한민국 해군 대표 영상"></div></div>
@@ -452,62 +454,74 @@
     </footer>
 
     <script>
-        function sendYTCommand(iframe, func, args = []) {
-            if (!iframe || !iframe.contentWindow) return;
-            iframe.contentWindow.postMessage(JSON.stringify({ event: 'command', func, args }), '*');
-        }
+        const ytPlayers = {};
+        let ytApiReady = false;
+        const pendingPlayers = [];
 
-        function registerYTListener(iframe) {
-            if (!iframe || !iframe.contentWindow) return;
-            const payload = JSON.stringify({ event: 'listening', id: iframe.id });
-            iframe.contentWindow.postMessage(payload, '*');
-            setTimeout(() => iframe.contentWindow?.postMessage(payload, '*'), 400);
-            setTimeout(() => iframe.contentWindow?.postMessage(payload, '*'), 1200);
-        }
-
-        function pauseOtherVideos(except = null) {
-            document.querySelectorAll('.yt-player').forEach(f => {
-                if (f !== except) sendYTCommand(f, 'pauseVideo');
+        function pauseAllExcept(activeId = null) {
+            Object.keys(ytPlayers).forEach(key => {
+                if (key !== activeId) {
+                    const p = ytPlayers[key];
+                    if (p && typeof p.pauseVideo === 'function') {
+                        try { p.pauseVideo(); } catch {}
+                    }
+                }
             });
         }
 
-        window.addEventListener('message', e => {
-            if (!e.origin.includes('youtube.com')) return;
-            try {
-                const d = typeof e.data === 'string' ? JSON.parse(e.data) : e.data;
-                if (d.event === 'onStateChange' && d.info === 1) {
-                    document.querySelectorAll('.yt-player').forEach(f => {
-                        if (f.contentWindow === e.source) pauseOtherVideos(f);
-                    });
-                }
-            } catch {}
-        });
+        function mountYTPlayer(elementId, videoId, isHeroAuto = false) {
+            if (!ytApiReady) {
+                pendingPlayers.push({ elementId, videoId, isHeroAuto });
+                return;
+            }
+            if (ytPlayers[elementId]) return;
 
-        function createYTIframe(id, videoId, title, autoMute = false) {
-            const f = document.createElement('iframe');
-            f.className = 'yt-player';
-            f.id = id;
-            const originParam = location.origin && location.origin !== 'null' ? `&origin=${encodeURIComponent(location.origin)}` : '';
-            const muteParam = autoMute ? '&mute=1&playsinline=1' : '';
-            f.src = `https://www.youtube.com/embed/${videoId}?autoplay=1${muteParam}&rel=0&enablejsapi=1${originParam}`;
-            f.title = title;
-            f.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
-            f.allowFullscreen = true;
-            f.onload = () => {
-                registerYTListener(f);
-                setTimeout(() => sendYTCommand(f, 'playVideo'), 5100);
-            };
-            return f;
+            ytPlayers[elementId] = new YT.Player(elementId, {
+                videoId: videoId,
+                playerVars: {
+                    autoplay: 1,
+                    mute: isHeroAuto ? 1 : 0,
+                    playsinline: 1,
+                    rel: 0
+                },
+                events: {
+                    onReady: e => {
+                        e.target.playVideo();
+                        setTimeout(() => {
+                            if (e.target.getPlayerState && e.target.getPlayerState() !== YT.PlayerState.PLAYING) {
+                                e.target.playVideo();
+                            }
+                        }, 5100);
+                    },
+                    onStateChange: e => {
+                        if (e.data === YT.PlayerState.PLAYING) {
+                            pauseAllExcept(elementId);
+                        }
+                    }
+                }
+            });
         }
 
-        function initYouTubePlayers() {
-            const heroContainer = document.getElementById('hero-auto-container');
-            if (heroContainer) {
-                heroContainer.appendChild(createYTIframe('yt-hero-auto', 'fRqTrPHP9nE', '대한민국 해군 메인 영상', true));
+        window.onYouTubeIframeAPIReady = function() {
+            ytApiReady = true;
+            while (pendingPlayers.length > 0) {
+                const { elementId, videoId, isHeroAuto } = pendingPlayers.shift();
+                mountYTPlayer(elementId, videoId, isHeroAuto);
             }
+        };
+
+        function initYouTubeFacades() {
+            const tag = document.createElement('script');
+            tag.src = 'https://www.youtube.com/iframe_api';
+            document.head.appendChild(tag);
+
+            mountYTPlayer('yt-hero-auto', 'fRqTrPHP9nE', true);
 
             document.querySelectorAll('.yt-facade').forEach((box, i) => {
-                const id = box.dataset.videoId, title = box.dataset.title || 'YouTube Video';
+                const id = box.dataset.videoId;
+                const title = box.dataset.title || 'YouTube Video';
+                const playerId = `yt-player-${i}`;
+
                 const img = document.createElement('img');
                 img.src = `https://i.ytimg.com/vi/${id}/maxresdefault.jpg`;
                 img.alt = title;
@@ -519,17 +533,16 @@
                 box.append(img, btn);
 
                 box.onclick = () => {
-                    if (box.querySelector('iframe')) return;
-                    pauseOtherVideos();
-                    const f = createYTIframe(`yt-player-${i}`, id, title, false);
-                    box.innerHTML = '';
-                    box.appendChild(f);
+                    if (ytPlayers[playerId]) return;
+                    pauseAllExcept(playerId);
+                    box.innerHTML = `<div id="${playerId}"></div>`;
+                    mountYTPlayer(playerId, id, false);
                 };
             });
         }
 
         function openTab(name) {
-            pauseOtherVideos();
+            pauseAllExcept();
             document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
             document.querySelectorAll('.nav-tab-btn').forEach(b => b.classList.remove('active'));
             document.getElementById('tab-' + name).classList.add('active');
@@ -545,7 +558,7 @@
             });
         }
 
-        document.addEventListener('DOMContentLoaded', initYouTubePlayers);
+        document.addEventListener('DOMContentLoaded', initYouTubeFacades);
     </script>
 </body>
 </html>
