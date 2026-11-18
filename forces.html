@@ -1,13 +1,28 @@
 <div class="content-container">
     <div class="section-header"><div class="eng-title">02. Naval Forces</div><h2>주요전력</h2></div>
+
+    <!-- [1차 기능 추가] 함정·무기체계 실시간 검색바 & 결과 카운터 -->
+    <div style="display:flex;flex-wrap:wrap;gap:.75rem;align-items:center;justify-content:space-between;margin-bottom:1.1rem;padding:.9rem 1.1rem;background:#F4F7FB;border:1px solid #D9E2EC;border-radius:10px;">
+        <div style="position:relative;flex:1;min-width:240px;">
+            <input type="text" id="fleetSearchInput" oninput="searchAndFilterFleet()"
+                placeholder="함정명, 함급, 분류기호 검색 (예: 정조대왕, DDG, 잠수함, 이지스, P-8A)"
+                style="width:100%;padding:.65rem 2.2rem .65rem .95rem;border:1.5px solid #CBD5E1;border-radius:8px;font-size:.92rem;font-family:inherit;outline:none;background:#FFF;">
+            <button type="button" onclick="resetFleetSearch()" title="검색 초기화"
+                style="position:absolute;right:.65rem;top:50%;transform:translateY(-50%);border:none;background:none;color:#64748B;font-size:1rem;cursor:pointer;">✕</button>
+        </div>
+        <div id="fleetResultCount" style="font-size:.88rem;font-weight:600;color:#0E4A84;white-space:nowrap;">
+            총 10개 함종 카테고리 표시 중
+        </div>
+    </div>
+
     <div class="fleet-tabs">
-        <button class="filter-btn active" onclick="filterFleet('all',this)">전체 보기</button>
-        <button class="filter-btn" onclick="filterFleet('destroyer',this)">구축함</button>
-        <button class="filter-btn" onclick="filterFleet('frigate',this)">호위함·초계함</button>
-        <button class="filter-btn" onclick="filterFleet('submarine',this)">잠수함</button>
-        <button class="filter-btn" onclick="filterFleet('amphibious',this)">상륙·기뢰·지원함</button>
-        <button class="filter-btn" onclick="filterFleet('patrol',this)">고속함·고속정</button>
-        <button class="filter-btn" onclick="filterFleet('aviation',this)">항공병기</button>
+        <button class="filter-btn active" data-cat="all" onclick="selectFleetCategory('all',this)">전체 보기</button>
+        <button class="filter-btn" data-cat="destroyer" onclick="selectFleetCategory('destroyer',this)">구축함</button>
+        <button class="filter-btn" data-cat="frigate" onclick="selectFleetCategory('frigate',this)">호위함·초계함</button>
+        <button class="filter-btn" data-cat="submarine" onclick="selectFleetCategory('submarine',this)">잠수함</button>
+        <button class="filter-btn" data-cat="amphibious" onclick="selectFleetCategory('amphibious',this)">상륙·기뢰·지원함</button>
+        <button class="filter-btn" data-cat="patrol" onclick="selectFleetCategory('patrol',this)">고속함·고속정</button>
+        <button class="filter-btn" data-cat="aviation" onclick="selectFleetCategory('aviation',this)">항공병기</button>
     </div>
 
     <div class="fleet-list-container" id="fleetList">
@@ -134,7 +149,7 @@
             <div class="fleet-desc">130mm 유도로켓과 원격사격통제체계를 갖추고 연안 경비 및 북방한계선(NLL) 즉각 대응 임무를 수행하는 신형 고속정 전력입니다.</div>
         </div>
 
-        <!-- 10. 항공병기 (초계기·작전헬기 첫 줄만 배지 표기 + 줄바꿈) -->
+        <!-- 10. 항공병기 -->
         <div class="fleet-item" data-category="aviation">
             <div class="fleet-col-type">항공병기</div>
             <div class="fleet-col-class">
@@ -145,6 +160,11 @@
                 <span style="display:inline-block;padding-left:4.2rem">링스 (Lynx)</span>
             </div>
             <div class="fleet-desc">한반도 주변 해역의 광역 해상 감시·정찰과 적 잠수함 탐지·추적·격멸 등 입체적인 대잠수함 작전 및 해상 구조 임무를 수행하는 해군항공사령부의 핵심 항공 전력입니다.</div>
+        </div>
+
+        <!-- 검색 결과 없음 안내 문구 -->
+        <div id="fleetEmptyMsg" style="display:none;text-align:center;padding:2.5rem 1rem;color:#64748B;font-size:.95rem;">
+            일치하는 함정 또는 무기체계가 없습니다. 다른 키워드로 검색해 보세요.
         </div>
     </div>
 
@@ -157,3 +177,44 @@
         <a href="https://www.navy.mil.kr/mbshome/mbs/navy/vr/vr/index.html" target="_blank" rel="noopener noreferrer" class="btn-primary">이지스함 VR 체험하기 ↗</a>
     </div>
 </div>
+
+<script>
+    let currentFleetCat = 'all';
+
+    function selectFleetCategory(category, btn) {
+        currentFleetCat = category;
+        document.querySelectorAll('.fleet-tabs .filter-btn').forEach(b => b.classList.remove('active'));
+        if (btn) btn.classList.add('active');
+        searchAndFilterFleet();
+    }
+
+    function searchAndFilterFleet() {
+        const input = document.getElementById('fleetSearchInput');
+        const keyword = input ? input.value.trim().toLowerCase() : '';
+        const items = document.querySelectorAll('#fleetList .fleet-item');
+        let visibleCount = 0;
+
+        items.forEach(item => {
+            const catMatch = (currentFleetCat === 'all' || item.dataset.category === currentFleetCat);
+            const textMatch = (!keyword || item.textContent.toLowerCase().includes(keyword));
+            if (catMatch && textMatch) {
+                item.style.display = '';
+                visibleCount++;
+            } else {
+                item.style.display = 'none';
+            }
+        });
+
+        const countEl = document.getElementById('fleetResultCount');
+        if (countEl) countEl.textContent = `총 ${visibleCount}개 함종 카테고리 표시 중`;
+
+        const emptyEl = document.getElementById('fleetEmptyMsg');
+        if (emptyEl) emptyEl.style.display = visibleCount === 0 ? 'block' : 'none';
+    }
+
+    function resetFleetSearch() {
+        const input = document.getElementById('fleetSearchInput');
+        if (input) input.value = '';
+        searchAndFilterFleet();
+    }
+</script>
