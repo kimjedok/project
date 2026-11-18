@@ -55,11 +55,10 @@
         @keyframes simpleOpacity{from{opacity:0}to{opacity:1}}
 
         /* 유튜브 고화질 플레이어 */
-        .yt-facade,.yt-auto-box{position:relative;width:100%;aspect-ratio:16/9;background:#000;overflow:hidden}
-        .yt-facade{cursor:pointer}
+        .yt-facade{position:relative;width:100%;aspect-ratio:16/9;background:#000;overflow:hidden;cursor:pointer}
         .yt-facade img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .3s ease,filter .3s ease}
         .yt-facade:hover img{transform:scale(1.02);filter:brightness(.92)}
-        .yt-facade iframe,.yt-auto-box iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+        .yt-facade iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
         .yt-play-btn{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:54px;height:38px;background:rgba(14,74,132,.9);border:1.5px solid rgba(255,255,255,.85);border-radius:10px;display:flex;align-items:center;justify-content:center;transition:.2s;box-shadow:0 4px 16px rgba(0,0,0,.45)}
         .yt-facade:hover .yt-play-btn{background:#F00;border-color:#F00;transform:translate(-50%,-50%) scale(1.06)}
         .yt-play-btn::after{content:'';border-style:solid;border-width:8px 0 8px 14px;border-color:transparent transparent transparent #FFF;margin-left:3px}
@@ -151,10 +150,11 @@
         .endorsement-sign span{display:block;font-size:.85rem;color:var(--point-gray);font-weight:500;margin-top:.2rem}
 
         .hy-grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem}
-        .hy-card{background:var(--light-gray-bg);border:1px solid var(--border-color);border-left:4px solid var(--navy-blue);padding:1.4rem 1.5rem;border-radius:4px}
-        .hy-card-tag{display:inline-block;font-size:.76rem;font-weight:700;color:var(--point-gray);margin-bottom:.3rem}
-        .hy-card h4{color:var(--navy-blue);font-size:1.08rem;margin-bottom:.45rem}
-        .hy-card p{font-size:.92rem;color:#4A5056;line-height:1.6}
+        .hy-stack{display:flex;flex-direction:column;gap:1.25rem}
+        .hy-card{background:var(--light-gray-bg);border:1px solid var(--border-color);border-left:4px solid var(--navy-blue);padding:1.65rem 1.85rem;border-radius:4px}
+        .hy-card-tag{display:inline-block;font-size:.76rem;font-weight:700;color:var(--point-gray);margin-bottom:.3rem;letter-spacing:.5px}
+        .hy-card h4{color:var(--navy-blue);font-size:1.15rem;font-weight:800;margin-bottom:.55rem}
+        .hy-card p{font-size:.95rem;color:#4A5056;line-height:1.7}
         .hanyang-videos-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem}
         .hanyang-video-card{border:1px solid var(--border-color);border-top:3px solid var(--navy-blue);border-radius:6px;overflow:hidden;background:#000;box-shadow:0 6px 18px rgba(14,74,132,.08)}
 
@@ -221,9 +221,7 @@
                 <h1 class="anim-step-2">The BEST Engine of Korea NAVY</h1>
                 <p class="anim-step-3">승리 앞에 겸손하며 패배를 모르는 애국한양 필승해군!</p>
                 <div class="hero-video-wrap anim-step-4">
-                    <div class="yt-auto-box">
-                        <iframe id="yt-hero-auto" class="yt-player" src="https://www.youtube.com/embed/fRqTrPHP9nE?autoplay=1&mute=1&playsinline=1&rel=0&enablejsapi=1" title="대한민국 해군 메인 영상" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                    </div>
+                    <div class="yt-facade" data-video-id="fRqTrPHP9nE" data-title="대한민국 해군 메인 영상"></div>
                 </div>
                 <div class="sub-videos-grid anim-step-5">
                     <div class="sub-video-card"><div class="yt-facade" data-video-id="ORiJx_mLj1Q" data-title="대한민국 해군 대표 영상"></div></div>
@@ -263,8 +261,8 @@
                         <span class="hy-box-tag">Department Introduction</span>
                         <h3>한양대학교 국방전략기술공학과</h3>
                         <p>한양대학교 국방전략기술공학과는 미래 해군이 필요로 하는 <strong>Smart Navy 구현의 핵심인재</strong>를 양성하기 위해 해군과 한양대학교의 협력으로 설립되었습니다.</p>
-                        <p>산학협력 전국 1위인 한양대 ERICA에서 4차 산업혁명기술 기반 창의적 문제 해결형 최정예 해군장교 양성을 목표로 각 분야별 최고의 교수진들이 구성된 최고의 커리큘럼을 통하여 인문학적 소양 및 소통능력, 공학과 사이언스를 접목한 융합적 배양기술, 기초 체력단련 및 국제 스포츠 교육 등 엘리트 해군장교 양성을 위한 최고의 교육과정을 제공하고 있습니다.</p>
-                        <p>이러한 전인교육을 통해 한양대학교 국방전략기술공학과는 여러분들의 소통능력·직무능력·리더십을 함양하고, 융합적 마인드를 갖춘 차세대 리더로 양성시킬 것입니다. 한양대학교의 슬로건은 <strong>"Engine of Korea"</strong>입니다. 국방전략기술공학과에 입학하는 여러분들은 최고의 교수진, 최고의 시설, 최고의 교육과정을 통해 Smart Navy를 구현할 한국해군의 원동력(<strong>Engine of Korean Navy</strong>)으로 성장할 것입니다.</p>
+                        <p><strong>산학협력 전국 1위</strong>인 한양대 ERICA에서 4차 산업혁명기술 기반 창의적 문제 해결형 최정예 해군장교 양성을 목표로 각 분야별 최고의 교수진들이 구성된 최고의 커리큘럼을 통하여 인문학적 소양 및 소통능력, 공학과 사이언스를 접목한 융합적 배양기술, 기초 체력단련 및 국제 스포츠 교육 등 엘리트 해군장교 양성을 위한 최고의 교육과정을 제공하고 있습니다.</p>
+                        <p>이러한 전인교육을 통해 한양대학교 국방전략기술공학과는 여러분들의 소통능력·직무능력·리더십을 함양하고, 융합적 마인드를 갖춘 차세대 리더로 양성시킬 것입니다. 한양대학교의 슬로건은 <strong>"Engine of Korea"</strong> 입니다. 국방전략기술공학과에 입학하는 여러분들은 최고의 교수진, 최고의 시설, 최고의 교육과정을 통해 Smart Navy를 구현할 한국해군의 원동력(Engine of Korean Navy)으로 성장할 것입니다.</p>
                     </div>
                 </div>
 
@@ -316,18 +314,18 @@
                     </div>
                 </div>
 
-                <!-- 4. 교수소개 -->
+                <!-- 4. 교수소개 (세로 2칸 구성) -->
                 <div id="hy-sub-faculty" class="sub-tab-panel">
-                    <div class="hy-grid-2">
+                    <div class="hy-stack">
                         <div class="hy-card">
-                            <span class="hy-card-tag">전임교원 · 국방전략기술</span>
-                            <h4>국방전략기술공학과 교수진</h4>
-                            <p>한양대학교 공과대학 및 국방과학·해양전략 분야의 최고 수준 교수진이 체계적인 학문 지도와 진로 멘토링을 담당합니다.</p>
+                            <span class="hy-card-tag">FACULTY</span>
+                            <h4>교수진</h4>
+                            <p>한양대학교 공과대학 및 국방과학·해양전략 분야의 최고 수준 전임교원진과 풍부한 함정 지휘 및 작전·전력기획 경험을 갖춘 해군 출신 초빙교수진이 체계적인 학문 지도와 실전적 군사학 교육을 담당합니다.</p>
                         </div>
                         <div class="hy-card">
-                            <span class="hy-card-tag">초빙교원 · 해군 작전 및 무기체계</span>
-                            <h4>해군 군사학 및 실무 전문가</h4>
-                            <p>풍부한 함정 지휘 및 작전·전력기획 경험을 갖춘 해군 출신 전문 교수진이 실전적 군사학 교육과 장교 임관 준비를 지원합니다.</p>
+                            <span class="hy-card-tag">DEFENSE INDUSTRY ADVISORY BOARD</span>
+                            <h4>Defense IAB</h4>
+                            <p>국내외 주요 방위산업체, 국방연구기관 및 해군 전력·기술 분야 핵심 전문가들로 구성된 국방산학자문위원회(Defense IAB)가 첨단 해양무기체계 연구 협력, 현장 실무 멘토링 및 산학연계 교육과정을 자문·지원합니다.</p>
                         </div>
                     </div>
                 </div>
@@ -394,9 +392,6 @@
         }
 
         function stopAllVideosExcept(activeIframe = null) {
-            const hero = document.getElementById('yt-hero-auto');
-            if (hero && hero !== activeIframe) sendYTCommand(hero, 'pauseVideo');
-
             document.querySelectorAll('.yt-facade').forEach(box => {
                 const iframe = box.querySelector('iframe');
                 if (iframe && iframe !== activeIframe) {
@@ -420,15 +415,6 @@
         });
 
         function initYouTubePlayers() {
-            const hero = document.getElementById('yt-hero-auto');
-            if (hero) {
-                hero.onload = () => {
-                    registerYTListening(hero);
-                    setTimeout(() => registerYTListening(hero), 500);
-                    setTimeout(() => sendYTCommand(hero, 'playVideo'), 5100);
-                };
-            }
-
             setInterval(() => {
                 document.querySelectorAll('.yt-player').forEach(registerYTListening);
             }, 1500);
