@@ -2,7 +2,7 @@
     <div class="section-header"><div class="eng-title">02. Naval Forces</div><h2>주요전력</h2></div>
     <div class="fleet-tabs">
         <button class="filter-btn active" onclick="filterFleet('all',this)">전체 보기</button>
-        <button class="filter-btn" onclick="filterFleet('destroyer',this)">구축함(테스트중)</button>
+        <button class="filter-btn" onclick="filterFleet('destroyer',this)">구축함</button>
         <button class="filter-btn" onclick="filterFleet('frigate',this)">호위함·초계함</button>
         <button class="filter-btn" onclick="filterFleet('submarine',this)">잠수함</button>
         <button class="filter-btn" onclick="filterFleet('amphibious',this)">상륙·기뢰·지원함</button>
@@ -13,25 +13,20 @@
     <div class="fleet-list-container" id="fleetList">
         <div class="fleet-list-header"><div>함종</div><div>분류 기호 및 함급 (만재배수량)</div><div>주요 특징</div></div>
 
+        <!-- 1. 구축함 (통합) -->
         <div class="fleet-item" data-category="destroyer">
             <div class="fleet-col-type">구축함</div>
             <div class="fleet-col-class">
                 <span class="ship-badge upcoming">취역 예정</span> KDDX <span class="tonnage-tag">(차기 구축함)</span><br>
                 <span class="ship-badge">DDG-II</span> 정조대왕급 <span class="tonnage-tag">(12,000톤)</span><br>
-                <span class="ship-badge">DDG-I</span> 세종대왕급 <span class="tonnage-tag">(10,600톤)</span>
-            </div>
-            <div class="fleet-desc">(테스트중)이지스(Aegis) 전투체계를 탑재한 대한민국 해군의 핵심 기동함대 주력 전력입니다. 다수의 탄도탄 및 항공 표적을 동시 탐지·추적·요격할 수 있으며, 국내 독자 개발 통합마스트와 전투체계를 적용한 KDDX 차기 구축함이 취역 예정입니다.</div>
-        </div>
-
-        <div class="fleet-item" data-category="destroyer">
-            <div class="fleet-col-type">구축함</div>
-            <div class="fleet-col-class">
+                <span class="ship-badge">DDG-I</span> 세종대왕급 <span class="tonnage-tag">(10,600톤)</span><br>
                 <span class="ship-badge">DDH-II</span> 충무공이순신급 <span class="tonnage-tag">(5,520톤)</span><br>
                 <span class="ship-badge">DDH-I</span> 광개토대왕급 <span class="tonnage-tag">(3,900톤)</span>
             </div>
-            <div class="fleet-desc">대공·대함·대잠 입체 작전 능력을 갖춘 한국형 다목적 구축함으로, 한반도 해역 방어는 물론 청해부대 등 원해 파병 임무에서도 핵심적인 역할을 수행합니다.</div>
+            <div class="fleet-desc">이지스(Aegis) 전투체계를 탑재한 기동함대 주력 이지스 구축함과 대공·대함·대잠 입체 작전 능력을 갖춘 한국형 다목적 구축함으로 구성된 대한민국 해군의 핵심 수상 전투 전력입니다. 한반도 해역 방어와 원해 파병 임무를 수행하며, 국내 독자 개발 통합마스트와 전투체계를 적용한 KDDX 차기 구축함이 취역 예정입니다.</div>
         </div>
 
+        <!-- 2. 호위함 -->
         <div class="fleet-item" data-category="frigate">
             <div class="fleet-col-type">호위함</div>
             <div class="fleet-col-class">
@@ -43,12 +38,14 @@
             <div class="fleet-desc">해역함대의 주력 전투함으로 복합식 추진체계(하이브리드)를 통한 저소음 대잠 능력과 다기능 위상배열레이더 기반의 대공·대함 방어력을 대폭 강화한 차기 호위함 전력이며, 무장 및 전투체계가 한층 고도화된 FFX Batch-IV가 취역 예정입니다.</div>
         </div>
 
+        <!-- 3. 초계함 -->
         <div class="fleet-item" data-category="frigate">
             <div class="fleet-col-type">초계함</div>
             <div class="fleet-col-class"><span class="ship-badge">PCC</span> 포항급 <span class="tonnage-tag">(1,220톤)</span></div>
             <div class="fleet-desc">연안 경비 및 대잠 초계 임무를 수행해 온 핵심 연안 방어 전력입니다.</div>
         </div>
 
+        <!-- 4. 잠수함 -->
         <div class="fleet-item" data-category="submarine">
             <div class="fleet-col-type">잠수함</div>
             <div class="fleet-col-class">
@@ -60,6 +57,7 @@
             <div class="fleet-desc">국내 독자 설계·건조된 3,000톤급 중형 잠수함(도산안창호급)부터 공기불요추진체계(AIP)를 탑재한 1,800톤급·1,200톤급까지 운용하는 핵심 수중 전략 전력이며, 리튬전지 체계와 수직발사관(VLS)을 확장한 장보고-III Batch-II가 취역 예정입니다.</div>
         </div>
 
+        <!-- 5. 상륙함 (분리) -->
         <div class="fleet-item" data-category="amphibious">
             <div class="fleet-col-type">상륙함</div>
             <div class="fleet-col-class">
@@ -70,35 +68,52 @@
             <div class="fleet-desc">대형수송함(독도함·마라도함)을 중심으로 상륙작전 지휘 통제 및 대규모 병력·상륙장갑차·헬기 수송과 재해·재난 구조 임무를 수행합니다.</div>
         </div>
 
+        <!-- 6. 기뢰전함 (분리) -->
         <div class="fleet-item" data-category="amphibious">
-            <div class="fleet-col-type">기뢰전함<br>지원함</div>
+            <div class="fleet-col-type">기뢰전함</div>
             <div class="fleet-col-class">
                 <span class="ship-badge upcoming">취역 예정</span> MSH-II <span class="tonnage-tag">(차기 소해함)</span><br>
                 <span class="ship-badge">MLS-II</span> 남포급 <span class="tonnage-tag">(4,240톤)</span><br>
-                <span class="ship-badge">MSH</span> 양양급 <span class="tonnage-tag">(880톤)</span><br>
-                <span class="ship-badge">AOE-II</span> 소양급 <span class="tonnage-tag">(23,000톤)</span><br>
-                <span class="ship-badge">AOE-I</span> 천지급 <span class="tonnage-tag">(9,200톤)</span>
+                <span class="ship-badge">MSH</span> 양양급 <span class="tonnage-tag">(880톤)</span>
             </div>
-            <div class="fleet-desc">주요 항만과 해상 교통로를 보호하는 기뢰 부설·소해함, 원해 작전 지속 능력을 보장하는 군수지원함, 수상함·잠수함 구조함(통영함·강화도함), 훈련함(한산도함) 등으로 구성되며, 무인기뢰처리기 등을 탑재한 차기 소해함(MSH-II)이 취역 예정입니다.</div>
+            <div class="fleet-desc">주요 항만과 해상 교통로에 부설된 적 기뢰를 탐색·제거하고 전략 해역에 기뢰를 부설하는 기뢰전 전문 전력이며, 무인기뢰처리기 등을 탑재한 차기 소해함(MSH-II)이 취역 예정입니다.</div>
         </div>
 
-        <div class="fleet-item" data-category="patrol">
-            <div class="fleet-col-type">고속함<br>고속정</div>
+        <!-- 7. 지원함 (분리) -->
+        <div class="fleet-item" data-category="amphibious">
+            <div class="fleet-col-type">지원함</div>
             <div class="fleet-col-class">
-                <span class="ship-badge">PKG</span> 윤영하급 <span class="tonnage-tag">(570톤)</span><br>
+                <span class="ship-badge">AOE-II</span> 소양급 <span class="tonnage-tag">(23,000톤)</span><br>
+                <span class="ship-badge">AOE-I</span> 천지급 <span class="tonnage-tag">(9,200톤)</span><br>
+                <span class="ship-badge">ATS/ASR</span> 통영급·강화도함
+            </div>
+            <div class="fleet-desc">기동전단의 원해 작전 지속 능력을 보장하는 군수지원함, 수상함·잠수함 조난 시 구조 작전을 수행하는 구조함(통영함·강화도함), 사관생도 순항훈련 및 교육 임무를 맡는 훈련함(한산도함) 등으로 구성됩니다.</div>
+        </div>
+
+        <!-- 8. 고속함 (분리) -->
+        <div class="fleet-item" data-category="patrol">
+            <div class="fleet-col-type">고속함</div>
+            <div class="fleet-col-class">
+                <span class="ship-badge">PKG</span> 윤영하급 <span class="tonnage-tag">(570톤)</span>
+            </div>
+            <div class="fleet-desc">대함유도탄과 76mm 함포를 탑재하여 연안 및 서해 NLL 최전선에서 적 고속세력을 제압하는 고기동 유도탄고속함 전력입니다.</div>
+        </div>
+
+        <!-- 9. 고속정 (분리) -->
+        <div class="fleet-item" data-category="patrol">
+            <div class="fleet-col-type">고속정</div>
+            <div class="fleet-col-class">
                 <span class="ship-badge">PKMR</span> 참수리급(신형) <span class="tonnage-tag">(250톤)</span>
             </div>
-            <div class="fleet-desc">연안 및 서해 NLL 최전선 수호를 담당하는 고기동 유도탄고속함 및 신형 고속정 전력입니다.</div>
+            <div class="fleet-desc">130mm 유도로켓과 원격사격통제체계를 갖추고 연안 경비 및 북방한계선(NLL) 즉각 대응 임무를 수행하는 신형 고속정 전력입니다.</div>
         </div>
 
+        <!-- 10. 항공병기 (초계기·작전헬기 한 번씩 표기) -->
         <div class="fleet-item" data-category="aviation">
             <div class="fleet-col-type">항공병기</div>
             <div class="fleet-col-class">
-                <span class="ship-badge">초계기</span> P-8A 포세이돈<br>
-                <span class="ship-badge">초계기</span> P-3C/CK<br>
-                <span class="ship-badge">작전헬기</span> MH-60R 시호크<br>
-                <span class="ship-badge">작전헬기</span> AW-159 와일드캣<br>
-                <span class="ship-badge">작전헬기</span> 링스
+                <span class="ship-badge">초계기</span> P-8A 포세이돈 · P-3C/CK<br>
+                <span class="ship-badge">작전헬기</span> MH-60R 시호크 · AW-159 와일드캣 · 링스
             </div>
             <div class="fleet-desc">한반도 주변 해역의 광역 해상 감시·정찰과 적 잠수함 탐지·추적·격멸 등 입체적인 대잠수함 작전 및 해상 구조 임무를 수행하는 해군항공사령부의 핵심 항공 전력입니다.</div>
         </div>
