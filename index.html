@@ -50,12 +50,12 @@
         .nav-tab-btn:hover{color:var(--navy-blue);background:var(--light-gray-bg)}
         .nav-tab-btn.active{color:var(--navy-blue);border-bottom-color:var(--navy-blue);font-weight:800}
 
-        .tab-panel,.sub-tab-panel{display:none;animation:fadeIn .25s ease-in-out}
-        .tab-panel.active,.sub-tab-panel.active{display:block}
-        @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+        .tab-panel,.sub-tab-panel{display:none}
+        .tab-panel.active,.sub-tab-panel.active{display:block;animation:simpleOpacity .2s ease-out}
+        @keyframes simpleOpacity{from{opacity:0}to{opacity:1}}
 
         /* 유튜브 고화질 플레이어 */
-        .yt-facade,.yt-auto-box{position:relative;width:100%;padding-bottom:56.25%;background:#000;overflow:hidden}
+        .yt-facade,.yt-auto-box{position:relative;width:100%;aspect-ratio:16/9;background:#000;overflow:hidden}
         .yt-facade{cursor:pointer}
         .yt-facade img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .3s ease,filter .3s ease}
         .yt-facade:hover img{transform:scale(1.02);filter:brightness(.92)}
@@ -212,7 +212,7 @@
                 <p class="anim-step-3">승리 앞에 겸손하며 패배를 모르는 애국한양 필승해군!</p>
                 <div class="hero-video-wrap anim-step-4">
                     <div class="yt-auto-box">
-                        <div id="yt-hero-auto"></div>
+                        <iframe id="yt-hero-auto" class="yt-player" src="https://www.youtube.com/embed/fRqTrPHP9nE?autoplay=1&mute=1&playsinline=1&rel=0&enablejsapi=1" title="대한민국 해군 메인 영상" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
                 </div>
                 <div class="sub-videos-grid anim-step-5">
@@ -547,73 +547,41 @@
     </footer>
 
     <script>
-        const ytPlayers = {};
-        let ytApiReady = false;
-        const pendingPlayers = [];
+        function sendYTCommand(iframe, func, args = []) {
+            if (!iframe || !iframe.contentWindow) return;
+            iframe.contentWindow.postMessage(JSON.stringify({ event: 'command', func, args }), '*');
+        }
 
-        function pauseAllExcept(activeId = null) {
-            Object.keys(ytPlayers).forEach(key => {
-                if (key !== activeId) {
-                    const p = ytPlayers[key];
-                    if (p && typeof p.pauseVideo === 'function') {
-                        try { p.pauseVideo(); } catch {}
-                    }
-                }
+        function pauseOtherVideos(except = null) {
+            document.querySelectorAll('.yt-player').forEach(f => {
+                if (f !== except) sendYTCommand(f, 'pauseVideo');
             });
         }
 
-        function mountYTPlayer(elementId, videoId, isHeroAuto = false) {
-            if (!ytApiReady) {
-                pendingPlayers.push({ elementId, videoId, isHeroAuto });
-                return;
-            }
-            if (ytPlayers[elementId]) return;
-
-            ytPlayers[elementId] = new YT.Player(elementId, {
-                videoId: videoId,
-                playerVars: {
-                    autoplay: 1,
-                    mute: isHeroAuto ? 1 : 0,
-                    playsinline: 1,
-                    rel: 0
-                },
-                events: {
-                    onReady: e => {
-                        e.target.playVideo();
-                        setTimeout(() => {
-                            if (e.target.getPlayerState && e.target.getPlayerState() !== YT.PlayerState.PLAYING) {
-                                e.target.playVideo();
-                            }
-                        }, 5100);
-                    },
-                    onStateChange: e => {
-                        if (e.data === YT.PlayerState.PLAYING) {
-                            pauseAllExcept(elementId);
-                        }
-                    }
+        window.addEventListener('message', e => {
+            if (!e.origin.includes('youtube.com')) return;
+            try {
+                const d = typeof e.data === 'string' ? JSON.parse(e.data) : e.data;
+                if (d.event === 'onStateChange' && d.info === 1) {
+                    document.querySelectorAll('.yt-player').forEach(f => {
+                        if (f.contentWindow === e.source) pauseOtherVideos(f);
+                    });
                 }
-            });
-        }
+            } catch {}
+        });
 
-        window.onYouTubeIframeAPIReady = function() {
-            ytApiReady = true;
-            while (pendingPlayers.length > 0) {
-                const { elementId, videoId, isHeroAuto } = pendingPlayers.shift();
-                mountYTPlayer(elementId, videoId, isHeroAuto);
+        function initYouTubePlayers() {
+            const hero = document.getElementById('yt-hero-auto');
+            if (hero) {
+                hero.onload = () => {
+                    hero.contentWindow?.postMessage(JSON.stringify({ event: 'listening', id: hero.id }), '*');
+                    setTimeout(() => sendYTCommand(hero, 'playVideo'), 5100);
+                };
             }
-        };
-
-        function initYouTubeFacades() {
-            const tag = document.createElement('script');
-            tag.src = 'https://www.youtube.com/iframe_api';
-            document.head.appendChild(tag);
-
-            mountYTPlayer('yt-hero-auto', 'fRqTrPHP9nE', true);
 
             document.querySelectorAll('.yt-facade').forEach((box, i) => {
                 const id = box.dataset.videoId;
                 const title = box.dataset.title || 'YouTube Video';
-                const playerId = `yt-player-${i}`;
 
                 const img = document.createElement('img');
                 img.src = `https://i.ytimg.com/vi/${id}/maxresdefault.jpg`;
@@ -626,16 +594,27 @@
                 box.append(img, btn);
 
                 box.onclick = () => {
-                    if (ytPlayers[playerId]) return;
-                    pauseAllExcept(playerId);
-                    box.innerHTML = `<div id="${playerId}"></div>`;
-                    mountYTPlayer(playerId, id, false);
+                    if (box.querySelector('iframe')) return;
+                    pauseOtherVideos();
+                    const f = document.createElement('iframe');
+                    f.className = 'yt-player';
+                    f.id = `yt-player-${i}`;
+                    f.src = `https://www.youtube.com/embed/${id}?autoplay=1&rel=0&enablejsapi=1`;
+                    f.title = title;
+                    f.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+                    f.allowFullscreen = true;
+                    f.onload = () => {
+                        f.contentWindow?.postMessage(JSON.stringify({ event: 'listening', id: f.id }), '*');
+                        setTimeout(() => sendYTCommand(f, 'playVideo'), 5100);
+                    };
+                    box.innerHTML = '';
+                    box.appendChild(f);
                 };
             });
         }
 
         function openTab(name) {
-            pauseAllExcept();
+            pauseOtherVideos();
             document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
             document.querySelectorAll('.nav-tab-btn').forEach(b => b.classList.remove('active'));
             document.getElementById('tab-' + name).classList.add('active');
@@ -644,7 +623,7 @@
         }
 
         function openHanyangSubTab(subName, btn) {
-            pauseAllExcept();
+            pauseOtherVideos();
             document.querySelectorAll('.sub-tab-panel').forEach(p => p.classList.remove('active'));
             document.querySelectorAll('.hy-sub-btn').forEach(b => b.classList.remove('active'));
             document.getElementById('hy-sub-' + subName).classList.add('active');
