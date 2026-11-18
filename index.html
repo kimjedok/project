@@ -50,8 +50,8 @@
         .nav-tab-btn:hover{color:var(--navy-blue);background:var(--light-gray-bg)}
         .nav-tab-btn.active{color:var(--navy-blue);border-bottom-color:var(--navy-blue);font-weight:800}
 
-        .tab-panel{display:none;animation:fadeIn .25s ease-in-out}
-        .tab-panel.active{display:block}
+        .tab-panel,.sub-tab-panel{display:none;animation:fadeIn .25s ease-in-out}
+        .tab-panel.active,.sub-tab-panel.active{display:block}
         @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
 
         /* 유튜브 고화질 플레이어 */
@@ -130,7 +130,20 @@
         .news-card p{font-size:.9rem;color:#555}
         .news-banner-text h4{color:var(--navy-blue);font-size:1.1rem;margin-bottom:.25rem}
 
-        /* 한양해군 */
+        /* 한양해군 서브 탭 (가운데 정렬 5개 탭) */
+        .hanyang-sub-nav{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:.5rem;margin:2rem 0 2.5rem;padding-bottom:1.25rem;border-bottom:1px solid var(--border-color)}
+        .hy-sub-btn{background:var(--bg-white);border:1px solid var(--border-color);color:var(--text-dark);padding:.65rem 1.45rem;font-size:.95rem;font-weight:700;border-radius:4px;cursor:pointer;transition:.2s;font-family:inherit;white-space:nowrap}
+        .hy-sub-btn:hover{border-color:var(--navy-blue);color:var(--navy-blue);background:var(--light-gray-bg)}
+        .hy-sub-btn.active{background:var(--navy-blue);border-color:var(--navy-blue);color:var(--bg-white);box-shadow:0 4px 12px rgba(14,74,132,.18)}
+
+        .hy-box{background:var(--bg-white);border:1px solid var(--border-color);border-top:3px solid var(--navy-blue);padding:2rem;border-radius:4px}
+        .hy-box h3{color:var(--navy-blue);font-size:1.3rem;margin-bottom:.75rem}
+        .hy-box p{color:#4A5056;font-size:.96rem;line-height:1.7}
+        .hy-grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem}
+        .hy-card{background:var(--light-gray-bg);border:1px solid var(--border-color);border-left:4px solid var(--navy-blue);padding:1.4rem 1.5rem;border-radius:4px}
+        .hy-card-tag{display:inline-block;font-size:.76rem;font-weight:700;color:var(--point-gray);margin-bottom:.3rem}
+        .hy-card h4{color:var(--navy-blue);font-size:1.08rem;margin-bottom:.45rem}
+        .hy-card p{font-size:.92rem;color:#4A5056;line-height:1.6}
         .hanyang-videos-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem}
         .hanyang-video-card{border:1px solid var(--border-color);border-top:3px solid var(--navy-blue);border-radius:6px;overflow:hidden;background:#000;box-shadow:0 6px 18px rgba(14,74,132,.08)}
 
@@ -147,11 +160,12 @@
             .nav-tabs{flex-wrap:wrap;justify-content:center}
             .nav-tab-btn{padding:.5rem .75rem;font-size:.88rem}
             .home-hero h1{font-size:1.9rem}
-            .sub-videos-grid,.hanyang-videos-grid{grid-template-columns:1fr}
+            .sub-videos-grid,.hanyang-videos-grid,.hy-grid-2{grid-template-columns:1fr}
             .unit-row{flex-direction:column;align-items:flex-start;gap:.85rem;padding:1.25rem}
             .unit-head{min-width:auto}
             .fleet-list-header{display:none}
             .fleet-item{grid-template-columns:1fr;gap:.5rem}
+            .hy-sub-btn{padding:.5rem .95rem;font-size:.86rem}
         }
     </style>
 </head>
@@ -435,15 +449,94 @@
             </div>
         </section>
 
-        <!-- 한양해군 -->
+        <!-- 한양해군 (가운데 정렬 5개 세부 탭) -->
         <section id="tab-hanyang" class="tab-panel">
             <div class="content-container">
                 <div class="section-header"><div class="eng-title">04. Hanyang Navy</div><h2>한양해군</h2></div>
-                <div class="hanyang-videos-grid">
-                    <div class="hanyang-video-card"><div class="yt-facade" data-video-id="qCJjdYokINs" data-title="한양해군 영상 1"></div></div>
-                    <div class="hanyang-video-card"><div class="yt-facade" data-video-id="qMJ2kb3W2UA" data-title="한양해군 영상 2"></div></div>
-                    <div class="hanyang-video-card"><div class="yt-facade" data-video-id="pQKTFU6FIWo" data-title="한양해군 영상 3"></div></div>
-                    <div class="hanyang-video-card"><div class="yt-facade" data-video-id="jiGTq_o7VmQ" data-title="한양해군 영상 4"></div></div>
+
+                <!-- 가운데 정렬 세부 탭 바 -->
+                <div class="hanyang-sub-nav">
+                    <button class="hy-sub-btn active" data-sub="intro" onclick="openHanyangSubTab('intro',this)">학과소개</button>
+                    <button class="hy-sub-btn" data-sub="curriculum" onclick="openHanyangSubTab('curriculum',this)">교과과정</button>
+                    <button class="hy-sub-btn" data-sub="endorsement" onclick="openHanyangSubTab('endorsement',this)">추천의글</button>
+                    <button class="hy-sub-btn" data-sub="faculty" onclick="openHanyangSubTab('faculty',this)">교수소개</button>
+                    <button class="hy-sub-btn" data-sub="promo" onclick="openHanyangSubTab('promo',this)">홍보영상</button>
+                </div>
+
+                <!-- 세부 탭 1: 학과소개 -->
+                <div id="hy-sub-intro" class="sub-tab-panel active">
+                    <div class="hy-box">
+                        <h3>한양대학교 국방전략기술공학과</h3>
+                        <p>한양대학교와 대한민국 해군의 협약으로 설립된 국방전략기술공학과는 첨단 해양과학기술과 실전적 국방전략 역량을 겸비한 최정예 해군 장교를 양성합니다. 이지스 전투체계, 무인·유무인 복합체계, 해양감시정찰 및 사이버·AI 국방기술 분야를 선도하는 미래 해양안보 핵심 인재를 배출합니다.</p>
+                    </div>
+                </div>
+
+                <!-- 세부 탭 2: 교과과정 -->
+                <div id="hy-sub-curriculum" class="sub-tab-panel">
+                    <div class="hy-grid-2">
+                        <div class="hy-card">
+                            <span class="hy-card-tag">1학년 · 기초공학 역량</span>
+                            <h4>공학 기초 및 해양안보 입문</h4>
+                            <p>대학수학·물리학·프로그래밍 등 공학 핵심 기초와 함께 대한민국 해군사 및 해양전략의 기본 개념을 학습합니다.</p>
+                        </div>
+                        <div class="hy-card">
+                            <span class="hy-card-tag">2학년 · 전공 핵심 심화</span>
+                            <h4>전자·정보통신 및 무기체계 기초</h4>
+                            <p>신호 및 시스템, 제어공학, 해양음향학, 함정공학 등 첨단 해군 무기체계 운용에 필수적인 공학 원리를 습득합니다.</p>
+                        </div>
+                        <div class="hy-card">
+                            <span class="hy-card-tag">3학년 · 첨단 국방기술 응용</span>
+                            <h4>레이더·소나 및 국방 AI·데이터 분석</h4>
+                            <p>위상배열레이더, 수중음향 탐지, 국방 인공지능 및 사이버 보안 등 현대 해전의 핵심 기술 트랙을 심화 연구합니다.</p>
+                        </div>
+                        <div class="hy-card">
+                            <span class="hy-card-tag">4학년 · 실전 통합 설계 및 리더십</span>
+                            <h4>국방전략 캡스톤디자인 및 장교 리더십</h4>
+                            <p>실전 작전 환경을 반영한 종합 설계 프로젝트와 함께 해군 초급장교로서의 지휘 통솔 및 군사학 역량을 완성합니다.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 세부 탭 3: 추천의글 -->
+                <div id="hy-sub-endorsement" class="sub-tab-panel">
+                    <div class="hy-grid-2">
+                        <div class="hy-card">
+                            <span class="hy-card-tag">대한민국 해군</span>
+                            <h4>미래 대양해군을 이끌 핵심 과학기술 장교의 요람</h4>
+                            <p>"첨단 과학기술 기반의 스마트 강군 건설을 위해 한양대학교 국방전략기술공학과에서 배출되는 인재들은 대한민국 해군의 미래 전력 그 자체입니다."</p>
+                        </div>
+                        <div class="hy-card">
+                            <span class="hy-card-tag">한양대학교</span>
+                            <h4>실용학풍과 애국정신이 결합된 최고의 국방 인재 양성</h4>
+                            <p>"한양의 공학적 역량과 투철한 국가관을 바탕으로 조국의 바다와 첨단 국방기술을 동시에 선도할 차세대 리더로 성장하기를 기대합니다."</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 세부 탭 4: 교수소개 -->
+                <div id="hy-sub-faculty" class="sub-tab-panel">
+                    <div class="hy-grid-2">
+                        <div class="hy-card">
+                            <span class="hy-card-tag">전임교원 · 국방전략기술</span>
+                            <h4>국방전략기술공학과 교수진</h4>
+                            <p>한양대학교 공과대학 및 국방과학·해양전략 분야의 최고 수준 교수진이 체계적인 학문 지도와 진로 멘토링을 담당합니다.</p>
+                        </div>
+                        <div class="hy-card">
+                            <span class="hy-card-tag">초빙교원 · 해군 작전 및 무기체계</span>
+                            <h4>해군 군사학 및 실무 전문가</h4>
+                            <p>풍부한 함정 지휘 및 작전·전력기획 경험을 갖춘 해군 출신 전문 교수진이 실전적 군사학 교육과 장교 임관 준비를 지원합니다.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 세부 탭 5: 홍보영상 -->
+                <div id="hy-sub-promo" class="sub-tab-panel">
+                    <div class="hanyang-videos-grid">
+                        <div class="hanyang-video-card"><div class="yt-facade" data-video-id="qCJjdYokINs" data-title="한양해군 영상 1"></div></div>
+                        <div class="hanyang-video-card"><div class="yt-facade" data-video-id="qMJ2kb3W2UA" data-title="한양해군 영상 2"></div></div>
+                        <div class="hanyang-video-card"><div class="yt-facade" data-video-id="pQKTFU6FIWo" data-title="한양해군 영상 3"></div></div>
+                        <div class="hanyang-video-card"><div class="yt-facade" data-video-id="jiGTq_o7VmQ" data-title="한양해군 영상 4"></div></div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -550,6 +643,14 @@
             scrollTo({ top: 0, behavior: 'smooth' });
         }
 
+        function openHanyangSubTab(subName, btn) {
+            pauseAllExcept();
+            document.querySelectorAll('.sub-tab-panel').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.hy-sub-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById('hy-sub-' + subName).classList.add('active');
+            btn.classList.add('active');
+        }
+
         function filterFleet(cat, btn) {
             document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
@@ -558,7 +659,7 @@
             });
         }
 
-        document.addEventListener('DOMContentLoaded', initYouTubeFacades);
+        document.addEventListener('DOMContentLoaded', initYouTubePlayers);
     </script>
 </body>
 </html>
