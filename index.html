@@ -5,9 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>대한민국 해군 소개</title>
     <link rel="icon" type="image/png" href="hanyang_logo.png">
-    <!-- ======================================================================
-         [공통 스타일 영역 - 총괄 담당자 전용 (팀원 수정 금지)]
-    ======================================================================= -->
     <style>
         :root{--bg-white:#FFFFFF;--navy-blue:#0E4A84;--navy-dark:#09325A;--point-gray:#898C8E;--light-gray-bg:#F8F9FA;--border-color:#E2E5E8;--text-dark:#1E2328}
         *{box-sizing:border-box;margin:0;padding:0}
@@ -174,9 +171,6 @@
 </head>
 <body>
 
-    <!-- ======================================================================
-         [공통 스플래시 및 내비게이션 - 총괄 담당자 전용]
-    ======================================================================= -->
     <div id="intro-splash">
         <div class="horizon-curtain top"></div>
         <div class="horizon-curtain bottom"></div>
@@ -208,10 +202,7 @@
     </nav>
 
     <main>
-        <!-- ==================================================================
-             [담당 구역 1: 홈 화면]
-             - 담당자: 총괄 담당자 (브랜치: feat/hanyang 또는 main 관리)
-        =================================================================== -->
+        <!-- [총괄 담당: 홈] -->
         <section id="tab-home" class="tab-panel active">
             <div class="home-hero">
                 <div class="sub-badge anim-step-1">REPUBLIC OF KOREA NAVY</div>
@@ -235,252 +226,13 @@
                 </div>
             </div>
         </section>
-        <!-- ==================== [담당 구역 1: 홈 화면 끝] ==================== -->
 
+        <!-- [팀원 3명 담당 구역: 외부 파일에서 자동 로드] -->
+        <section id="tab-organization" class="tab-panel"></section>
+        <section id="tab-forces" class="tab-panel"></section>
+        <section id="tab-news" class="tab-panel"></section>
 
-        <!-- ==================================================================
-             [담당 구역 2: 편제 (주력부대)]
-             - 담당 브랜치: feat/organization
-             - 안내: 이 주석 블록 내부의 부대 설명 및 영상 링크만 수정하세요.
-        =================================================================== -->
-        <section id="tab-organization" class="tab-panel">
-            <div class="content-container">
-                <div class="section-header"><div class="eng-title">01. Organization</div><h2>주력부대</h2></div>
-                <div class="unit-list">
-                    <div class="unit-row">
-                        <div class="unit-head">
-                            <span class="unit-tag">동해 수호</span>
-                            <h3>제1함대사령부</h3>
-                        </div>
-                        <div class="unit-body">강원도 동해시에 위치하며, 동해 해역의 영해 수호와 해상 방위 작전을 전담하는 주력 함대입니다.</div>
-                    </div>
-                    <div class="unit-row">
-                        <div class="unit-head">
-                            <span class="unit-tag">서해 수호</span>
-                            <h3>제2함대사령부</h3>
-                        </div>
-                        <div class="unit-body">경기도 평택시에 위치하며, 서해 NLL(북방한계선) 사수 및 수도권 서측 해역 방어를 책임집니다.</div>
-                    </div>
-                    <div class="unit-row">
-                        <div class="unit-head">
-                            <span class="unit-tag">남해 수호</span>
-                            <h3>제3함대사령부</h3>
-                        </div>
-                        <div class="unit-body">전라남도 영암군에 위치하며, 남해 및 제주 해역의 해상 교통로 보호와 연안 방어를 수행합니다.</div>
-                    </div>
-                    <div class="unit-row">
-                        <div class="unit-head">
-                            <span class="unit-tag">대양 핵심 기동전력</span>
-                            <h3>기동함대사령부</h3>
-                            <div class="unit-links">
-                                <a href="https://m.youtube.com/watch?si=L5ZwUt_22Gh-jWUt&v=3jf5KkfdPAU&feature=youtu.be" target="_blank" rel="noopener noreferrer" class="unit-video-link">▶ 기동함대 소개영상</a>
-                            </div>
-                        </div>
-                        <div class="unit-body">이지스 구축함 등 최첨단 전투함을 주축으로 한반도 전역 및 원해 해상 교통로 보호와 대양 작전을 수행합니다.</div>
-                    </div>
-                    <div class="unit-row">
-                        <div class="unit-head">
-                            <span class="unit-tag">수중 전략전력</span>
-                            <h3>잠수함사령부</h3>
-                        </div>
-                        <div class="unit-body">경상남도 창원시 진해에 본부를 두고, 은밀한 수중 작전과 국가 전략 억제 임무를 수행합니다.</div>
-                    </div>
-                    <div class="unit-row">
-                        <div class="unit-head">
-                            <span class="unit-tag">입체 항공작전</span>
-                            <h3>해군항공사령부</h3>
-                        </div>
-                        <div class="unit-body">해상초계기 및 해상작전헬기를 운용하며 대잠수함 작전, 해상 감시·정찰 및 구조 임무를 담당합니다.</div>
-                    </div>
-                    <div class="unit-row">
-                        <div class="unit-head">
-                            <span class="unit-tag">특수작전 전력</span>
-                            <h3>해군특수전전단 (UDT/SEAL)</h3>
-                            <div class="unit-links">
-                                <a href="https://youtu.be/mbUvRu_ZOd4?si=oIUmfcZxRCUeN_gF" target="_blank" rel="noopener noreferrer" class="unit-video-link">▶ UDT/SEAL 소개영상</a>
-                                <a href="https://youtu.be/xU7NLAXHb4g" target="_blank" rel="noopener noreferrer" class="unit-video-link">▶ SSU 소개영상</a>
-                            </div>
-                        </div>
-                        <div class="unit-body">전천후 특수타격, 폭발물 처리(EOD), 해난구조(SSU) 등 고난도 특수작전을 수행하는 최정예 부대입니다.</div>
-                    </div>
-                    <div class="unit-row">
-                        <div class="unit-head">
-                            <span class="unit-tag">국가전략기동부대</span>
-                            <h3>해병대사령부</h3>
-                            <div class="unit-links">
-                                <a href="https://youtu.be/ZSD6pXe24Kc?si=qOuB10FLRhS0aAh6" target="_blank" rel="noopener noreferrer" class="unit-video-link">▶ 해병대 소개영상</a>
-                            </div>
-                        </div>
-                        <div class="unit-body">상륙작전을 주임무로 하며, 서북도서 방어 및 신속기동부대로서 국가 위기 대응의 선봉에 섭니다.</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- ================= [담당 구역 2: 편제 (주력부대) 끝] ================= -->
-
-
-        <!-- ==================================================================
-             [담당 구역 3: 전력 (주요전력)]
-             - 담당 브랜치: feat/forces
-             - 안내: 이 주석 블록 내부의 함정 제원, 설명 및 VR 배너만 수정하세요.
-        =================================================================== -->
-        <section id="tab-forces" class="tab-panel">
-            <div class="content-container">
-                <div class="section-header"><div class="eng-title">02. Naval Forces</div><h2>주요전력</h2></div>
-                <div class="fleet-tabs">
-                    <button class="filter-btn active" onclick="filterFleet('all',this)">전체 보기</button>
-                    <button class="filter-btn" onclick="filterFleet('destroyer',this)">구축함</button>
-                    <button class="filter-btn" onclick="filterFleet('frigate',this)">호위함·초계함</button>
-                    <button class="filter-btn" onclick="filterFleet('submarine',this)">잠수함</button>
-                    <button class="filter-btn" onclick="filterFleet('amphibious',this)">상륙·기뢰·지원함</button>
-                    <button class="filter-btn" onclick="filterFleet('patrol',this)">고속함·고속정</button>
-                    <button class="filter-btn" onclick="filterFleet('aviation',this)">항공병기</button>
-                </div>
-
-                <div class="fleet-list-container" id="fleetList">
-                    <div class="fleet-list-header"><div>함종</div><div>분류 기호 및 함급 (만재배수량)</div><div>주요 특징</div></div>
-
-                    <div class="fleet-item" data-category="destroyer">
-                        <div class="fleet-col-type">구축함</div>
-                        <div class="fleet-col-class">
-                            <span class="ship-badge upcoming">취역 예정</span> KDDX <span class="tonnage-tag">(차기 구축함)</span><br>
-                            <span class="ship-badge">DDG-II</span> 정조대왕급 <span class="tonnage-tag">(12,000톤)</span><br>
-                            <span class="ship-badge">DDG-I</span> 세종대왕급 <span class="tonnage-tag">(10,600톤)</span>
-                        </div>
-                        <div class="fleet-desc">이지스(Aegis) 전투체계를 탑재한 대한민국 해군의 핵심 기동함대 주력 전력입니다. 다수의 탄도탄 및 항공 표적을 동시 탐지·추적·요격할 수 있으며, 국내 독자 개발 통합마스트와 전투체계를 적용한 KDDX 차기 구축함이 취역 예정입니다.</div>
-                    </div>
-
-                    <div class="fleet-item" data-category="destroyer">
-                        <div class="fleet-col-type">구축함</div>
-                        <div class="fleet-col-class">
-                            <span class="ship-badge">DDH-II</span> 충무공이순신급 <span class="tonnage-tag">(5,520톤)</span><br>
-                            <span class="ship-badge">DDH-I</span> 광개토대왕급 <span class="tonnage-tag">(3,900톤)</span>
-                        </div>
-                        <div class="fleet-desc">대공·대함·대잠 입체 작전 능력을 갖춘 한국형 다목적 구축함으로, 한반도 해역 방어는 물론 청해부대 등 원해 파병 임무에서도 핵심적인 역할을 수행합니다.</div>
-                    </div>
-
-                    <div class="fleet-item" data-category="frigate">
-                        <div class="fleet-col-type">호위함</div>
-                        <div class="fleet-col-class">
-                            <span class="ship-badge upcoming">취역 예정</span> FFX Batch-IV <span class="tonnage-tag">(차기 호위함)</span><br>
-                            <span class="ship-badge">FFG-III</span> 충남급 <span class="tonnage-tag">(4,300톤)</span><br>
-                            <span class="ship-badge">FFG-II</span> 대구급 <span class="tonnage-tag">(3,600톤)</span><br>
-                            <span class="ship-badge">FFG-I</span> 인천급 <span class="tonnage-tag">(3,200톤)</span>
-                        </div>
-                        <div class="fleet-desc">해역함대의 주력 전투함으로 복합식 추진체계(하이브리드)를 통한 저소음 대잠 능력과 다기능 위상배열레이더 기반의 대공·대함 방어력을 대폭 강화한 차기 호위함 전력이며, 무장 및 전투체계가 한층 고도화된 FFX Batch-IV가 취역 예정입니다.</div>
-                    </div>
-
-                    <div class="fleet-item" data-category="frigate">
-                        <div class="fleet-col-type">초계함</div>
-                        <div class="fleet-col-class"><span class="ship-badge">PCC</span> 포항급 <span class="tonnage-tag">(1,220톤)</span></div>
-                        <div class="fleet-desc">연안 경비 및 대잠 초계 임무를 수행해 온 핵심 연안 방어 전력입니다.</div>
-                    </div>
-
-                    <div class="fleet-item" data-category="submarine">
-                        <div class="fleet-col-type">잠수함</div>
-                        <div class="fleet-col-class">
-                            <span class="ship-badge upcoming">취역 예정</span> 장보고-III Batch-II <span class="tonnage-tag">(3,600톤급)</span><br>
-                            <span class="ship-badge">SS-III</span> 도산안창호급 <span class="tonnage-tag">(수중 3,700톤)</span><br>
-                            <span class="ship-badge">SS-II</span> 손원일급 <span class="tonnage-tag">(수중 1,860톤)</span><br>
-                            <span class="ship-badge">SS-I</span> 장보고급 <span class="tonnage-tag">(수중 1,400톤)</span>
-                        </div>
-                        <div class="fleet-desc">국내 독자 설계·건조된 3,000톤급 중형 잠수함(도산안창호급)부터 공기불요추진체계(AIP)를 탑재한 1,800톤급·1,200톤급까지 운용하는 핵심 수중 전략 전력이며, 리튬전지 체계와 수직발사관(VLS)을 확장한 장보고-III Batch-II가 취역 예정입니다.</div>
-                    </div>
-
-                    <div class="fleet-item" data-category="amphibious">
-                        <div class="fleet-col-type">상륙함</div>
-                        <div class="fleet-col-class">
-                            <span class="ship-badge">LPH</span> 독도급 <span class="tonnage-tag">(18,800톤)</span><br>
-                            <span class="ship-badge">LST-II</span> 천왕봉급 <span class="tonnage-tag">(7,140톤)</span><br>
-                            <span class="ship-badge">LST-I</span> 고준봉급 <span class="tonnage-tag">(4,250톤)</span>
-                        </div>
-                        <div class="fleet-desc">대형수송함(독도함·마라도함)을 중심으로 상륙작전 지휘 통제 및 대규모 병력·상륙장갑차·헬기 수송과 재해·재난 구조 임무를 수행합니다.</div>
-                    </div>
-
-                    <div class="fleet-item" data-category="amphibious">
-                        <div class="fleet-col-type">기뢰전함<br>지원함</div>
-                        <div class="fleet-col-class">
-                            <span class="ship-badge upcoming">취역 예정</span> MSH-II <span class="tonnage-tag">(차기 소해함)</span><br>
-                            <span class="ship-badge">MLS-II</span> 남포급 <span class="tonnage-tag">(4,240톤)</span><br>
-                            <span class="ship-badge">MSH</span> 양양급 <span class="tonnage-tag">(880톤)</span><br>
-                            <span class="ship-badge">AOE-II</span> 소양급 <span class="tonnage-tag">(23,000톤)</span><br>
-                            <span class="ship-badge">AOE-I</span> 천지급 <span class="tonnage-tag">(9,200톤)</span>
-                        </div>
-                        <div class="fleet-desc">주요 항만과 해상 교통로를 보호하는 기뢰 부설·소해함, 원해 작전 지속 능력을 보장하는 군수지원함, 수상함·잠수함 구조함(통영함·강화도함), 훈련함(한산도함) 등으로 구성되며, 무인기뢰처리기 등을 탑재한 차기 소해함(MSH-II)이 취역 예정입니다.</div>
-                    </div>
-
-                    <div class="fleet-item" data-category="patrol">
-                        <div class="fleet-col-type">고속함<br>고속정</div>
-                        <div class="fleet-col-class">
-                            <span class="ship-badge">PKG</span> 윤영하급 <span class="tonnage-tag">(570톤)</span><br>
-                            <span class="ship-badge">PKMR</span> 참수리급(신형) <span class="tonnage-tag">(250톤)</span>
-                        </div>
-                        <div class="fleet-desc">연안 및 서해 NLL 최전선 수호를 담당하는 고기동 유도탄고속함 및 신형 고속정 전력입니다.</div>
-                    </div>
-
-                    <div class="fleet-item" data-category="aviation">
-                        <div class="fleet-col-type">항공병기</div>
-                        <div class="fleet-col-class">
-                            <span class="ship-badge">초계기</span> P-8A 포세이돈<br>
-                            <span class="ship-badge">초계기</span> P-3C/CK<br>
-                            <span class="ship-badge">작전헬기</span> MH-60R 시호크<br>
-                            <span class="ship-badge">작전헬기</span> AW-159 와일드캣<br>
-                            <span class="ship-badge">작전헬기</span> 링스
-                        </div>
-                        <div class="fleet-desc">한반도 주변 해역의 광역 해상 감시·정찰과 적 잠수함 탐지·추적·격멸 등 입체적인 대잠수함 작전 및 해상 구조 임무를 수행하는 해군항공사령부의 핵심 항공 전력입니다.</div>
-                    </div>
-                </div>
-
-                <div class="vr-banner">
-                    <div class="vr-banner-text">
-                        <span class="vr-badge">360° VR EXPERIENCE</span>
-                        <h3>대한민국 해군 이지스함 VR로 살펴보기</h3>
-                        <p>해군 공식 VR 콘텐츠를 통해 이지스 구축함의 함교, 전투지휘실 및 주요 구역을 360도 가상현실로 생생하게 체험해 보세요.</p>
-                    </div>
-                    <a href="https://www.navy.mil.kr/mbshome/mbs/navy/vr/vr/index.html" target="_blank" rel="noopener noreferrer" class="btn-primary">이지스함 VR 체험하기 ↗</a>
-                </div>
-            </div>
-        </section>
-        <!-- ================= [담당 구역 3: 전력 (주요전력) 끝] ================= -->
-
-
-        <!-- ==================================================================
-             [담당 구역 4: 뉴스 (해군 관련 뉴스)]
-             - 담당 브랜치: feat/news
-             - 안내: 이 주석 블록 내부의 뉴스 카드 및 외부 링크 배너만 수정하세요.
-        =================================================================== -->
-        <section id="tab-news" class="tab-panel">
-            <div class="content-container">
-                <div class="section-header"><div class="eng-title">03. Navy News</div><h2>해군 관련 뉴스</h2></div>
-                <div class="news-container">
-                    <div class="news-card">
-                        <div class="news-meta">해상 안보 · 국제 동향</div>
-                        <h3>호르무즈 해협 등 주요 해상 교통로 및 글로벌 해군 작전 동향</h3>
-                        <p>국제 해상 물류 핵심 요충지의 기뢰·선박 안전 이슈 및 각국 해군의 해상 작전 현황 관련 주요 보도입니다.</p>
-                    </div>
-                    <div class="news-card">
-                        <div class="news-meta">전력 증강 · 방위산업</div>
-                        <h3>차세대 이지스 구축함 및 한국형 함정 건조·인도 소식</h3>
-                        <p>정조대왕급 구축함, 충남급 호위함, 도산안창호급 잠수함 등 해군 첨단 전력화 추진 현황을 확인하세요.</p>
-                    </div>
-                </div>
-                <div class="news-banner">
-                    <div class="news-banner-text">
-                        <h4>실시간 해군 최신 뉴스 모아보기</h4>
-                        <p>네이버 뉴스 검색 결과에서 '해군' 관련 최신 기사를 실시간으로 확인하실 수 있습니다.</p>
-                    </div>
-                    <a href="https://m.search.naver.com/search.naver?ssc=tab.m_news.all&query=%ED%95%B4%EA%B5%B0&sm=mtb_clk.jou&sort=1&photo=0&field=0&pd=0&ds=2026.11.13&de=2026.11.13&docid=&qdt=0&related=0&mynews=1&office_type=1&office_section_code=1&news_office_checked=1052&nso=so%3Add%2Cp%3Aall&is_sug_officeid=0&office_category=0&service_area=0" target="_blank" rel="noopener noreferrer" class="btn-primary">네이버 해군 뉴스 바로가기 →</a>
-                </div>
-            </div>
-        </section>
-        <!-- ================= [담당 구역 4: 뉴스 (해군 뉴스) 끝] ================ -->
-
-
-        <!-- ==================================================================
-             [담당 구역 5: 한양해군 (5개 세부 탭)]
-             - 담당 브랜치: feat/hanyang (총괄 담당자)
-             - 안내: 학과소개, 교과과정, 추천의글, 교수소개, 홍보영상 탭 내용을 관리합니다.
-        =================================================================== -->
+        <!-- [총괄 담당: 한양해군] -->
         <section id="tab-hanyang" class="tab-panel">
             <div class="content-container">
                 <div class="section-header"><div class="eng-title">04. Hanyang Navy</div><h2>한양해군</h2></div>
@@ -493,7 +245,6 @@
                     <button class="hy-sub-btn" data-sub="promo" onclick="openHanyangSubTab('promo',this)">홍보영상</button>
                 </div>
 
-                <!-- 세부 탭 1: 학과소개 -->
                 <div id="hy-sub-intro" class="sub-tab-panel active">
                     <div class="hy-box">
                         <h3>한양대학교 국방전략기술공학과</h3>
@@ -501,7 +252,6 @@
                     </div>
                 </div>
 
-                <!-- 세부 탭 2: 교과과정 -->
                 <div id="hy-sub-curriculum" class="sub-tab-panel">
                     <div class="hy-grid-2">
                         <div class="hy-card">
@@ -527,7 +277,6 @@
                     </div>
                 </div>
 
-                <!-- 세부 탭 3: 추천의글 -->
                 <div id="hy-sub-endorsement" class="sub-tab-panel">
                     <div class="hy-grid-2">
                         <div class="hy-card">
@@ -543,7 +292,6 @@
                     </div>
                 </div>
 
-                <!-- 세부 탭 4: 교수소개 -->
                 <div id="hy-sub-faculty" class="sub-tab-panel">
                     <div class="hy-grid-2">
                         <div class="hy-card">
@@ -559,7 +307,6 @@
                     </div>
                 </div>
 
-                <!-- 세부 탭 5: 홍보영상 -->
                 <div id="hy-sub-promo" class="sub-tab-panel">
                     <div class="hanyang-videos-grid">
                         <div class="hanyang-video-card"><div class="yt-facade" data-video-id="qCJjdYokINs" data-title="한양해군 영상 1"></div></div>
@@ -570,18 +317,30 @@
                 </div>
             </div>
         </section>
-        <!-- ================= [담당 구역 5: 한양해군 탭 끝] ==================== -->
     </main>
 
     <footer>
         <p><strong>Hanyang University</strong> | Naval Strategic Technology Engineering 26</p>
     </footer>
 
-    <!-- ======================================================================
-         [공통 스크립트 영역 - 총괄 담당자 전용 (팀원 수정 금지)]
-         - 유튜브 동시 재생 2중 차단 제어 / 탭 전환 / 함종 필터 제어
-    ======================================================================= -->
     <script>
+        /* 외부 파트 파일(organization.html, forces.html, news.html) 로드 */
+        async function loadPartFiles() {
+            const parts = [
+                { id: 'tab-organization', file: 'organization.html' },
+                { id: 'tab-forces', file: 'forces.html' },
+                { id: 'tab-news', file: 'news.html' }
+            ];
+            await Promise.all(parts.map(async ({ id, file }) => {
+                try {
+                    const res = await fetch(file);
+                    if (res.ok) document.getElementById(id).innerHTML = await res.text();
+                } catch (err) {
+                    console.error(`${file} 로드 실패:`, err);
+                }
+            }));
+        }
+
         function sendYTCommand(iframe, func, args = []) {
             if (!iframe || !iframe.contentWindow) return;
             iframe.contentWindow.postMessage(JSON.stringify({ event: 'command', func, args }), '*');
@@ -589,8 +348,7 @@
 
         function registerYTListening(iframe) {
             if (!iframe || !iframe.contentWindow) return;
-            const msg = JSON.stringify({ event: 'listening', id: iframe.id });
-            iframe.contentWindow.postMessage(msg, '*');
+            iframe.contentWindow.postMessage(JSON.stringify({ event: 'listening', id: iframe.id }), '*');
         }
 
         function renderFacadeThumbnail(box) {
@@ -611,9 +369,7 @@
 
         function stopAllVideosExcept(activeIframe = null) {
             const hero = document.getElementById('yt-hero-auto');
-            if (hero && hero !== activeIframe) {
-                sendYTCommand(hero, 'pauseVideo');
-            }
+            if (hero && hero !== activeIframe) sendYTCommand(hero, 'pauseVideo');
 
             document.querySelectorAll('.yt-facade').forEach(box => {
                 const iframe = box.querySelector('iframe');
@@ -631,9 +387,7 @@
                 const state = d.event === 'onStateChange' ? d.info : d.info?.playerState;
                 if (state === 1) {
                     document.querySelectorAll('.yt-player').forEach(f => {
-                        if (f.contentWindow === e.source) {
-                            stopAllVideosExcept(f);
-                        }
+                        if (f.contentWindow === e.source) stopAllVideosExcept(f);
                     });
                 }
             } catch {}
@@ -708,7 +462,10 @@
             });
         }
 
-        document.addEventListener('DOMContentLoaded', initYouTubePlayers);
+        document.addEventListener('DOMContentLoaded', async () => {
+            await loadPartFiles();
+            initYouTubePlayers();
+        });
     </script>
 </body>
 </html>
