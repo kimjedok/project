@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>대한민국 해군 소개</title>
     <link rel="icon" type="image/png" href="hanyang_logo.png">
+    <!-- ======================================================================
+         [공통 스타일 영역 - 총괄 담당자 전용 (팀원 수정 금지)]
+    ======================================================================= -->
     <style>
         :root{--bg-white:#FFFFFF;--navy-blue:#0E4A84;--navy-dark:#09325A;--point-gray:#898C8E;--light-gray-bg:#F8F9FA;--border-color:#E2E5E8;--text-dark:#1E2328}
         *{box-sizing:border-box;margin:0;padding:0}
@@ -130,7 +133,7 @@
         .news-card p{font-size:.9rem;color:#555}
         .news-banner-text h4{color:var(--navy-blue);font-size:1.1rem;margin-bottom:.25rem}
 
-        /* 한양해군 서브 탭 (가운데 정렬 5개 탭) */
+        /* 한양해군 서브 탭 */
         .hanyang-sub-nav{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:.5rem;margin:2rem 0 2.5rem;padding-bottom:1.25rem;border-bottom:1px solid var(--border-color)}
         .hy-sub-btn{background:var(--bg-white);border:1px solid var(--border-color);color:var(--text-dark);padding:.65rem 1.45rem;font-size:.95rem;font-weight:700;border-radius:4px;cursor:pointer;transition:.2s;font-family:inherit;white-space:nowrap}
         .hy-sub-btn:hover{border-color:var(--navy-blue);color:var(--navy-blue);background:var(--light-gray-bg)}
@@ -171,7 +174,9 @@
 </head>
 <body>
 
-    <!-- 초기 접속 스플래시 -->
+    <!-- ======================================================================
+         [공통 스플래시 및 내비게이션 - 총괄 담당자 전용]
+    ======================================================================= -->
     <div id="intro-splash">
         <div class="horizon-curtain top"></div>
         <div class="horizon-curtain bottom"></div>
@@ -187,7 +192,6 @@
         </div>
     </div>
 
-    <!-- 상단 내비게이션 -->
     <nav>
         <button class="logo" onclick="openTab('home')">
             <img src="hanyang_logo.png" alt="한양대학교">
@@ -204,7 +208,10 @@
     </nav>
 
     <main>
-        <!-- 홈 -->
+        <!-- ==================================================================
+             [담당 구역 1: 홈 화면]
+             - 담당자: 총괄 담당자 (브랜치: feat/hanyang 또는 main 관리)
+        =================================================================== -->
         <section id="tab-home" class="tab-panel active">
             <div class="home-hero">
                 <div class="sub-badge anim-step-1">REPUBLIC OF KOREA NAVY</div>
@@ -228,8 +235,14 @@
                 </div>
             </div>
         </section>
+        <!-- ==================== [담당 구역 1: 홈 화면 끝] ==================== -->
 
-        <!-- 편제 -> 본문 타이틀: 주력부대 -->
+
+        <!-- ==================================================================
+             [담당 구역 2: 편제 (주력부대)]
+             - 담당 브랜치: feat/organization
+             - 안내: 이 주석 블록 내부의 부대 설명 및 영상 링크만 수정하세요.
+        =================================================================== -->
         <section id="tab-organization" class="tab-panel">
             <div class="content-container">
                 <div class="section-header"><div class="eng-title">01. Organization</div><h2>주력부대</h2></div>
@@ -303,8 +316,14 @@
                 </div>
             </div>
         </section>
+        <!-- ================= [담당 구역 2: 편제 (주력부대) 끝] ================= -->
 
-        <!-- 전력 -> 본문 타이틀: 주요전력 -->
+
+        <!-- ==================================================================
+             [담당 구역 3: 전력 (주요전력)]
+             - 담당 브랜치: feat/forces
+             - 안내: 이 주석 블록 내부의 함정 제원, 설명 및 VR 배너만 수정하세요.
+        =================================================================== -->
         <section id="tab-forces" class="tab-panel">
             <div class="content-container">
                 <div class="section-header"><div class="eng-title">02. Naval Forces</div><h2>주요전력</h2></div>
@@ -422,8 +441,14 @@
                 </div>
             </div>
         </section>
+        <!-- ================= [담당 구역 3: 전력 (주요전력) 끝] ================= -->
 
-        <!-- 뉴스 -->
+
+        <!-- ==================================================================
+             [담당 구역 4: 뉴스 (해군 관련 뉴스)]
+             - 담당 브랜치: feat/news
+             - 안내: 이 주석 블록 내부의 뉴스 카드 및 외부 링크 배너만 수정하세요.
+        =================================================================== -->
         <section id="tab-news" class="tab-panel">
             <div class="content-container">
                 <div class="section-header"><div class="eng-title">03. Navy News</div><h2>해군 관련 뉴스</h2></div>
@@ -448,13 +473,18 @@
                 </div>
             </div>
         </section>
+        <!-- ================= [담당 구역 4: 뉴스 (해군 뉴스) 끝] ================ -->
 
-        <!-- 한양해군 (가운데 정렬 5개 세부 탭) -->
+
+        <!-- ==================================================================
+             [담당 구역 5: 한양해군 (5개 세부 탭)]
+             - 담당 브랜치: feat/hanyang (총괄 담당자)
+             - 안내: 학과소개, 교과과정, 추천의글, 교수소개, 홍보영상 탭 내용을 관리합니다.
+        =================================================================== -->
         <section id="tab-hanyang" class="tab-panel">
             <div class="content-container">
                 <div class="section-header"><div class="eng-title">04. Hanyang Navy</div><h2>한양해군</h2></div>
 
-                <!-- 가운데 정렬 세부 탭 바 -->
                 <div class="hanyang-sub-nav">
                     <button class="hy-sub-btn active" data-sub="intro" onclick="openHanyangSubTab('intro',this)">학과소개</button>
                     <button class="hy-sub-btn" data-sub="curriculum" onclick="openHanyangSubTab('curriculum',this)">교과과정</button>
@@ -540,12 +570,17 @@
                 </div>
             </div>
         </section>
+        <!-- ================= [담당 구역 5: 한양해군 탭 끝] ==================== -->
     </main>
 
     <footer>
         <p><strong>Hanyang University</strong> | Naval Strategic Technology Engineering 26</p>
     </footer>
 
+    <!-- ======================================================================
+         [공통 스크립트 영역 - 총괄 담당자 전용 (팀원 수정 금지)]
+         - 유튜브 동시 재생 2중 차단 제어 / 탭 전환 / 함종 필터 제어
+    ======================================================================= -->
     <script>
         function sendYTCommand(iframe, func, args = []) {
             if (!iframe || !iframe.contentWindow) return;
