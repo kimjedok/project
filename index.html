@@ -552,9 +552,40 @@
             iframe.contentWindow.postMessage(JSON.stringify({ event: 'command', func, args }), '*');
         }
 
-        function pauseOtherVideos(except = null) {
-            document.querySelectorAll('.yt-player').forEach(f => {
-                if (f !== except) sendYTCommand(f, 'pauseVideo');
+        function registerYTListening(iframe) {
+            if (!iframe || !iframe.contentWindow) return;
+            const msg = JSON.stringify({ event: 'listening', id: iframe.id });
+            iframe.contentWindow.postMessage(msg, '*');
+        }
+
+        function renderFacadeThumbnail(box) {
+            const id = box.dataset.videoId;
+            const title = box.dataset.title || 'YouTube Video';
+            box.innerHTML = '';
+
+            const img = document.createElement('img');
+            img.src = `https://i.ytimg.com/vi/${id}/maxresdefault.jpg`;
+            img.alt = title;
+            img.onload = () => { if (img.naturalWidth <= 120) img.src = `https://i.ytimg.com/vi/${id}/hqdefault.jpg`; };
+            img.onerror = () => { if (!img.src.includes('hqdefault')) img.src = `https://i.ytimg.com/vi/${id}/hqdefault.jpg`; };
+
+            const btn = document.createElement('div');
+            btn.className = 'yt-play-btn';
+            box.append(img, btn);
+        }
+
+        function stopAllVideosExcept(activeIframe = null) {
+            const hero = document.getElementById('yt-hero-auto');
+            if (hero && hero !== activeIframe) {
+                sendYTCommand(hero, 'pauseVideo');
+            }
+
+            document.querySelectorAll('.yt-facade').forEach(box => {
+                const iframe = box.querySelector('iframe');
+                if (iframe && iframe !== activeIframe) {
+                    sendYTCommand(iframe, 'pauseVideo');
+                    renderFacadeThumbnail(box);
+                }
             });
         }
 
@@ -562,9 +593,12 @@
             if (!e.origin.includes('youtube.com')) return;
             try {
                 const d = typeof e.data === 'string' ? JSON.parse(e.data) : e.data;
-                if (d.event === 'onStateChange' && d.info === 1) {
+                const state = d.event === 'onStateChange' ? d.info : d.info?.playerState;
+                if (state === 1) {
                     document.querySelectorAll('.yt-player').forEach(f => {
-                        if (f.contentWindow === e.source) pauseOtherVideos(f);
+                        if (f.contentWindow === e.source) {
+                            stopAllVideosExcept(f);
+                        }
                     });
                 }
             } catch {}
@@ -574,28 +608,24 @@
             const hero = document.getElementById('yt-hero-auto');
             if (hero) {
                 hero.onload = () => {
-                    hero.contentWindow?.postMessage(JSON.stringify({ event: 'listening', id: hero.id }), '*');
+                    registerYTListening(hero);
+                    setTimeout(() => registerYTListening(hero), 500);
                     setTimeout(() => sendYTCommand(hero, 'playVideo'), 5100);
                 };
             }
 
+            setInterval(() => {
+                document.querySelectorAll('.yt-player').forEach(registerYTListening);
+            }, 1500);
+
             document.querySelectorAll('.yt-facade').forEach((box, i) => {
-                const id = box.dataset.videoId;
-                const title = box.dataset.title || 'YouTube Video';
-
-                const img = document.createElement('img');
-                img.src = `https://i.ytimg.com/vi/${id}/maxresdefault.jpg`;
-                img.alt = title;
-                img.onload = () => { if (img.naturalWidth <= 120) img.src = `https://i.ytimg.com/vi/${id}/hqdefault.jpg`; };
-                img.onerror = () => { if (!img.src.includes('hqdefault')) img.src = `https://i.ytimg.com/vi/${id}/hqdefault.jpg`; };
-
-                const btn = document.createElement('div');
-                btn.className = 'yt-play-btn';
-                box.append(img, btn);
+                renderFacadeThumbnail(box);
 
                 box.onclick = () => {
                     if (box.querySelector('iframe')) return;
-                    pauseOtherVideos();
+                    const id = box.dataset.videoId;
+                    const title = box.dataset.title || 'YouTube Video';
+
                     const f = document.createElement('iframe');
                     f.className = 'yt-player';
                     f.id = `yt-player-${i}`;
@@ -603,10 +633,15 @@
                     f.title = title;
                     f.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
                     f.allowFullscreen = true;
+
+                    stopAllVideosExcept(f);
+
                     f.onload = () => {
-                        f.contentWindow?.postMessage(JSON.stringify({ event: 'listening', id: f.id }), '*');
+                        registerYTListening(f);
+                        setTimeout(() => registerYTListening(f), 500);
                         setTimeout(() => sendYTCommand(f, 'playVideo'), 5100);
                     };
+
                     box.innerHTML = '';
                     box.appendChild(f);
                 };
@@ -614,7 +649,7 @@
         }
 
         function openTab(name) {
-            pauseOtherVideos();
+            stopAllVideosExcept();
             document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
             document.querySelectorAll('.nav-tab-btn').forEach(b => b.classList.remove('active'));
             document.getElementById('tab-' + name).classList.add('active');
@@ -623,7 +658,7 @@
         }
 
         function openHanyangSubTab(subName, btn) {
-            pauseOtherVideos();
+            stopAllVideosExcept();
             document.querySelectorAll('.sub-tab-panel').forEach(p => p.classList.remove('active'));
             document.querySelectorAll('.hy-sub-btn').forEach(b => b.classList.remove('active'));
             document.getElementById('hy-sub-' + subName).classList.add('active');
