@@ -103,17 +103,24 @@
         .filter-btn{background:var(--bg-white);border:1px solid var(--point-gray);color:var(--text-dark);padding:.5rem 1.1rem;font-size:.9rem;font-weight:600;cursor:pointer;border-radius:3px;transition:.2s;font-family:inherit}
         .filter-btn.active,.filter-btn:hover{background:var(--navy-blue);border-color:var(--navy-blue);color:var(--bg-white)}
         .fleet-list-container{border:1px solid var(--border-color);border-radius:6px;overflow:hidden;margin-bottom:1.75rem;background:var(--bg-white)}
-        .fleet-list-header,.fleet-item{display:grid;grid-template-columns:120px 280px 1fr;gap:1rem}
+        .fleet-list-header,.fleet-item{display:grid;grid-template-columns:120px 300px 1fr;gap:1rem}
         .fleet-list-header{background:var(--navy-blue);color:var(--bg-white);font-weight:600;font-size:.92rem;padding:.9rem 1.25rem}
         .fleet-item{padding:1.25rem;border-bottom:1px solid var(--border-color);align-items:start;transition:background-color .2s}
         .fleet-item:last-child{border-bottom:none}
         .fleet-item:hover{background:var(--light-gray-bg)}
         .fleet-col-type{font-weight:800;color:var(--navy-blue);font-size:1rem;white-space:nowrap;line-height:1.7}
         .fleet-col-class{line-height:1.85;font-size:.94rem}
-        .ship-badge{display:inline-block;background:var(--light-gray-bg);border:1px solid var(--point-gray);color:var(--navy-blue);font-size:.78rem;font-weight:700;padding:.08rem .45rem;border-radius:3px;margin-right:.35rem;line-height:1.4}
+        .ship-badge{display:inline-block;background:var(--light-gray-bg);border:1px solid var(--point-gray);color:var(--navy-blue);font-size:.78rem;font-weight:700;padding:.08rem .45rem;border-radius:3px;margin-right:.35rem;line-height:1.4;text-align:center}
         .ship-badge.upcoming{background:var(--navy-blue);border-color:var(--navy-blue);color:var(--bg-white)}
         .tonnage-tag{color:var(--point-gray);font-size:.78rem;font-weight:500;margin-left:.25rem}
         .fleet-desc{font-size:.94rem;color:var(--text-dark);line-height:1.65}
+
+        /* 항공병기 기체 줄맞춤용 스타일 */
+        .av-group{display:flex;flex-direction:column;gap:.15rem}
+        .av-group + .av-group{margin-top:.55rem}
+        .av-row{display:flex;align-items:center}
+        .av-badge-slot{width:68px;flex-shrink:0;display:flex;align-items:center}
+        .av-badge-slot .ship-badge{margin-right:0}
 
         /* VR 및 뉴스 배너 */
         .vr-banner,.news-banner{background:var(--light-gray-bg);border:1px solid var(--border-color);padding:1.65rem;border-radius:4px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:1.25rem}
@@ -202,7 +209,7 @@
         <button class="logo" onclick="openTab('home')">
             <img src="hanyang_logo.png" alt="한양대학교">
             <img src="navy_logo.png" alt="대한민국 해군">
-            <span>ROK NAVY</span>
+            <span>R.O.K. NAVY</span>
         </button>
         <ul class="nav-tabs">
             <li><button class="nav-tab-btn active" data-tab="home" onclick="openTab('home')">홈</button></li>
@@ -301,10 +308,10 @@
                         <div class="endorsement-greeting">미래를 준비하는 학생 여러분에게.</div>
                         <p>누구나 대한민국의 역사를 뒤돌아본다면, 한반도에서 살아온 우리 민족의 삶이 쉽지 않았다는 것을 알게 됩니다. 그리고 이러한 어려움들은 그저 수천 년간을 전해져 내려온 과거의 이야기들이 아닌, 현재 국제사회의 역학관계와 같은 거대한 집단과 집단 사이의 난제들일 뿐 아니라, 사회를 구성하는 개인들의 삶 속에까지도 계속 영향을 미치고 있는 소규모 조직들 간에도 상존하고 있는, 우리들 인생의 한 부분이기도 합니다.</p>
                         <p>대한민국 해군은 이러한 어려움으로 가득 찬 대한민국의 역사와 개인의 삶 속에서도 뚜렷한 방향성을 제시하고 있습니다. 이순신 제독께서는 중앙정부의 지원 없이도 스스로 전투함을 건조하고 수병을 양성하면서도 백성들과 자급자족의 전시경제체제를 만들어 가며 기나긴 전쟁을 승리로 이끌어 내었습니다. 근대 해군의 설립자들은 해방 이후의 혼란기에도 독립운동가이자 유럽 선진국가의 상선사관이었던 손원일 선장을 중심으로 스스로 모여 대한민국 해군의 모체인 해방병단(海防兵團)을 창설하고 미군의 중고 전투함을 사재를 털어 구매, 정비하여 북한의 남침을 막아내었습니다.</p>
-                        <p>한국 뿐 아니라 세계 역사를 살펴보아도, 통치권력이나 기타 주변으로부터의 지원이 없는 상황에서도 자생적으로 떨쳐 일어나서 정의를 향해 자신의 모든 것을 걸고 나아가는 사람들을 찾아보기는 매우 보기 어렵습니다. 대한민국 해군의 가치는 그 무엇보다도, 이러한 어려운 길을 걸어가기를 두려워하지 않으며, 난관을 헤쳐 나감으로서 정의를 실현해 나가는 자신의 임무를 묵묵히 해 나가는 바다 사람들에 의해서 수백 년이 넘게 축적되어 온 본질에 있습니다.</p>
+                        <p>한국 뿐 아니라 세계 역사를 살펴보아도, 통치권력이나 기타 주변으로부터의 지원이 없는 상황에서도 자생적으로 떨쳐 일어나서 <strong>정의를 향해 자신의 모든 것을 걸고 나아가는 사람들을 찾아보기는 매우 보기 어렵습니다. 대한민국 해군의 가치는 그 무엇보다도, 이러한 어려운 길을 걸어가기를 두려워하지 않으며, 난관을 헤쳐 나감으로서 정의를 실현해 나가는 자신의 임무를 묵묵히 해 나가는</strong> 바다 사람들에 의해서 수백 년이 넘게 축적되어 온 본질에 있습니다.</p>
                         <p>해군은 외부에서 보이는 모습 보다는 내부적으로 훨씬 방대한 조직이며, 세계로 뻗어 나아가는 빠르게 발전하는 기관입니다. 해군의 전문 업무 영역은 통상적인 수상함정에서 이루어지는 임무 뿐 아니라 해군항공대와 잠수함 전단과 같이 공중과 심해작전영역을 총괄하면서도 UDT/SEAL 및 SSU로 이루어진 해군특수전전단과 해병대에서 이루어지는 보병특수전 임무에 대한 해양 투사 및 구조/구급임무까지도 포함됩니다.</p>
                         <p>또한 각 업무 영역 내에서 파생되는 세부 임무를 위해서는 항해학과 기계공학 및 군사학 등의 잘 알려진 해양관련 전공뿐 아니라 물리학, 화학, 생물학 및 지구과학을 포함하는 방대한 영역의 기초과학 관련 전공과 함께, 항공운항과 조종전공, 잠수학과 같은 특수업무분야 및 법무와 회계, 기타 의학관련 세부전공자 까지도 해군 조직 내에서 함께 일하며 내부적으로 육성시키기도 하는 독특한 특징을 가지고 있습니다. 즉, 육상에서 볼 수 있는 대부분의 세부전공 및 직업군들이, 독특한 환경적 특성을 가지는 해양공간에서 매우 다양하게 발현되게 됩니다.</p>
-                        <p>따라서 해군에서 양성된 인재들은 해군의 발전을 통한 국방력 강화에 기여했을 뿐 아니라, 대한민국의 발전을 견인해 온 기계공업과 조선산업, 화학 및 정유, 철강산업과 같은 중후장대 산업군에서 헌신하여 왔을 뿐 아니라, 해운업과 수산업을 바탕으로 하는 각종 파생영역들과 해사법 전공영역 및 많은 행정 세부전공은 국제기구와 정부기관에서 핵심인력군을 형성하고 있습니다. 바로 이러한 넓은 업무 영역의 특성을 가지는 해군간부를 훌륭하게 육성해 내기 위해서 국내 최고의 명문대학인 한양대학교의 폭넓은 학문적 기반과 뛰어난 대학 기반 시설을 바탕으로 본 학과가 운영되고 있습니다.</p>
+                        <p>따라서 해군에서 양성된 인재들은 해군의 발전을 통한 국방력 강화에 기여했을 뿐 아니라, 대한민국의 발전을 견인해 온 기계공업과 조선산업, 화학 및 정유, 철강산업과 같은 중후장대 산업군에서 헌신하여 왔을 뿐 아니라, 해운업과 수산업을 바탕으로 하는 각종 파생영역들과 해사법 전공영역 및 많은 행정 세부전공은 국제기구와 정부기관에서 핵심인력군을 형성하고 있습니다. 바로 이러한 넓은 업무 영역의 특성을 가지는 <strong>해군간부를 훌륭하게 육성해 내기 위해서 국내 최고의 명문대학인 한양대학교의 폭넓은 학문적 기반과 뛰어난 대학 기반 시설을 바탕으로 본 학과가 운영되고 있습니다.</strong></p>
                         <p>저는 바다를 배경으로 살아가는 사람들이 자신의 인생을 훌륭히 살아내어 가는 과정을 오랜 기간 보아왔으며 저 또한 바로 그 핵심인 해군의 일원인 것을 자랑스럽게 생각합니다. 대한민국의 미래는 바다에 있고, 해군에는 한 개인에게도 수많은 기회가 있음은 누구나 알고 있는 상식일 수도 있습니다. 그러나 해군의 일원이 됨으로서 얻을 수 있는 더 큰 소득은, 인생의 어려움과도 같은 파도를 정면으로 깨고 나아가, 난관을 돌파하며 더 넓은 세계로 나아가는 것을 경험해 가면서 자연스럽게 체득되는 삶의 핵심 가치들일 것입니다.</p>
                         <p>이렇게 오래된 전설과도 같은 해군의 삶은 "은빛 갈매기"와 같은 오래된 여러 해군 군가에도 잘 녹아들어 있으며 나이든 예비역 해군 수병들조차도 잊어버리는 경우가 없습니다. 저는 여러분 모두가 인생의 본격적인 긴 여정을 향해 나아가는 이 순간, 이순신 제독과 손원일 제독이 항해를 했던 바로 그 해군의 바다를 향해, 훌륭한 모항이 되어줄 커다란 한양대학교에서, 함께 닻을 올리고 대양을 향해 나아가는 멋진 미래를 펼쳐 나아가시길 진심으로 기원합니다.</p>
                         <div class="endorsement-sign">
@@ -314,7 +321,7 @@
                     </div>
                 </div>
 
-                <!-- 4. 교수소개 (세로 2칸 구성) -->
+                <!-- 4. 교수소개 -->
                 <div id="hy-sub-faculty" class="sub-tab-panel">
                     <div class="hy-stack">
                         <div class="hy-card">
