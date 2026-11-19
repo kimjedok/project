@@ -98,7 +98,7 @@
         .unit-video-link:hover{background:var(--navy-blue);color:var(--bg-white)}
         .unit-body{flex:1;font-size:.95rem;color:#3E444A;line-height:1.65}
 
-        /* 전력 -> 주요전력 */
+        /* 전력 -> 주요전력 & 북한 비교 */
         .fleet-tabs{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.5rem}
         .filter-btn{background:var(--bg-white);border:1px solid var(--point-gray);color:var(--text-dark);padding:.5rem 1.1rem;font-size:.9rem;font-weight:600;cursor:pointer;border-radius:3px;transition:.2s;font-family:inherit}
         .filter-btn.active,.filter-btn:hover{background:var(--navy-blue);border-color:var(--navy-blue);color:var(--bg-white)}
@@ -115,12 +115,25 @@
         .tonnage-tag{color:var(--point-gray);font-size:.78rem;font-weight:500;margin-left:.25rem}
         .fleet-desc{font-size:.94rem;color:var(--text-dark);line-height:1.65}
 
-        /* 항공병기 기체 줄맞춤용 스타일 */
-        .av-group{display:flex;flex-direction:column;gap:.15rem}
-        .av-group + .av-group{margin-top:.55rem}
+        /* 항공병기 기체 줄맞춤 및 여백 확보 */
+        .av-group{display:flex;flex-direction:column;gap:.2rem}
+        .av-group + .av-group{margin-top:.65rem}
         .av-row{display:flex;align-items:center}
-        .av-badge-slot{width:68px;flex-shrink:0;display:flex;align-items:center}
+        .av-badge-slot{width:108px;flex-shrink:0;display:flex;align-items:center;padding-right:10px}
         .av-badge-slot .ship-badge{margin-right:0}
+
+        /* 북한 함정 비교 테이블 */
+        .cmp-table-wrap{border:1px solid var(--border-color);border-radius:6px;overflow-x:auto;background:var(--bg-white);margin-bottom:1.75rem}
+        .cmp-table{width:100%;border-collapse:collapse;min-width:680px;font-size:.94rem}
+        .cmp-table thead th{background:var(--navy-blue);color:var(--bg-white);padding:.95rem 1.15rem;text-align:left;font-weight:700}
+        .cmp-table tbody td{padding:1.15rem;border-bottom:1px solid var(--border-color);vertical-align:top;line-height:1.65}
+        .cmp-table tbody tr:last-child td{border-bottom:none}
+        .cmp-table tbody tr:hover{background:var(--light-gray-bg)}
+        .cmp-cat{font-weight:800;color:var(--navy-blue);width:120px;white-space:nowrap}
+        .cmp-rok{background:rgba(14,74,132,.025)}
+        .cmp-badge{display:inline-block;font-size:.74rem;font-weight:700;padding:.1rem .45rem;border-radius:3px;margin-bottom:.35rem}
+        .cmp-badge.rok{background:var(--navy-blue);color:#FFF}
+        .cmp-badge.nk{background:#E9ECEF;color:#495057}
 
         /* VR 및 뉴스 배너 */
         .vr-banner,.news-banner{background:var(--light-gray-bg);border:1px solid var(--border-color);padding:1.65rem;border-radius:4px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:1.25rem}
@@ -136,7 +149,7 @@
         .news-card p{font-size:.9rem;color:#555}
         .news-banner-text h4{color:var(--navy-blue);font-size:1.1rem;margin-bottom:.25rem}
 
-        /* 한양해군 서브 탭 */
+        /* 공통 서브 탭 내비게이션 (한양해군 & 전력) */
         .hanyang-sub-nav{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:.5rem;margin:2rem 0 2.5rem;padding-bottom:1.25rem;border-bottom:1px solid var(--border-color)}
         .hy-sub-btn{background:var(--bg-white);border:1px solid var(--border-color);color:var(--text-dark);padding:.65rem 1.45rem;font-size:.95rem;font-weight:700;border-radius:4px;cursor:pointer;transition:.2s;font-family:inherit;white-space:nowrap}
         .hy-sub-btn:hover{border-color:var(--navy-blue);color:var(--navy-blue);background:var(--light-gray-bg)}
@@ -467,9 +480,16 @@
 
         function openHanyangSubTab(subName, btn) {
             stopAllVideosExcept();
-            document.querySelectorAll('.sub-tab-panel').forEach(p => p.classList.remove('active'));
-            document.querySelectorAll('.hy-sub-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('#tab-hanyang .sub-tab-panel').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('#tab-hanyang .hy-sub-btn').forEach(b => b.classList.remove('active'));
             document.getElementById('hy-sub-' + subName).classList.add('active');
+            btn.classList.add('active');
+        }
+
+        function openForcesSubTab(subName, btn) {
+            document.querySelectorAll('#tab-forces .sub-tab-panel').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('#tab-forces .hy-sub-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById('forces-sub-' + subName).classList.add('active');
             btn.classList.add('active');
         }
 
