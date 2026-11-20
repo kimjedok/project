@@ -1,22 +1,54 @@
-<div class="content-container">
+<div class="content-container" data-active-cat="all"
+    data-ship-specs='{
+        "kddx": {"code":"KDDX","title":"한국형 차기 구축함 (KDDX)","img":"images/ships/kddx.jpg","disp":"기준 6,500톤급 / 만재 8,000톤급","dim":"전장 155m × 전폭 18.8m","speed":"최대 30노트 (약 55km/h)","weapon":"한국형 수직발사체계(KVLS), 5인치 함포, 함대함·함대공 유도탄, 근접방어무기체계(CIWS-II)","feat":"국내 최초 통합마스트(I-MAST)와 국산 이지스급 전투체계를 탑재한 차세대 스마트 구축함으로 대공·대잠·대지 입체 작전을 수행합니다."},
+        "jeongjo": {"code":"DDG-II","title":"정조대왕급 이지스 구축함 (광개토-III Batch-II)","img":"images/ships/jeongjo.jpg","disp":"기준 8,200톤 / 만재 12,000톤","dim":"전장 170m × 전폭 21m","speed":"최대 30노트 (약 55km/h)","weapon":"Mk.41 VLS 48셀 + KVLS 16셀 + KVLS-II 24셀(총 88셀), SM-3·SM-6 요격미사일, 해성·천룡 유도탄","feat":"해상 기반 한국형 3축 체계의 핵심 전력으로, 탄도탄 탐지·추적뿐만 아니라 직접 요격(SM-3/SM-6) 능력을 갖춘 최신예 이지스 구축함입니다."},
+        "sejong": {"code":"DDG-I","title":"세종대왕급 이지스 구축함 (광개토-III Batch-I)","img":"images/ships/sejong.jpg","disp":"기준 7,600톤 / 만재 10,600톤","dim":"전장 165.9m × 전폭 21.4m","speed":"최대 30노트 (약 55km/h)","weapon":"수직발사관(VLS) 총 128셀(SM-2, 현무-3 순항미사일, 홍상어), 해성 대함유도탄 16발, 5인치 함포","feat":"SPY-1D(V) 위상배열레이더로 약 1,000km 밖의 표적 1,000여 개를 동시 탐지·추적하며 기동함대의 대공방어 우산 역할을 수행합니다."},
+        "yisunsin": {"code":"DDH-II","title":"충무공이순신급 구축함 (KDX-II)","img":"images/ships/yisunsin.jpg","disp":"기준 4,400톤 / 만재 5,520톤","dim":"전장 150m × 전폭 17.4m","speed":"최대 29노트 (약 54km/h)","weapon":"Mk.41 VLS 32셀 + KVLS 32셀, SM-2 함대공미사일, 해성 대함유도탄, 5인치 함포, 골키퍼 CIWS","feat":"대한민국 해군 최초의 스텔스 선형 적용 및 원해 작전 가능 구축함으로, 청해부대 소말리아 아덴만 파병의 주역입니다."},
+        "chungnam": {"code":"FFG-III","title":"충남급 호위함 (울산급 Batch-III)","img":"images/ships/chungnam.jpg","disp":"기준 3,600톤 / 만재 4,300톤","dim":"전장 129m × 전폭 14.8m","speed":"최대 30노트 (약 55km/h)","weapon":"KVLS 16셀(해궁 함대공유도탄, 전술함대지유도탄, 홍상어), 5인치 함포, 대함유도탄","feat":"국내 기술로 개발한 4면 고정형 다기능 위상배열레이더(MFR)와 복합식(하이브리드) 추진체계를 탑재해 대공·대잠 능력이 획기적으로 향상되었습니다."},
+        "daegu": {"code":"FFG-II","title":"대구급 호위함 (울산급 Batch-II)","img":"images/ships/daegu.jpg","disp":"기준 2,800톤 / 만재 3,600톤","dim":"전장 122m × 전폭 14m","speed":"최대 30노트 (약 55km/h)","weapon":"KVLS 16셀(해궁, 홍상어, 해룡 전술함대지유도탄), 5인치 함포, 팰렁스(Phalanx) CIWS","feat":"해군 전투함 최초로 하이브리드 추진체계(가스터빈+추진전동기)를 적용해 수중 방사소음을 최소화한 대잠 특화 호위함입니다."},
+        "dosan": {"code":"SS-III","title":"도산안창호급 잠수함 (장보고-III Batch-I)","img":"images/ships/dosan.jpg","disp":"수상 3,000톤 / 수중 3,700톤","dim":"전장 83.5m × 전폭 9.6m","speed":"수중 최대 20노트 (약 37km/h)","weapon":"잠수함발사탄도미사일(SLBM) 수직발사관 6셀, 533mm 어뢰발사관 6문(범상어 중어뢰, 해성-III)","feat":"국내 독자 설계·건조된 최초의 3,000톤급 중형 잠수함으로 공기불요추진체계(AIP)와 SLBM 탑재로 은밀한 전략 억제력을 보유합니다."},
+        "sonwonil": {"code":"SS-II","title":"손원일급 잠수함 (장보고-II)","img":"images/ships/sonwonil.jpg","disp":"수상 1,700톤 / 수중 1,860톤","dim":"전장 65.3m × 전폭 6.3m","speed":"수중 최대 20노트 (약 37km/h)","weapon":"533mm 어뢰발사관 8문(백상어·범상어 중어뢰, 하푼·해성 잠대지/잠대함 순항미사일)","feat":"연료전지 기반 공기불요추진체계(AIP)를 탑재해 수면 부상 없이 약 2주간 수중 잠항 작전이 가능한 주력 잠수함입니다."},
+        "dokdo": {"code":"LPH","title":"독도급 대형수송함 (독도함·마라도함)","img":"images/ships/dokdo.jpg","disp":"기준 14,500톤 / 만재 18,800톤","dim":"전장 199m × 전폭 31m","speed":"최대 23노트 (약 43km/h)","weapon":"RAM 대공유도탄, 팰렁스/골키퍼 CIWS (상륙병력 700여 명, 헬기 7대, 공기부양정 2척 탑재)","feat":"입체고속상륙작전을 지휘하는 기함(Flagship) 역할을 수행하며 대규모 재난 구조 및 평화유지활동(PKO) 지원 능력을 갖추고 있습니다."},
+        "yunyoungha": {"code":"PKG","title":"윤영하급 유도탄고속함","img":"images/ships/yunyoungha.jpg","disp":"기준 450톤 / 만재 570톤","dim":"전장 63m × 전폭 9m","speed":"최대 40노트 (약 74km/h)","weapon":"해성 함대함유도탄 4발, 76mm 함포 1문, 40mm 쌍열함포 1문","feat":"워터제트 추진기를 장착해 얕은 수심의 서해 NLL 연안에서 40노트의 고속 기동으로 적 함정을 원거리 정밀 타격합니다."},
+        "p8a": {"code":"해상초계기","title":"P-8A 포세이돈 해상초계기","img":"images/ships/p8a.jpg","disp":"최대이륙중량 약 85.8톤","dim":"전장 39.5m × 전폭 37.6m","speed":"최대 907km/h (순항 815km/h)","weapon":"하푼 공대함미사일, Mk.54 경어뢰, 소노부이(음향탐지부표) 129발","feat":"세계 최고 성능의 최신예 해상초계기로 고성능 다기능 레이더와 전자광학 장비를 통해 적 잠수함과 수상함을 광역 탐지·격멸합니다."},
+        "mh60r": {"code":"해상작전헬기","title":"MH-60R 시호크 해상작전헬기","img":"images/ships/mh60r.jpg","disp":"최대이륙중량 약 10.6톤","dim":"전장 19.7m × 로터직경 16.4m","speed":"최대 270km/h","weapon":"헬파이어 공대지미사일, Mk.54 경어뢰, 디핑 소나(수중음파탐지기)","feat":"이지스 구축함 등에 탑재되어 원거리 적 잠수함을 수중에서 직접 탐지·추적·공격하는 최첨단 대잠작전 헬기입니다."}
+    }'>
+
     <div class="section-header"><div class="eng-title">02. Naval Forces</div><h2>전력</h2></div>
 
+    <!-- 전력 서브 탭 버튼 (기존 기능 복구) -->
     <!-- 전력 서브 탭 버튼 -->
     <div class="hanyang-sub-nav">
-        <button class="hy-sub-btn active" onclick="openForcesSubTab('main',this)">주요전력</button>
-        <button class="hy-sub-btn" onclick="openForcesSubTab('nk-compare',this)">북한 함정과 비교</button>
+        <button class="hy-sub-btn active" onclick="document.querySelectorAll('#tab-forces .sub-tab-panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('#tab-forces .hy-sub-btn').forEach(b=>b.classList.remove('active'));document.getElementById('forces-sub-main').classList.add('active');this.classList.add('active');">주요전력</button>
+        <button class="hy-sub-btn" onclick="document.querySelectorAll('#tab-forces .sub-tab-panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('#tab-forces .hy-sub-btn').forEach(b=>b.classList.remove('active'));document.getElementById('forces-sub-nk-compare').classList.add('active');this.classList.add('active');">북한 함정과 비교</button>
     </div>
-
     <!-- [서브 탭 1: 주요전력] -->
     <div id="forces-sub-main" class="sub-tab-panel active">
+
+        <!-- 실시간 검색창 + 결과 카운터 -->
+        <div style="display:flex;flex-wrap:wrap;gap:.75rem;align-items:center;justify-content:space-between;margin-bottom:1.1rem;padding:.85rem 1.1rem;background:var(--light-gray-bg);border:1px solid var(--border-color);border-radius:6px;">
+            <div style="position:relative;flex:1;min-width:240px;">
+                <input type="text" id="fleetSearchInput"
+                    oninput="const root=this.closest('.content-container');const cat=root.dataset.activeCat||'all';const kw=this.value.trim().toLowerCase();let cnt=0;root.querySelectorAll('#fleetList .fleet-item').forEach(el=>{const ok=(cat==='all'||el.dataset.category===cat)&&(!kw||el.textContent.toLowerCase().includes(kw));el.style.display=ok?'':'none';if(ok)cnt++;});document.getElementById('fleetResultCount').textContent='총 '+cnt+'개 함종 표시 중 · 파란색 함급 클릭 시 상세제원 확인';document.getElementById('fleetEmptyMsg').style.display=cnt===0?'block':'none';"
+                    placeholder="함정명, 함급, 분류기호 검색 (예: 정조대왕, DDG, 잠수함, 이지스, P-8A)"
+                    style="width:100%;padding:.6rem 2.2rem .6rem .9rem;border:1px solid var(--point-gray);border-radius:4px;font-size:.92rem;font-family:inherit;outline:none;background:#FFF;">
+                <button type="button" title="검색 초기화"
+                    onclick="const inp=document.getElementById('fleetSearchInput');inp.value='';inp.dispatchEvent(new Event('input'));"
+                    style="position:absolute;right:.65rem;top:50%;transform:translateY(-50%);border:none;background:none;color:var(--point-gray);font-size:1rem;cursor:pointer;">✕</button>
+            </div>
+            <div id="fleetResultCount" style="font-size:.86rem;font-weight:700;color:var(--navy-blue);white-space:nowrap;">
+                총 10개 함종 표시 중 · 파란색 함급 클릭 시 상세제원 확인
+            </div>
+        </div>
+
         <div class="fleet-tabs">
-            <button class="filter-btn active" onclick="filterFleet('all',this)">전체 보기</button>
-            <button class="filter-btn" onclick="filterFleet('destroyer',this)">구축함</button>
-            <button class="filter-btn" onclick="filterFleet('frigate',this)">호위함·초계함</button>
-            <button class="filter-btn" onclick="filterFleet('submarine',this)">잠수함</button>
-            <button class="filter-btn" onclick="filterFleet('amphibious',this)">상륙·기뢰·지원함</button>
-            <button class="filter-btn" onclick="filterFleet('patrol',this)">고속함·고속정</button>
-            <button class="filter-btn" onclick="filterFleet('aviation',this)">항공병기</button>
+            <button class="filter-btn active" onclick="filterFleet('all',this);const r=this.closest('.content-container');r.dataset.activeCat='all';document.getElementById('fleetSearchInput').dispatchEvent(new Event('input'));">전체 보기</button>
+            <button class="filter-btn" onclick="filterFleet('destroyer',this);const r=this.closest('.content-container');r.dataset.activeCat='destroyer';document.getElementById('fleetSearchInput').dispatchEvent(new Event('input'));">구축함</button>
+            <button class="filter-btn" onclick="filterFleet('frigate',this);const r=this.closest('.content-container');r.dataset.activeCat='frigate';document.getElementById('fleetSearchInput').dispatchEvent(new Event('input'));">호위함·초계함</button>
+            <button class="filter-btn" onclick="filterFleet('submarine',this);const r=this.closest('.content-container');r.dataset.activeCat='submarine';document.getElementById('fleetSearchInput').dispatchEvent(new Event('input'));">잠수함</button>
+            <button class="filter-btn" onclick="filterFleet('amphibious',this);const r=this.closest('.content-container');r.dataset.activeCat='amphibious';document.getElementById('fleetSearchInput').dispatchEvent(new Event('input'));">상륙·기뢰·지원함</button>
+            <button class="filter-btn" onclick="filterFleet('patrol',this);const r=this.closest('.content-container');r.dataset.activeCat='patrol';document.getElementById('fleetSearchInput').dispatchEvent(new Event('input'));">고속함·고속정</button>
+            <button class="filter-btn" onclick="filterFleet('aviation',this);const r=this.closest('.content-container');r.dataset.activeCat='aviation';document.getElementById('fleetSearchInput').dispatchEvent(new Event('input'));">항공병기</button>
         </div>
 
         <div class="fleet-list-container" id="fleetList">
@@ -26,13 +58,29 @@
             <div class="fleet-item" data-category="destroyer">
                 <div class="fleet-col-type">구축함</div>
                 <div class="fleet-col-class">
-                    <span class="ship-badge upcoming">취역 예정</span> KDDX <span class="tonnage-tag">(차기 구축함 · 6척 계획)</span><br>
-                    <span class="ship-badge">DDG-II</span> 정조대왕급 <span class="tonnage-tag">(12,000톤 · 총 3척)</span><br>
+                    <span class="ship-badge upcoming">취역 예정</span>
+                    <span onclick="const d=JSON.parse(this.closest('.content-container').dataset.shipSpecs)['kddx'];document.getElementById('modalShipCode').textContent=d.code;document.getElementById('modalShipTitle').textContent=d.title;document.getElementById('modalDisplacement').textContent=d.disp;document.getElementById('modalDimension').textContent=d.dim;document.getElementById('modalSpeed').textContent=d.speed;document.getElementById('modalWeapon').textContent=d.weapon;document.getElementById('modalFeature').textContent=d.feat;const img=document.getElementById('modalShipImg');img.style.objectFit='cover';img.style.padding='0';img.src=d.img;document.getElementById('shipSpecModal').style.display='flex';"
+                        style="cursor:pointer;font-weight:700;color:var(--navy-blue);text-decoration:underline;">KDDX 🔍</span>
+                    <span class="tonnage-tag">(차기 구축함 · 6척 계획)</span><br>
+
+                    <span class="ship-badge">DDG-II</span>
+                    <span onclick="const d=JSON.parse(this.closest('.content-container').dataset.shipSpecs)['jeongjo'];document.getElementById('modalShipCode').textContent=d.code;document.getElementById('modalShipTitle').textContent=d.title;document.getElementById('modalDisplacement').textContent=d.disp;document.getElementById('modalDimension').textContent=d.dim;document.getElementById('modalSpeed').textContent=d.speed;document.getElementById('modalWeapon').textContent=d.weapon;document.getElementById('modalFeature').textContent=d.feat;const img=document.getElementById('modalShipImg');img.style.objectFit='cover';img.style.padding='0';img.src=d.img;document.getElementById('shipSpecModal').style.display='flex';"
+                        style="cursor:pointer;font-weight:700;color:var(--navy-blue);text-decoration:underline;">정조대왕급 🔍</span>
+                    <span class="tonnage-tag">(12,000톤 · 총 3척)</span><br>
                     <span style="display:block;font-size:.82rem;color:#555;padding-left:.25rem;margin-bottom:.25rem">└ 정조대왕함, 다산정약용함, 대호김종서함</span>
-                    <span class="ship-badge">DDG-I</span> 세종대왕급 <span class="tonnage-tag">(10,600톤 · 총 3척)</span><br>
+
+                    <span class="ship-badge">DDG-I</span>
+                    <span onclick="const d=JSON.parse(this.closest('.content-container').dataset.shipSpecs)['sejong'];document.getElementById('modalShipCode').textContent=d.code;document.getElementById('modalShipTitle').textContent=d.title;document.getElementById('modalDisplacement').textContent=d.disp;document.getElementById('modalDimension').textContent=d.dim;document.getElementById('modalSpeed').textContent=d.speed;document.getElementById('modalWeapon').textContent=d.weapon;document.getElementById('modalFeature').textContent=d.feat;const img=document.getElementById('modalShipImg');img.style.objectFit='cover';img.style.padding='0';img.src=d.img;document.getElementById('shipSpecModal').style.display='flex';"
+                        style="cursor:pointer;font-weight:700;color:var(--navy-blue);text-decoration:underline;">세종대왕급 🔍</span>
+                    <span class="tonnage-tag">(10,600톤 · 총 3척)</span><br>
                     <span style="display:block;font-size:.82rem;color:#555;padding-left:.25rem;margin-bottom:.25rem">└ 세종대왕함, 율곡이이함, 서애류성룡함</span>
-                    <span class="ship-badge">DDH-II</span> 충무공이순신급 <span class="tonnage-tag">(5,520톤 · 총 6척)</span><br>
+
+                    <span class="ship-badge">DDH-II</span>
+                    <span onclick="const d=JSON.parse(this.closest('.content-container').dataset.shipSpecs)['yisunsin'];document.getElementById('modalShipCode').textContent=d.code;document.getElementById('modalShipTitle').textContent=d.title;document.getElementById('modalDisplacement').textContent=d.disp;document.getElementById('modalDimension').textContent=d.dim;document.getElementById('modalSpeed').textContent=d.speed;document.getElementById('modalWeapon').textContent=d.weapon;document.getElementById('modalFeature').textContent=d.feat;const img=document.getElementById('modalShipImg');img.style.objectFit='cover';img.style.padding='0';img.src=d.img;document.getElementById('shipSpecModal').style.display='flex';"
+                        style="cursor:pointer;font-weight:700;color:var(--navy-blue);text-decoration:underline;">충무공이순신급 🔍</span>
+                    <span class="tonnage-tag">(5,520톤 · 총 6척)</span><br>
                     <span style="display:block;font-size:.82rem;color:#555;padding-left:.25rem;margin-bottom:.25rem">└ 충무공이순신함, 문무대왕함, 대조영함, 왕건함, 강감찬함, 최영함</span>
+
                     <span class="ship-badge">DDH-I</span> 광개토대왕급 <span class="tonnage-tag">(3,900톤 · 총 3척)</span><br>
                     <span style="display:block;font-size:.82rem;color:#555;padding-left:.25rem">└ 광개토대왕함, 을지문덕함, 양만춘함</span>
                 </div>
@@ -44,10 +92,18 @@
                 <div class="fleet-col-type">호위함</div>
                 <div class="fleet-col-class">
                     <span class="ship-badge upcoming">취역 예정</span> FFX Batch-IV <span class="tonnage-tag">(차기 호위함 · 6척 계획)</span><br>
-                    <span class="ship-badge">FFG-III</span> 충남급 <span class="tonnage-tag">(4,300톤 · 총 6척)</span><br>
+                    <span class="ship-badge">FFG-III</span>
+                    <span onclick="const d=JSON.parse(this.closest('.content-container').dataset.shipSpecs)['chungnam'];document.getElementById('modalShipCode').textContent=d.code;document.getElementById('modalShipTitle').textContent=d.title;document.getElementById('modalDisplacement').textContent=d.disp;document.getElementById('modalDimension').textContent=d.dim;document.getElementById('modalSpeed').textContent=d.speed;document.getElementById('modalWeapon').textContent=d.weapon;document.getElementById('modalFeature').textContent=d.feat;const img=document.getElementById('modalShipImg');img.style.objectFit='cover';img.style.padding='0';img.src=d.img;document.getElementById('shipSpecModal').style.display='flex';"
+                        style="cursor:pointer;font-weight:700;color:var(--navy-blue);text-decoration:underline;">충남급 🔍</span>
+                    <span class="tonnage-tag">(4,300톤 · 총 6척)</span><br>
                     <span style="display:block;font-size:.82rem;color:#555;padding-left:.25rem;margin-bottom:.25rem">└ 충남함, 경북함, 전남함 등</span>
-                    <span class="ship-badge">FFG-II</span> 대구급 <span class="tonnage-tag">(3,600톤 · 총 8척)</span><br>
+
+                    <span class="ship-badge">FFG-II</span>
+                    <span onclick="const d=JSON.parse(this.closest('.content-container').dataset.shipSpecs)['daegu'];document.getElementById('modalShipCode').textContent=d.code;document.getElementById('modalShipTitle').textContent=d.title;document.getElementById('modalDisplacement').textContent=d.disp;document.getElementById('modalDimension').textContent=d.dim;document.getElementById('modalSpeed').textContent=d.speed;document.getElementById('modalWeapon').textContent=d.weapon;document.getElementById('modalFeature').textContent=d.feat;const img=document.getElementById('modalShipImg');img.style.objectFit='cover';img.style.padding='0';img.src=d.img;document.getElementById('shipSpecModal').style.display='flex';"
+                        style="cursor:pointer;font-weight:700;color:var(--navy-blue);text-decoration:underline;">대구급 🔍</span>
+                    <span class="tonnage-tag">(3,600톤 · 총 8척)</span><br>
                     <span style="display:block;font-size:.82rem;color:#555;padding-left:.25rem;margin-bottom:.25rem">└ 대구함, 경남함, 서울함, 동해함, 대전함, 포항함, 천안함, 춘천함</span>
+
                     <span class="ship-badge">FFG-I</span> 인천급 <span class="tonnage-tag">(3,200톤 · 총 6척)</span><br>
                     <span style="display:block;font-size:.82rem;color:#555;padding-left:.25rem">└ 인천함, 경기함, 전북함, 강원함, 충북함, 광주함</span>
                 </div>
@@ -70,10 +126,19 @@
                 <div class="fleet-col-class">
                     <span class="ship-badge upcoming">취역 예정</span> 장보고-III Batch-II <span class="tonnage-tag">(3,600톤급 · 3척 계획)</span><br>
                     <span style="display:block;font-size:.82rem;color:#555;padding-left:.25rem;margin-bottom:.25rem">└ 장영실함(선도함) 등</span>
-                    <span class="ship-badge">SS-III</span> 도산안창호급 <span class="tonnage-tag">(수중 3,700톤 · 총 3척)</span><br>
+
+                    <span class="ship-badge">SS-III</span>
+                    <span onclick="const d=JSON.parse(this.closest('.content-container').dataset.shipSpecs)['dosan'];document.getElementById('modalShipCode').textContent=d.code;document.getElementById('modalShipTitle').textContent=d.title;document.getElementById('modalDisplacement').textContent=d.disp;document.getElementById('modalDimension').textContent=d.dim;document.getElementById('modalSpeed').textContent=d.speed;document.getElementById('modalWeapon').textContent=d.weapon;document.getElementById('modalFeature').textContent=d.feat;const img=document.getElementById('modalShipImg');img.style.objectFit='cover';img.style.padding='0';img.src=d.img;document.getElementById('shipSpecModal').style.display='flex';"
+                        style="cursor:pointer;font-weight:700;color:var(--navy-blue);text-decoration:underline;">도산안창호급 🔍</span>
+                    <span class="tonnage-tag">(수중 3,700톤 · 총 3척)</span><br>
                     <span style="display:block;font-size:.82rem;color:#555;padding-left:.25rem;margin-bottom:.25rem">└ 도산안창호함, 안무함, 신채호함</span>
-                    <span class="ship-badge">SS-II</span> 손원일급 <span class="tonnage-tag">(수중 1,860톤 · 총 9척)</span><br>
+
+                    <span class="ship-badge">SS-II</span>
+                    <span onclick="const d=JSON.parse(this.closest('.content-container').dataset.shipSpecs)['sonwonil'];document.getElementById('modalShipCode').textContent=d.code;document.getElementById('modalShipTitle').textContent=d.title;document.getElementById('modalDisplacement').textContent=d.disp;document.getElementById('modalDimension').textContent=d.dim;document.getElementById('modalSpeed').textContent=d.speed;document.getElementById('modalWeapon').textContent=d.weapon;document.getElementById('modalFeature').textContent=d.feat;const img=document.getElementById('modalShipImg');img.style.objectFit='cover';img.style.padding='0';img.src=d.img;document.getElementById('shipSpecModal').style.display='flex';"
+                        style="cursor:pointer;font-weight:700;color:var(--navy-blue);text-decoration:underline;">손원일급 🔍</span>
+                    <span class="tonnage-tag">(수중 1,860톤 · 총 9척)</span><br>
                     <span style="display:block;font-size:.82rem;color:#555;padding-left:.25rem;margin-bottom:.25rem">└ 손원일함, 정지함, 안중근함, 김좌진함, 윤봉길함, 유관순함, 홍범도함, 이범석함, 신돌석함</span>
+
                     <span class="ship-badge">SS-I</span> 장보고급 <span class="tonnage-tag">(수중 1,400톤 · 총 9척)</span><br>
                     <span style="display:block;font-size:.82rem;color:#555;padding-left:.25rem">└ 장보고함, 이천함, 최무선함, 박위함, 이종무함, 정운함, 이순신함, 나대용함, 이억기함</span>
                 </div>
@@ -84,10 +149,15 @@
             <div class="fleet-item" data-category="amphibious">
                 <div class="fleet-col-type">상륙함</div>
                 <div class="fleet-col-class">
-                    <span class="ship-badge">LPH</span> 독도급 <span class="tonnage-tag">(18,800톤 · 총 2척)</span><br>
+                    <span class="ship-badge">LPH</span>
+                    <span onclick="const d=JSON.parse(this.closest('.content-container').dataset.shipSpecs)['dokdo'];document.getElementById('modalShipCode').textContent=d.code;document.getElementById('modalShipTitle').textContent=d.title;document.getElementById('modalDisplacement').textContent=d.disp;document.getElementById('modalDimension').textContent=d.dim;document.getElementById('modalSpeed').textContent=d.speed;document.getElementById('modalWeapon').textContent=d.weapon;document.getElementById('modalFeature').textContent=d.feat;const img=document.getElementById('modalShipImg');img.style.objectFit='cover';img.style.padding='0';img.src=d.img;document.getElementById('shipSpecModal').style.display='flex';"
+                        style="cursor:pointer;font-weight:700;color:var(--navy-blue);text-decoration:underline;">독도급 🔍</span>
+                    <span class="tonnage-tag">(18,800톤 · 총 2척)</span><br>
                     <span style="display:block;font-size:.82rem;color:#555;padding-left:.25rem;margin-bottom:.25rem">└ 독도함, 마라도함</span>
+
                     <span class="ship-badge">LST-II</span> 천왕봉급 <span class="tonnage-tag">(7,140톤 · 총 4척)</span><br>
                     <span style="display:block;font-size:.82rem;color:#555;padding-left:.25rem;margin-bottom:.25rem">└ 천왕봉함, 천자봉함, 일출봉함, 노적봉함</span>
+
                     <span class="ship-badge">LST-I</span> 고준봉급 <span class="tonnage-tag">(4,250톤 · 총 4척)</span><br>
                     <span style="display:block;font-size:.82rem;color:#555;padding-left:.25rem">└ 고준봉함, 비로봉함, 향로봉함, 성인봉함</span>
                 </div>
@@ -127,7 +197,10 @@
             <div class="fleet-item" data-category="patrol">
                 <div class="fleet-col-type">고속함</div>
                 <div class="fleet-col-class">
-                    <span class="ship-badge">PKG</span> 윤영하급 <span class="tonnage-tag">(570톤 · 총 18척)</span><br>
+                    <span class="ship-badge">PKG</span>
+                    <span onclick="const d=JSON.parse(this.closest('.content-container').dataset.shipSpecs)['yunyoungha'];document.getElementById('modalShipCode').textContent=d.code;document.getElementById('modalShipTitle').textContent=d.title;document.getElementById('modalDisplacement').textContent=d.disp;document.getElementById('modalDimension').textContent=d.dim;document.getElementById('modalSpeed').textContent=d.speed;document.getElementById('modalWeapon').textContent=d.weapon;document.getElementById('modalFeature').textContent=d.feat;const img=document.getElementById('modalShipImg');img.style.objectFit='cover';img.style.padding='0';img.src=d.img;document.getElementById('shipSpecModal').style.display='flex';"
+                        style="cursor:pointer;font-weight:700;color:var(--navy-blue);text-decoration:underline;">윤영하급 🔍</span>
+                    <span class="tonnage-tag">(570톤 · 총 18척)</span><br>
                     <span style="display:block;font-size:.82rem;color:#555;padding-left:.25rem">└ 윤영하함, 한상국함, 조천형함, 황도현함, 서후원함, 박동혁함 등</span>
                 </div>
                 <div class="fleet-desc">대함유도탄과 76mm 함포를 탑재하여 연안 및 서해 NLL 최전선에서 적 고속세력을 제압하는 고기동 유도탄고속함 전력입니다.</div>
@@ -143,25 +216,38 @@
                 <div class="fleet-desc">130mm 유도로켓과 원격사격통제체계를 갖추고 연안 경비 및 북방한계선(NLL) 즉각 대응 임무를 수행하는 신형 고속정 전력입니다.</div>
             </div>
 
-            <!-- 10. 항공병기 -->
+            <!-- 10. 항공병기 (원본 av-group 구조 유지) -->
             <div class="fleet-item" data-category="aviation">
                 <div class="fleet-col-type">항공병기</div>
                 <div class="fleet-col-class">
                     <div class="av-group">
-                        <div class="av-row"><span class="av-badge-slot"><span class="ship-badge">해상초계기</span></span><span>P-8A 포세이돈</span></div>
+                        <div class="av-row">
+                            <span class="av-badge-slot"><span class="ship-badge">해상초계기</span></span>
+                            <span onclick="const d=JSON.parse(this.closest('.content-container').dataset.shipSpecs)['p8a'];document.getElementById('modalShipCode').textContent=d.code;document.getElementById('modalShipTitle').textContent=d.title;document.getElementById('modalDisplacement').textContent=d.disp;document.getElementById('modalDimension').textContent=d.dim;document.getElementById('modalSpeed').textContent=d.speed;document.getElementById('modalWeapon').textContent=d.weapon;document.getElementById('modalFeature').textContent=d.feat;const img=document.getElementById('modalShipImg');img.style.objectFit='cover';img.style.padding='0';img.src=d.img;document.getElementById('shipSpecModal').style.display='flex';"
+                                style="cursor:pointer;font-weight:700;color:var(--navy-blue);text-decoration:underline;">P-8A 포세이돈 🔍</span>
+                        </div>
                         <div class="av-row"><span class="av-badge-slot"></span><span>P-3C</span></div>
                         <div class="av-row"><span class="av-badge-slot"></span><span>P-3CK</span></div>
                     </div>
                     <div class="av-group">
                         <div class="av-row"><span class="av-badge-slot"><span class="ship-badge">해상작전헬기</span></span><span>슈퍼링스</span></div>
                         <div class="av-row"><span class="av-badge-slot"></span><span>와일드캣</span></div>
-                        <div class="av-row"><span class="av-badge-slot"></span><span>MH-60R</span></div>
+                        <div class="av-row">
+                            <span class="av-badge-slot"></span>
+                            <span onclick="const d=JSON.parse(this.closest('.content-container').dataset.shipSpecs)['mh60r'];document.getElementById('modalShipCode').textContent=d.code;document.getElementById('modalShipTitle').textContent=d.title;document.getElementById('modalDisplacement').textContent=d.disp;document.getElementById('modalDimension').textContent=d.dim;document.getElementById('modalSpeed').textContent=d.speed;document.getElementById('modalWeapon').textContent=d.weapon;document.getElementById('modalFeature').textContent=d.feat;const img=document.getElementById('modalShipImg');img.style.objectFit='cover';img.style.padding='0';img.src=d.img;document.getElementById('shipSpecModal').style.display='flex';"
+                                style="cursor:pointer;font-weight:700;color:var(--navy-blue);text-decoration:underline;">MH-60R 🔍</span>
+                        </div>
                     </div>
                     <div class="av-group">
                         <div class="av-row"><span class="av-badge-slot"><span class="ship-badge">해상기동헬기</span></span><span>UH-60P</span></div>
                     </div>
                 </div>
                 <div class="fleet-desc">한반도 주변 해역의 광역 해상 감시·정찰, 입체적인 대잠수함 작전 및 해상·상륙 기동 지원 임무를 수행하는 해군항공사령부의 핵심 항공 전력입니다.</div>
+            </div>
+
+            <!-- 검색 결과 없음 안내 문구 -->
+            <div id="fleetEmptyMsg" style="display:none;text-align:center;padding:2.5rem 1rem;color:var(--point-gray);font-size:.95rem;">
+                일치하는 함정 또는 무기체계가 없습니다. 다른 키워드로 검색해 보세요.
             </div>
         </div>
 
@@ -175,83 +261,157 @@
         </div>
     </div>
 
-    <!-- [서브 탭 2: 북한 함정과 비교] -->
+    <!-- [서브 탭 2: 북한 함정과 비교 (원본 완벽 유지)] -->
+<!-- [서브 탭 2: 북한 함정과 비교 (UI 전면 개편)] -->
     <div id="forces-sub-nk-compare" class="sub-tab-panel">
-        <div class="cmp-table-wrap">
-            <table class="cmp-table">
-                <thead>
-                    <tr>
-                        <th>전력 구분</th>
-                        <th>대한민국 해군 (ROK Navy)</th>
-                        <th>북한 해군 (조선인민군 해군)</th>
-                        <th>전력 특성 및 격차 비교</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="cmp-cat">주력 수상함</td>
-                        <td class="cmp-rok">
-                            <span class="cmp-badge rok">대양·원해 작전형</span><br>
-                            • 이지스 구축함 (10,600~12,000톤급)<br>
-                            • 한국형 구축함·신형 호위함 (3,200~5,520톤급)<br>
-                            • 장거리 함대공·함대함·함대지 유도탄 및 통합전투체계
-                        </td>
-                        <td>
-                            <span class="cmp-badge nk">연안 기습·유격전형</span><br>
-                            • 경비함·호위함 (압록급·나진급 등 1,500톤급 내외)<br>
-                            • 다수의 소형 초계정·유도탄정·어뢰정 (400여 척 규모)<br>
-                            • 동·서해 함대 분리 운용으로 상호 증원 제한
-                        </td>
-                        <td>한국 해군은 대형 이지스함·호위함 중심의 <strong>질적·기술적 우위</strong>와 원해 작전 능력을 보유한 반면, 북한 해군은 노후 소형 함정 위주의 <strong>수적 다수·연안 기습</strong> 교리에 의존합니다.</td>
-                    </tr>
-                    <tr>
-                        <td class="cmp-cat">잠수함 전력</td>
-                        <td class="cmp-rok">
-                            <span class="cmp-badge rok">첨단 정숙·전략 잠수함</span><br>
-                            • 도산안창호급(3,000톤급) · 손원일급(1,800톤급)<br>
-                            • 공기불요추진(AIP)·리튬전지 기반 장기 수중 작전<br>
-                            • 첨단 소나 및 정밀 유도무기 탑재
-                        </td>
-                        <td>
-                            <span class="cmp-badge nk">비대칭 수중 위협</span><br>
-                            • 로미오급(1,800톤급), 상어급·연어급 소형 잠수정 (70여 척)<br>
-                            • 신포급·김군옥영웅함 등 SLBM 시험·탑재 플랫폼<br>
-                            • 구형 디젤 잠수함 비중이 높아 소음·탐지 회피 열세
-                        </td>
-                        <td>북한은 다수의 소형 잠수정과 SLBM 탑재 잠수함으로 비대칭 위협을 가하나, 정숙성·수중 지속 능력·대잠 탐지 체계에서는 한국 해군이 압도적 우세를 점합니다.</td>
-                    </tr>
-                    <tr>
-                        <td class="cmp-cat">상륙·기동전력</td>
-                        <td class="cmp-rok">
-                            <span class="cmp-badge rok">입체 상륙·원거리 투사</span><br>
-                            • 독도급 대형수송함(18,800톤) 2척<br>
-                            • 천왕봉급·고준봉급 상륙함, 고속상륙정(LSF-II)
-                        </td>
-                        <td>
-                            <span class="cmp-badge nk">단거리 고속 침투</span><br>
-                            • 공기부양정(공방급 등 130여 척)<br>
-                            • 특수작전부대 서북도서·해안 기습 상륙용 소형 주정
-                        </td>
-                        <td>한국 해군은 헬기·상륙돌격장갑차(KAAV)를 동반한 입체 상륙작전이 가능하며, 북한은 NLL 인접 해안 단거리 침투용 공기부양정에 집중되어 있습니다.</td>
-                    </tr>
-                    <tr>
-                        <td class="cmp-cat">해상항공전력</td>
-                        <td class="cmp-rok">
-                            <span class="cmp-badge rok">입체 대잠·광역 정찰</span><br>
-                            • P-8A 포세이돈, P-3C/CK 해상초계기<br>
-                            • MH-60R, 와일드캣, 슈퍼링스 해상작전헬기
-                        </td>
-                        <td>
-                            <span class="cmp-badge nk">자체 해군항공대 부재</span><br>
-                            • 해군 소속 전용 해상초계기 및 함재 작전헬기 없음<br>
-                            • 공군 지원에 의존하여 원해 대잠·감시 능력 제한
-                        </td>
-                        <td>해상초계기와 함재 작전헬기를 통한 <strong>입체 대잠수함 작전 및 광역 해상 감시 능력</strong>은 한국 해군이 일방적 우위를 보유한 핵심 영역입니다.</td>
-                    </tr>
-                </tbody>
-            </table>
+
+        <!-- 1. 상단 핵심 전력 요약 배너 -->
+        <div style="background:linear-gradient(135deg, var(--navy-dark) 0%, var(--navy-blue) 100%);color:#FFF;border-radius:8px;padding:1.4rem 1.6rem;margin-bottom:1.5rem;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem;">
+            <div>
+                <span style="display:inline-block;background:rgba(255,255,255,.16);padding:.2rem .6rem;border-radius:4px;font-size:.76rem;font-weight:700;letter-spacing:.04em;margin-bottom:.4rem;">NAVAL CAPABILITY COMPARISON</span>
+                <h3 style="margin:0;font-size:1.22rem;font-weight:700;">남·북 해군 전력 구조 및 작전 교리 비교</h3>
+                <p style="margin:.35rem 0 0;font-size:.88rem;color:rgba(255,255,255,.84);">대형 첨단 함정 중심의 <strong>질적·입체적 우위(대한민국)</strong> vs 소형 함정·잠수정 중심의 <strong>수적·비대칭 위협(북한)</strong></p>
+            </div>
+            <div style="display:flex;gap:.6rem;font-size:.82rem;font-weight:700;">
+                <span style="background:#FFF;color:var(--navy-blue);padding:.45rem .85rem;border-radius:5px;">🇰🇷 ROK NAVY · 대양·입체작전</span>
+                <span style="background:rgba(255,255,255,.14);color:#FFF;padding:.45rem .85rem;border-radius:5px;border:1px solid rgba(255,255,255,.28);">북한 해군 · 연안·기습전</span>
+            </div>
         </div>
 
+        <!-- 2. 4대 핵심 분야 1:1 대조 카드 리스트 -->
+        <div style="display:flex;flex-direction:column;gap:1.1rem;margin-bottom:1.6rem;">
+
+            <!-- 분야 1: 주력 수상함 -->
+            <div style="background:#FFF;border:1px solid var(--border-color);border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.03);">
+                <div style="background:var(--light-gray-bg);padding:.75rem 1.2rem;border-bottom:1px solid var(--border-color);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.5rem;">
+                    <strong style="font-size:1rem;color:var(--navy-blue);">01. 주력 수상함 전력</strong>
+                    <span style="font-size:.82rem;color:#4A5568;font-weight:600;">핵심 격차: 1만 톤급 이지스 전투체계 vs 1,500톤급 노후 경비함</span>
+                </div>
+                <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));">
+                    <div style="padding:1.15rem 1.25rem;border-right:1px solid var(--border-color);background:#F8FBFF;">
+                        <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.65rem;">
+                            <span class="cmp-badge rok">대한민국 해군</span>
+                            <span style="font-size:.82rem;font-weight:700;color:var(--navy-blue);">대양·원해 작전형</span>
+                        </div>
+                        <ul style="margin:0;padding-left:1.15rem;font-size:.9rem;line-height:1.65;color:var(--text-dark);">
+                            <li><strong>이지스 구축함</strong> (정조대왕급·세종대왕급 10,600~12,000톤)</li>
+                            <li><strong>한국형 구축함·호위함</strong> (충무공이순신급·충남급·대구급)</li>
+                            <li>장거리 대공·대함·대지 유도탄 및 3차원 위상배열레이더</li>
+                        </ul>
+                    </div>
+                    <div style="padding:1.15rem 1.25rem;background:#FFF;">
+                        <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.65rem;">
+                            <span class="cmp-badge nk">북한 해군</span>
+                            <span style="font-size:.82rem;font-weight:700;color:#64748B;">연안 기습·유격전형</span>
+                        </div>
+                        <ul style="margin:0;padding-left:1.15rem;font-size:.9rem;line-height:1.65;color:#4A5568;">
+                            <li><strong>경비함·호위함</strong> (압록급·나진급 등 1,500톤급 내외)</li>
+                            <li>소형 초계정·유도탄정·어뢰정 등 <strong>약 400여 척</strong> 집중 운용</li>
+                            <li>동·서해 함대 지리적 분리로 상호 전력 증원 제한</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 분야 2: 잠수함 전력 -->
+            <div style="background:#FFF;border:1px solid var(--border-color);border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.03);">
+                <div style="background:var(--light-gray-bg);padding:.75rem 1.2rem;border-bottom:1px solid var(--border-color);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.5rem;">
+                    <strong style="font-size:1rem;color:var(--navy-blue);">02. 잠수함 전력</strong>
+                    <span style="font-size:.82rem;color:#4A5568;font-weight:600;">핵심 격차: AIP·리튬전지 기반 정숙 작전 vs 구형 소형 잠수정 다수</span>
+                </div>
+                <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));">
+                    <div style="padding:1.15rem 1.25rem;border-right:1px solid var(--border-color);background:#F8FBFF;">
+                        <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.65rem;">
+                            <span class="cmp-badge rok">대한민국 해군</span>
+                            <span style="font-size:.82rem;font-weight:700;color:var(--navy-blue);">첨단 정숙·전략 잠수함</span>
+                        </div>
+                        <ul style="margin:0;padding-left:1.15rem;font-size:.9rem;line-height:1.65;color:var(--text-dark);">
+                            <li><strong>도산안창호급</strong>(3,000톤급) · <strong>손원일급</strong>(1,800톤급) 운용</li>
+                            <li>공기불요추진(AIP) 및 리튬전지 탑재로 수주간 은밀 잠항</li>
+                            <li>고성능 소나 체계 및 정밀 잠대지·잠대함 유도탄 탑재</li>
+                        </ul>
+                    </div>
+                    <div style="padding:1.15rem 1.25rem;background:#FFF;">
+                        <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.65rem;">
+                            <span class="cmp-badge nk">북한 해군</span>
+                            <span style="font-size:.82rem;font-weight:700;color:#64748B;">비대칭 수중 위협</span>
+                        </div>
+                        <ul style="margin:0;padding-left:1.15rem;font-size:.9rem;line-height:1.65;color:#4A5568;">
+                            <li>로미오급(1,800톤급), 상어급·연어급 소형 잠수정 <strong>70여 척</strong></li>
+                            <li>신포급·김군옥영웅함 등 SLBM 시험·탑재 플랫폼 개발</li>
+                            <li>구형 디젤 추진 비중이 높아 수중 소음·탐지 회피 열세</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 분야 3: 상륙·기동전력 -->
+            <div style="background:#FFF;border:1px solid var(--border-color);border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.03);">
+                <div style="background:var(--light-gray-bg);padding:.75rem 1.2rem;border-bottom:1px solid var(--border-color);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.5rem;">
+                    <strong style="font-size:1rem;color:var(--navy-blue);">03. 상륙·기동전력</strong>
+                    <span style="font-size:.82rem;color:#4A5568;font-weight:600;">핵심 격차: 대형수송함 기반 입체 상륙 vs 단거리 고속 침투</span>
+                </div>
+                <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));">
+                    <div style="padding:1.15rem 1.25rem;border-right:1px solid var(--border-color);background:#F8FBFF;">
+                        <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.65rem;">
+                            <span class="cmp-badge rok">대한민국 해군</span>
+                            <span style="font-size:.82rem;font-weight:700;color:var(--navy-blue);">입체 상륙·원거리 투사</span>
+                        </div>
+                        <ul style="margin:0;padding-left:1.15rem;font-size:.9rem;line-height:1.65;color:var(--text-dark);">
+                            <li><strong>독도급 대형수송함</strong>(18,800톤) 2척 (독도함·마라도함)</li>
+                            <li>천왕봉급·고준봉급 상륙함 및 고속상륙정(LSF-II)</li>
+                            <li>기동헬기·상륙돌격장갑차(KAAV) 동반 원거리 입체 상륙</li>
+                        </ul>
+                    </div>
+                    <div style="padding:1.15rem 1.25rem;background:#FFF;">
+                        <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.65rem;">
+                            <span class="cmp-badge nk">북한 해군</span>
+                            <span style="font-size:.82rem;font-weight:700;color:#64748B;">단거리 고속 침투</span>
+                        </div>
+                        <ul style="margin:0;padding-left:1.15rem;font-size:.9rem;line-height:1.65;color:#4A5568;">
+                            <li>공기부양정(공방급 등) <strong>약 130여 척</strong> 보유</li>
+                            <li>특수작전부대 서북도서·해안 기습 상륙용 소형 주정 중심</li>
+                            <li>원거리 대규모 병력·장비 수송 및 지속 지원 능력 제한</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 분야 4: 해상항공전력 -->
+            <div style="background:#FFF;border:1px solid var(--border-color);border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.03);">
+                <div style="background:var(--light-gray-bg);padding:.75rem 1.2rem;border-bottom:1px solid var(--border-color);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.5rem;">
+                    <strong style="font-size:1rem;color:var(--navy-blue);">04. 해상항공전력</strong>
+                    <span style="font-size:.82rem;color:#4A5568;font-weight:600;">핵심 격차: 최신예 해상초계기·작전헬기 운용 vs 자체 해군항공대 부재</span>
+                </div>
+                <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));">
+                    <div style="padding:1.15rem 1.25rem;border-right:1px solid var(--border-color);background:#F8FBFF;">
+                        <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.65rem;">
+                            <span class="cmp-badge rok">대한민국 해군</span>
+                            <span style="font-size:.82rem;font-weight:700;color:var(--navy-blue);">입체 대잠·광역 정찰</span>
+                        </div>
+                        <ul style="margin:0;padding-left:1.15rem;font-size:.9rem;line-height:1.65;color:var(--text-dark);">
+                            <li><strong>P-8A 포세이돈</strong>, P-3C/CK 해상초계기 운용</li>
+                            <li><strong>MH-60R 시호크</strong>, 와일드캣, 슈퍼링스 함재 작전헬기</li>
+                            <li>해상·공중·수중을 연결하는 입체 대잠수함 작전 수행</li>
+                        </ul>
+                    </div>
+                    <div style="padding:1.15rem 1.25rem;background:#FFF;">
+                        <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.65rem;">
+                            <span class="cmp-badge nk">북한 해군</span>
+                            <span style="font-size:.82rem;font-weight:700;color:#64748B;">자체 해군항공대 부재</span>
+                        </div>
+                        <ul style="margin:0;padding-left:1.15rem;font-size:.9rem;line-height:1.65;color:#4A5568;">
+                            <li>해군 소속 전용 해상초계기 및 함재 작전헬기 <strong>미보유</strong></li>
+                            <li>공군 전술기 지원에 의존하여 원해 대잠·감시 능력 제한</li>
+                            <li>함정 단독 방공 및 대잠 탐지 범위 협소</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- 3. 하단 핵심 종합 분석 카드 2열 -->
         <div class="hy-grid-2">
             <div class="hy-card">
                 <span class="hy-card-tag">ROK NAVY STRENGTH</span>
@@ -261,7 +421,60 @@
             <div class="hy-card">
                 <span class="hy-card-tag">ASYMMETRIC THREAT RESPONSE</span>
                 <h4>북한의 비대칭 전력과 대비 태세</h4>
-                <p>북한 해군은 지리적 분단(동·서해 함대 분리)과 노후 수상함 열세를 만회하기 위해 잠수함(SLBM), 공기부양정, 해안포 및 기뢰 등 비대칭 전력에 집중하고 있어, 해군은 대잠전·기뢰대항전(소해함)·해상미사일방어 역량을 최우선으로 강화하고 있습니다.</p>
+                <p>북한 해군은 동·서해 함대 분리와 노후 수상함 열세를 만회하기 위해 잠수함(SLBM), 공기부양정, 해안포 및 기뢰 등 비대칭 전력에 집중하고 있어, 해군은 대잠전·기뢰대항전·해상미사일방어 역량을 최우선으로 강화하고 있습니다.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- [상세 제원 & 사진 팝업 모달창] -->
+    <div id="shipSpecModal" onclick="if(event.target===this) this.style.display='none'"
+        style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(9,50,90,.65);align-items:center;justify-content:center;padding:1rem;">
+        <div style="background:#FFF;width:100%;max-width:620px;border-radius:8px;overflow:hidden;box-shadow:0 20px 40px rgba(0,0,0,.3);">
+            <div style="background:var(--navy-blue);color:#FFF;padding:1rem 1.4rem;display:flex;align-items:center;justify-content:space-between;">
+                <div>
+                    <span id="modalShipCode" style="display:inline-block;background:rgba(255,255,255,.2);padding:.15rem .55rem;border-radius:3px;font-size:.78rem;font-weight:700;margin-right:.45rem;">DDG-II</span>
+                    <strong id="modalShipTitle" style="font-size:1.12rem;">정조대왕급 구축함</strong>
+                </div>
+                <button type="button" onclick="document.getElementById('shipSpecModal').style.display='none'" style="background:none;border:none;color:#FFF;font-size:1.4rem;cursor:pointer;line-height:1;">✕</button>
+            </div>
+
+            <div style="background:var(--navy-dark);height:210px;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;">
+                <img id="modalShipImg" src="navy_logo.png" alt="함정 사진"
+                    onerror="this.src='navy_logo.png';this.style.objectFit='contain';this.style.padding='1.5rem';"
+                    style="width:100%;height:100%;object-fit:contain;padding:1.5rem;">
+                <span style="position:absolute;bottom:.6rem;right:.8rem;background:rgba(0,0,0,.6);color:#FFF;font-size:.75rem;padding:.2rem .55rem;border-radius:3px;">
+                    R.O.K. NAVY 주요전력 상세제원
+                </span>
+            </div>
+
+            <div style="padding:1.3rem 1.4rem;">
+                <table style="width:100%;border-collapse:collapse;font-size:.9rem;margin-bottom:1rem;">
+                    <tbody>
+                        <tr style="border-bottom:1px solid var(--border-color);">
+                            <th style="width:28%;text-align:left;padding:.55rem .4rem;color:var(--navy-blue);">배수량 / 중량</th>
+                            <td id="modalDisplacement" style="padding:.55rem .4rem;color:var(--text-dark);font-weight:700;"></td>
+                        </tr>
+                        <tr style="border-bottom:1px solid var(--border-color);">
+                            <th style="text-align:left;padding:.55rem .4rem;color:var(--navy-blue);">제원 (전장×전폭)</th>
+                            <td id="modalDimension" style="padding:.55rem .4rem;color:var(--text-dark);"></td>
+                        </tr>
+                        <tr style="border-bottom:1px solid var(--border-color);">
+                            <th style="text-align:left;padding:.55rem .4rem;color:var(--navy-blue);">최고 속력</th>
+                            <td id="modalSpeed" style="padding:.55rem .4rem;color:var(--text-dark);"></td>
+                        </tr>
+                        <tr style="border-bottom:1px solid var(--border-color);">
+                            <th style="text-align:left;padding:.55rem .4rem;color:var(--navy-blue);">주요 무장</th>
+                            <td id="modalWeapon" style="padding:.55rem .4rem;color:var(--text-dark);"></td>
+                        </tr>
+                        <tr>
+                            <th style="text-align:left;padding:.55rem .4rem;color:var(--navy-blue);vertical-align:top;">핵심 작전 능력</th>
+                            <td id="modalFeature" style="padding:.55rem .4rem;color:#3E444A;line-height:1.55;"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div style="text-align:right;">
+                    <button type="button" onclick="document.getElementById('shipSpecModal').style.display='none'" class="btn-primary" style="border:none;cursor:pointer;padding:.55rem 1.25rem;">닫기</button>
+                </div>
             </div>
         </div>
     </div>
