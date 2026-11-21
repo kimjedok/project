@@ -98,27 +98,13 @@
         .unit-video-link:hover{background:var(--navy-blue);color:var(--bg-white)}
         .unit-body{flex:1;font-size:.95rem;color:#3E444A;line-height:1.65}
 
-        /* 전력 -> 주요전력 (재구성된 카드형 UI) */
+        /* 전력 -> 주요전력 */
         .fleet-tabs{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.5rem}
         .filter-btn{background:var(--bg-white);border:1px solid var(--point-gray);color:var(--text-dark);padding:.5rem 1.1rem;font-size:.9rem;font-weight:600;cursor:pointer;border-radius:3px;transition:.2s;font-family:inherit}
         .filter-btn.active,.filter-btn:hover{background:var(--navy-blue);border-color:var(--navy-blue);color:var(--bg-white)}
-
         .fleet-cards-wrap{display:flex;flex-direction:column;gap:1.25rem;margin-bottom:1.75rem}
-        .fleet-card{background:var(--bg-white);border:1px solid var(--border-color);border-radius:8px;overflow:hidden;box-shadow:0 2px 10px rgba(14,74,132,.04);transition:box-shadow .2s}
-        .fleet-card:hover{box-shadow:0 6px 20px rgba(14,74,132,.09)}
-        .fleet-card-head{background:var(--light-gray-bg);padding:1.15rem 1.4rem;border-bottom:1px solid var(--border-color);border-left:5px solid var(--navy-blue)}
-        .fleet-card-title-row{display:flex;align-items:center;justify-content:space-between;gap:.75rem;margin-bottom:.4rem}
-        .fleet-card-title{font-size:1.18rem;font-weight:800;color:var(--navy-blue)}
-        .fleet-card-count{font-size:.8rem;font-weight:700;color:var(--navy-blue);background:#EBF2F9;padding:.2rem .65rem;border-radius:999px;white-space:nowrap}
-        .fleet-card-summary{font-size:.92rem;color:#4A5056;line-height:1.6;word-break:keep-all}
-        .fleet-card-body{padding:1.2rem 1.4rem}
 
-        .ship-class-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:.85rem}
-        .ship-class-box{background:#FAFBFD;border:1px solid #E6E9ED;border-radius:6px;padding:.85rem 1rem;display:flex;flex-direction:column;justify-content:center}
-        .ship-class-top{display:flex;align-items:center;flex-wrap:wrap;gap:.4rem}
         .ship-class-name{font-weight:700;font-size:.95rem;color:var(--text-dark)}
-        .ship-names-sub{font-size:.82rem;color:#5A626A;margin-top:.45rem;padding-top:.4rem;border-top:1px dashed #DDE2E7;line-height:1.5;word-break:keep-all}
-
         .ship-badge{display:inline-block;background:var(--bg-white);border:1px solid var(--point-gray);color:var(--navy-blue);font-size:.76rem;font-weight:700;padding:.1rem .48rem;border-radius:3px;line-height:1.4;text-align:center}
         .ship-badge.upcoming{background:var(--navy-blue);border-color:var(--navy-blue);color:var(--bg-white)}
         .tonnage-tag{color:var(--point-gray);font-size:.8rem;font-weight:600}
@@ -204,7 +190,7 @@
             .nav-tabs{flex-wrap:wrap;justify-content:center}
             .nav-tab-btn{padding:.5rem .75rem;font-size:.88rem}
             .home-hero h1{font-size:1.9rem}
-            .sub-videos-grid,.hanyang-videos-grid,.hy-grid-2,.ship-class-grid{grid-template-columns:1fr}
+            .sub-videos-grid,.hanyang-videos-grid,.hy-grid-2{grid-template-columns:1fr}
             .unit-row{flex-direction:column;align-items:flex-start;gap:.85rem;padding:1.25rem}
             .unit-head{min-width:auto}
             .hy-sub-btn{padding:.5rem .95rem;font-size:.86rem}
@@ -530,9 +516,9 @@
 
         function filterFleet(cat, btn) {
             document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
+            if (btn) btn.classList.add('active');
             document.querySelectorAll('#fleetList .fleet-card').forEach(item => {
-                item.style.display = (cat === 'all' || item.dataset.category === cat) ? '' : 'none';
+                item.style.display = (item.dataset.category === cat) ? '' : 'none';
             });
         }
 
