@@ -1,4 +1,4 @@
-<div class="content-container" data-active-cat="all"
+<div class="content-container" data-active-cat="destroyer"
     data-ship-specs='{
         "kddx": {"code":"KDDX","title":"한국형 차기 구축함 (KDDX)","img":"images/ships/kddx.jpg","disp":"기준 6,500톤급 / 만재 8,000톤급","dim":"전장 155m × 전폭 18.8m","speed":"최대 30노트 (약 55km/h)","weapon":"한국형 수직발사체계(KVLS), 5인치 함포, 함대함·함대공 유도탄, 근접방어무기체계(CIWS-II)","feat":"국내 최초 통합마스트(I-MAST)와 국산 이지스급 전투체계를 탑재한 차세대 스마트 구축함으로 대공·대잠·대지 입체 작전을 수행합니다."},
         "jeongjo": {"code":"DDG-II","title":"정조대왕급 이지스 구축함 (광개토-III Batch-II)","img":"images/ships/jeongjo.jpg","disp":"기준 8,200톤 / 만재 12,000톤","dim":"전장 170m × 전폭 21m","speed":"최대 30노트 (약 55km/h)","weapon":"Mk.41 VLS 48셀 + KVLS 16셀 + KVLS-II 24셀(총 88셀), SM-3·SM-6 요격미사일, 해성·천룡 유도탄","feat":"해상 기반 한국형 3축 체계의 핵심 전력으로, 탄도탄 탐지·추적뿐만 아니라 직접 요격(SM-3/SM-6) 능력을 갖춘 최신예 이지스 구축함입니다."},
@@ -14,7 +14,56 @@
         "mh60r": {"code":"해상작전헬기","title":"MH-60R 시호크 해상작전헬기","img":"images/ships/mh60r.jpg","disp":"최대이륙중량 약 10.6톤","dim":"전장 19.7m × 로터직경 16.4m","speed":"최대 270km/h","weapon":"헬파이어 공대지미사일, Mk.54 경어뢰, 디핑 소나(수중음파탐지기)","feat":"이지스 구축함 등에 탑재되어 원거리 적 잠수함을 수중에서 직접 탐지·추적·공격하는 최첨단 대잠작전 헬기입니다."}
     }'>
 
-    <div class="section-header"><div class="eng-title">02. Naval Forces</div><h2>전력</h2></div>
+    <style>
+        .forces-top-bar{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:1.25rem;margin-bottom:1.5rem}
+        .forces-top-bar .section-header{margin-bottom:0}
+        .vr-top-btn{display:inline-flex;align-items:center;gap:.65rem;background:linear-gradient(135deg,var(--navy-dark) 0%,var(--navy-blue) 100%);color:#FFF;padding:.72rem 1.3rem;border-radius:6px;text-decoration:none;font-weight:700;font-size:.9rem;box-shadow:0 6px 16px rgba(14,74,132,.22);border:1px solid rgba(255,255,255,.15);transition:all .2s ease;white-space:nowrap}
+        .vr-top-btn:hover{transform:translateY(-2px);box-shadow:0 10px 22px rgba(14,74,132,.32);background:var(--navy-dark)}
+        .vr-top-pill{background:rgba(255,255,255,.18);padding:.15rem .45rem;border-radius:3px;font-size:.72rem;letter-spacing:.6px;font-weight:800}
+
+        .fleet-toolbar{display:flex;flex-wrap:wrap;gap:.75rem;align-items:center;justify-content:space-between;margin-bottom:1.25rem;padding:.9rem 1.15rem;background:linear-gradient(to right,#F8FAFC,#F1F5F9);border:1px solid #DCE3EC;border-radius:8px}
+        .fleet-cat-bar{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.6rem}
+        .fleet-cat-bar .filter-btn{padding:.58rem 1.2rem;border-radius:6px;font-weight:700;border:1px solid #CBD5E1;background:#FFF;color:#334155;box-shadow:0 1px 2px rgba(0,0,0,.03)}
+        .fleet-cat-bar .filter-btn:hover{border-color:var(--navy-blue);color:var(--navy-blue);background:#F8FAFC}
+        .fleet-cat-bar .filter-btn.active{background:var(--navy-blue);border-color:var(--navy-blue);color:#FFF;box-shadow:0 4px 12px rgba(14,74,132,.22)}
+
+        /* 고급형 함종 마스터 카드 */
+        .premium-fleet-card{background:#FFF;border:1px solid #DCE3EC;border-radius:10px;overflow:hidden;box-shadow:0 4px 18px rgba(9,50,90,.05);transition:box-shadow .25s ease}
+        .premium-fleet-card:hover{box-shadow:0 10px 28px rgba(9,50,90,.09)}
+        .pfc-header{background:linear-gradient(135deg,#F8FAFC 0%,#EEF3F8 100%);padding:1.35rem 1.65rem;border-bottom:1px solid #DCE3EC;border-left:6px solid var(--navy-blue)}
+        .pfc-meta-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.6rem;margin-bottom:.45rem}
+        .pfc-eng-label{font-size:.74rem;font-weight:800;letter-spacing:1.4px;color:var(--point-gray);text-transform:uppercase}
+        .pfc-scale-pill{font-size:.78rem;font-weight:700;color:var(--navy-blue);background:#FFF;border:1px solid #C8D7E6;padding:.22rem .75rem;border-radius:999px;box-shadow:0 1px 3px rgba(14,74,132,.06)}
+        .pfc-title{font-size:1.28rem;font-weight:800;color:var(--navy-dark);margin-bottom:.45rem;letter-spacing:-.3px}
+        .pfc-desc{font-size:.93rem;color:#475569;line-height:1.65;word-break:keep-all}
+        .pfc-body{padding:1.45rem 1.65rem;background:#FFF}
+
+        /* 함급별 스펙 타일 */
+        .pfc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem}
+        .pfc-tile{background:#FAFBFD;border:1px solid #E2E8F0;border-top:3px solid #94A3B8;border-radius:7px;padding:1.05rem 1.2rem;display:flex;flex-direction:column;justify-content:space-between;transition:all .2s ease}
+        .pfc-tile:hover{background:#FFF;border-color:#CBD5E1;border-top-color:var(--navy-blue);box-shadow:0 6px 16px rgba(14,74,132,.07);transform:translateY(-2px)}
+        .pfc-tile.has-spec{border-top-color:var(--navy-blue);background:#F8FBFF}
+        .pfc-tile-head{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem}
+        .pfc-tile-left{display:flex;align-items:center;flex-wrap:wrap;gap:.45rem}
+        .pfc-tonnage{font-size:.81rem;font-weight:700;color:#64748B;background:#F1F5F9;padding:.15rem .55rem;border-radius:4px}
+        .pfc-ships{margin-top:.75rem;padding-top:.65rem;border-top:1px dashed #CBD5E1;font-size:.84rem;color:#475569;line-height:1.55;word-break:keep-all}
+        .pfc-ships strong{color:var(--navy-blue);font-weight:700;margin-right:.35rem;font-size:.78rem}
+
+        @media(max-width:768px){
+            .pfc-grid{grid-template-columns:1fr}
+            .pfc-header,.pfc-body{padding:1.15rem}
+            .vr-top-btn{width:100%;justify-content:center}
+        }
+    </style>
+
+    <!-- 상단 타이틀 + 이지스함 VR 체험 버튼 -->
+    <div class="forces-top-bar">
+        <div class="section-header"><div class="eng-title">02. Naval Forces</div><h2>전력</h2></div>
+        <a href="https://www.navy.mil.kr/mbshome/mbs/navy/vr/vr/index.html" target="_blank" rel="noopener noreferrer" class="vr-top-btn">
+            <span class="vr-top-pill">360° VR</span>
+            <span>이지스함 VR 체험하기 ↗</span>
+        </a>
+    </div>
 
     <!-- 전력 서브 탭 버튼 -->
     <div class="hanyang-sub-nav">
@@ -25,387 +74,469 @@
     <!-- [서브 탭 1: 주요전력] -->
     <div id="forces-sub-main" class="sub-tab-panel active">
 
-        <!-- 실시간 검색창 + 결과 카운터 -->
-        <div style="display:flex;flex-wrap:wrap;gap:.75rem;align-items:center;justify-content:space-between;margin-bottom:1.1rem;padding:.85rem 1.1rem;background:var(--light-gray-bg);border:1px solid var(--border-color);border-radius:6px;">
+        <!-- 실시간 검색창 + 안내 문구 -->
+        <div class="fleet-toolbar">
             <div style="position:relative;flex:1;min-width:240px;">
                 <input type="text" id="fleetSearchInput"
-                    oninput="const root=this.closest('.content-container');const cat=root.dataset.activeCat||'all';const kw=this.value.trim().toLowerCase();let cnt=0;root.querySelectorAll('#fleetList .fleet-card').forEach(el=>{const ok=(cat==='all'||el.dataset.category===cat)&&(!kw||el.textContent.toLowerCase().includes(kw));el.style.display=ok?'':'none';if(ok)cnt++;});document.getElementById('fleetResultCount').textContent='총 '+cnt+'개 함종 표시 중 · 하이라이트된 함급 클릭 시 상세제원 확인';document.getElementById('fleetEmptyMsg').style.display=cnt===0?'block':'none';"
-                    placeholder="함정명, 함급, 분류기호 검색 (예: 정조대왕, DDG, 잠수함, 이지스, P-8A)"
-                    style="width:100%;padding:.6rem 2.2rem .6rem .9rem;border:1px solid var(--point-gray);border-radius:4px;font-size:.92rem;font-family:inherit;outline:none;background:#FFF;">
+                    oninput="const root=this.closest('.content-container');const cat=root.dataset.activeCat||'destroyer';const kw=this.value.trim().toLowerCase();let cnt=0;root.querySelectorAll('#fleetList .fleet-card').forEach(el=>{const ok=kw?el.textContent.toLowerCase().includes(kw):(el.dataset.category===cat);el.style.display=ok?'':'none';if(ok)cnt++;});document.getElementById('fleetResultCount').textContent=(kw?'전체 함종 검색 결과 '+cnt+'개 · ':'')+'하이라이트된 함급 클릭 시 상세제원·사진 확인';document.getElementById('fleetEmptyMsg').style.display=cnt===0?'block':'none';"
+                    placeholder="전체 함정명, 함급, 분류기호 통합 검색 (예: 정조대왕, DDG, 잠수함, 이지스, P-8A)"
+                    style="width:100%;padding:.62rem 2.2rem .62rem .95rem;border:1px solid #CBD5E1;border-radius:6px;font-size:.92rem;font-family:inherit;outline:none;background:#FFF;">
                 <button type="button" title="검색 초기화"
                     onclick="const inp=document.getElementById('fleetSearchInput');inp.value='';inp.dispatchEvent(new Event('input'));"
                     style="position:absolute;right:.65rem;top:50%;transform:translateY(-50%);border:none;background:none;color:var(--point-gray);font-size:1rem;cursor:pointer;">✕</button>
             </div>
-            <div id="fleetResultCount" style="font-size:.86rem;font-weight:700;color:var(--navy-blue);white-space:nowrap;">
-                총 10개 함종 표시 중 · 하이라이트된 함급 클릭 시 상세제원 확인
+            <div id="fleetResultCount" style="font-size:.85rem;font-weight:700;color:var(--navy-blue);white-space:nowrap;">
+                하이라이트된 함급 클릭 시 상세제원·사진 확인
             </div>
         </div>
 
-        <div class="fleet-tabs">
-            <button class="filter-btn active" onclick="filterFleet('all',this);const r=this.closest('.content-container');r.dataset.activeCat='all';document.getElementById('fleetSearchInput').dispatchEvent(new Event('input'));">전체 보기</button>
-            <button class="filter-btn" onclick="filterFleet('destroyer',this);const r=this.closest('.content-container');r.dataset.activeCat='destroyer';document.getElementById('fleetSearchInput').dispatchEvent(new Event('input'));">구축함</button>
-            <button class="filter-btn" onclick="filterFleet('frigate',this);const r=this.closest('.content-container');r.dataset.activeCat='frigate';document.getElementById('fleetSearchInput').dispatchEvent(new Event('input'));">호위함·초계함</button>
-            <button class="filter-btn" onclick="filterFleet('submarine',this);const r=this.closest('.content-container');r.dataset.activeCat='submarine';document.getElementById('fleetSearchInput').dispatchEvent(new Event('input'));">잠수함</button>
-            <button class="filter-btn" onclick="filterFleet('amphibious',this);const r=this.closest('.content-container');r.dataset.activeCat='amphibious';document.getElementById('fleetSearchInput').dispatchEvent(new Event('input'));">상륙·기뢰·지원함</button>
-            <button class="filter-btn" onclick="filterFleet('patrol',this);const r=this.closest('.content-container');r.dataset.activeCat='patrol';document.getElementById('fleetSearchInput').dispatchEvent(new Event('input'));">고속함·고속정</button>
-            <button class="filter-btn" onclick="filterFleet('aviation',this);const r=this.closest('.content-container');r.dataset.activeCat='aviation';document.getElementById('fleetSearchInput').dispatchEvent(new Event('input'));">항공병기</button>
+        <!-- 함종 카테고리 버튼 (전체 보기 제거, 구축함 기본 선택) -->
+        <div class="fleet-cat-bar">
+            <button class="filter-btn active" onclick="const inp=document.getElementById('fleetSearchInput');inp.value='';const r=this.closest('.content-container');r.dataset.activeCat='destroyer';filterFleet('destroyer',this);inp.dispatchEvent(new Event('input'));">구축함</button>
+            <button class="filter-btn" onclick="const inp=document.getElementById('fleetSearchInput');inp.value='';const r=this.closest('.content-container');r.dataset.activeCat='frigate';filterFleet('frigate',this);inp.dispatchEvent(new Event('input'));">호위함·초계함</button>
+            <button class="filter-btn" onclick="const inp=document.getElementById('fleetSearchInput');inp.value='';const r=this.closest('.content-container');r.dataset.activeCat='submarine';filterFleet('submarine',this);inp.dispatchEvent(new Event('input'));">잠수함</button>
+            <button class="filter-btn" onclick="const inp=document.getElementById('fleetSearchInput');inp.value='';const r=this.closest('.content-container');r.dataset.activeCat='amphibious';filterFleet('amphibious',this);inp.dispatchEvent(new Event('input'));">상륙·기뢰·지원함</button>
+            <button class="filter-btn" onclick="const inp=document.getElementById('fleetSearchInput');inp.value='';const r=this.closest('.content-container');r.dataset.activeCat='patrol';filterFleet('patrol',this);inp.dispatchEvent(new Event('input'));">고속함·고속정</button>
+            <button class="filter-btn" onclick="const inp=document.getElementById('fleetSearchInput');inp.value='';const r=this.closest('.content-container');r.dataset.activeCat='aviation';filterFleet('aviation',this);inp.dispatchEvent(new Event('input'));">항공병기</button>
         </div>
 
-        <!-- 재구성된 카드형 주요전력 리스트 -->
+        <!-- 함종별 마스터 카드 리스트 -->
         <div class="fleet-cards-wrap" id="fleetList">
 
-            <!-- 1. 구축함 -->
-            <div class="fleet-card" data-category="destroyer">
-                <div class="fleet-card-head">
-                    <div class="fleet-card-title-row">
-                        <span class="fleet-card-title">01. 구축함 (Destroyers)</span>
-                        <span class="fleet-card-count">현역 15척 + 차기 6척 계획</span>
+            <!-- 1. 구축함 (기본 표시) -->
+            <div class="fleet-card premium-fleet-card" data-category="destroyer">
+                <div class="pfc-header">
+                    <div class="pfc-meta-row">
+                        <span class="pfc-eng-label">SURFACE COMBATANTS · DESTROYERS</span>
+                        <span class="pfc-scale-pill">현역 15척 + 차기 6척 계획</span>
                     </div>
-                    <p class="fleet-card-summary">이지스(Aegis) 전투체계를 탑재한 기동함대 주력 이지스 구축함과 대공·대함·대잠 입체 작전 능력을 갖춘 한국형 다목적 구축함으로 구성된 대한민국 해군의 핵심 수상 전투 전력입니다.</p>
+                    <h3 class="pfc-title">구축함</h3>
+                    <p class="pfc-desc">이지스(Aegis) 전투체계를 탑재한 기동함대 주력 이지스 구축함과 대공·대함·대잠 입체 작전 능력을 갖춘 한국형 다목적 구축함으로 구성된 대한민국 해군의 핵심 수상 전투 전력입니다.</p>
                 </div>
-                <div class="fleet-card-body">
-                    <div class="ship-class-grid">
-                        <div class="ship-class-box">
-                            <div class="ship-class-top">
-                                <span class="ship-badge upcoming">취역 예정</span>
-                                <span class="spec-trigger" onclick="const d=JSON.parse(this.closest('.content-container').dataset.shipSpecs)['kddx'];document.getElementById('modalShipCode').textContent=d.code;document.getElementById('modalShipTitle').textContent=d.title;document.getElementById('modalDisplacement').textContent=d.disp;document.getElementById('modalDimension').textContent=d.dim;document.getElementById('modalSpeed').textContent=d.speed;document.getElementById('modalWeapon').textContent=d.weapon;document.getElementById('modalFeature').textContent=d.feat;const img=document.getElementById('modalShipImg');img.style.objectFit='cover';img.style.padding='0';img.src=d.img;document.getElementById('shipSpecModal').style.display='flex';">KDDX <span class="arrow">›</span></span>
-                                <span class="tonnage-tag">차기 구축함 · 6척 계획</span>
+                <div class="pfc-body">
+                    <div class="pfc-grid">
+                        <div class="pfc-tile has-spec">
+                            <div class="pfc-tile-head">
+                                <div class="pfc-tile-left">
+                                    <span class="ship-badge upcoming">취역 예정</span>
+                                    <span class="spec-trigger" onclick="const d=JSON.parse(this.closest('.content-container').dataset.shipSpecs)['kddx'];document.getElementById('modalShipCode').textContent=d.code;document.getElementById('modalShipTitle').textContent=d.title;document.getElementById('modalDisplacement').textContent=d.disp;document.getElementById('modalDimension').textContent=d.dim;document.getElementById('modalSpeed').textContent=d.speed;document.getElementById('modalWeapon').textContent=d.weapon;document.getElementById('modalFeature').textContent=d.feat;const img=document.getElementById('modalShipImg');img.style.objectFit='cover';img.style.padding='0';img.src=d.img;document.getElementById('shipSpecModal').style.display='flex';">KDDX <span class="arrow">›</span></span>
+                                </div>
+                                <span class="pfc-tonnage">8,000톤급 · 6척 계획</span>
                             </div>
+                            <div class="pfc-ships"><strong>비고</strong>국내 최초 통합마스트(I-MAST) 적용 차기 구축함</div>
                         </div>
-                        <div class="ship-class-box">
-                            <div class="ship-class-top">
-                                <span class="ship-badge">DDG-II</span>
-                                <span class="spec-trigger" onclick="const d=JSON.parse(this.closest('.content-container').dataset.shipSpecs)['jeongjo'];document.getElementById('modalShipCode').textContent=d.code;document.getElementById('modalShipTitle').textContent=d.title;document.getElementById('modalDisplacement').textContent=d.disp;document.getElementById('modalDimension').textContent=d.dim;document.getElementById('modalSpeed').textContent=d.speed;document.getElementById('modalWeapon').textContent=d.weapon;document.getElementById('modalFeature').textContent=d.feat;const img=document.getElementById('modalShipImg');img.style.objectFit='cover';img.style.padding='0';img.src=d.img;document.getElementById('shipSpecModal').style.display='flex';">정조대왕급 <span class="arrow">›</span></span>
-                                <span class="tonnage-tag">12,000톤 · 총 3척</span>
+
+                        <div class="pfc-tile has-spec">
+                            <div class="pfc-tile-head">
+                                <div class="pfc-tile-left">
+                                    <span class="ship-badge">DDG-II</span>
+                                    <span class="spec-trigger" onclick="const d=JSON.parse(this.closest('.content-container').dataset.shipSpecs)['jeongjo'];document.getElementById('modalShipCode').textContent=d.code;document.getElementById('modalShipTitle').textContent=d.title;document.getElementById('modalDisplacement').textContent=d.disp;document.getElementById('modalDimension').textContent=d.dim;document.getElementById('modalSpeed').textContent=d.speed;document.getElementById('modalWeapon').textContent=d.weapon;document.getElementById('modalFeature').textContent=d.feat;const img=document.getElementById('modalShipImg');img.style.objectFit='cover';img.style.padding='0';img.src=d.img;document.getElementById('shipSpecModal').style.display='flex';">정조대왕급 <span class="arrow">›</span></span>
+                                </div>
+                                <span class="pfc-tonnage">만재 12,000톤 · 3척</span>
                             </div>
-                            <div class="ship-names-sub">정조대왕함, 다산정약용함, 대호김종서함</div>
+                            <div class="pfc-ships"><strong>보유함</strong>정조대왕함, 다산정약용함, 대호김종서함</div>
                         </div>
-                        <div class="ship-class-box">
-                            <div class="ship-class-top">
-                                <span class="ship-badge">DDG-I</span>
-                                <span class="spec-trigger" onclick="const d=JSON.parse(this.closest('.content-container').dataset.shipSpecs)['sejong'];document.getElementById('modalShipCode').textContent=d.code;document.getElementById('modalShipTitle').textContent=d.title;document.getElementById('modalDisplacement').textContent=d.disp;document.getElementById('modalDimension').textContent=d.dim;document.getElementById('modalSpeed').textContent=d.speed;document.getElementById('modalWeapon').textContent=d.weapon;document.getElementById('modalFeature').textContent=d.feat;const img=document.getElementById('modalShipImg');img.style.objectFit='cover';img.style.padding='0';img.src=d.img;document.getElementById('shipSpecModal').style.display='flex';">세종대왕급 <span class="arrow">›</span></span>
-                                <span class="tonnage-tag">10,600톤 · 총 3척</span>
+
+                        <div class="pfc-tile has-spec">
+                            <div class="pfc-tile-head">
+                                <div class="pfc-tile-left">
+                                    <span class="ship-badge">DDG-I</span>
+                                    <span class="spec-trigger" onclick="const d=JSON.parse(this.closest('.content-container').dataset.shipSpecs)['sejong'];document.getElementById('modalShipCode').textContent=d.code;document.getElementById('modalShipTitle').textContent=d.title;document.getElementById('modalDisplacement').textContent=d.disp;document.getElementById('modalDimension').textContent=d.dim;document.getElementById('modalSpeed').textContent=d.speed;document.getElementById('modalWeapon').textContent=d.weapon;document.getElementById('modalFeature').textContent=d.feat;const img=document.getElementById('modalShipImg');img.style.objectFit='cover';img.style.padding='0';img.src=d.img;document.getElementById('shipSpecModal').style.display='flex';">세종대왕급 <span class="arrow">›</span></span>
+                                </div>
+                                <span class="pfc-tonnage">만재 10,600톤 · 3척</span>
                             </div>
-                            <div class="ship-names-sub">세종대왕함, 율곡이이함, 서애류성룡함</div>
+                            <div class="pfc-ships"><strong>보유함</strong>세종대왕함, 율곡이이함, 서애류성룡함</div>
                         </div>
-                        <div class="ship-class-box">
-                            <div class="ship-class-top">
-                                <span class="ship-badge">DDH-II</span>
-                                <span class="spec-trigger" onclick="const d=JSON.parse(this.closest('.content-container').dataset.shipSpecs)['yisunsin'];document.getElementById('modalShipCode').textContent=d.code;document.getElementById('modalShipTitle').textContent=d.title;document.getElementById('modalDisplacement').textContent=d.disp;document.getElementById('modalDimension').textContent=d.dim;document.getElementById('modalSpeed').textContent=d.speed;document.getElementById('modalWeapon').textContent=d.weapon;document.getElementById('modalFeature').textContent=d.feat;const img=document.getElementById('modalShipImg');img.style.objectFit='cover';img.style.padding='0';img.src=d.img;document.getElementById('shipSpecModal').style.display='flex';">충무공이순신급 <span class="arrow">›</span></span>
-                                <span class="tonnage-tag">5,520톤 · 총 6척</span>
+
+                        <div class="pfc-tile has-spec">
+                            <div class="pfc-tile-head">
+                                <div class="pfc-tile-left">
+                                    <span class="ship-badge">DDH-II</span>
+                                    <span class="spec-trigger" onclick="const d=JSON.parse(this.closest('.content-container').dataset.shipSpecs)['yisunsin'];document.getElementById('modalShipCode').textContent=d.code;document.getElementById('modalShipTitle').textContent=d.title;document.getElementById('modalDisplacement').textContent=d.disp;document.getElementById('modalDimension').textContent=d.dim;document.getElementById('modalSpeed').textContent=d.speed;document.getElementById('modalWeapon').textContent=d.weapon;document.getElementById('modalFeature').textContent=d.feat;const img=document.getElementById('modalShipImg');img.style.objectFit='cover';img.style.padding='0';img.src=d.img;document.getElementById('shipSpecModal').style.display='flex';">충무공이순신급 <span class="arrow">›</span></span>
+                                </div>
+                                <span class="pfc-tonnage">만재 5,520톤 · 6척</span>
                             </div>
-                            <div class="ship-names-sub">충무공이순신함, 문무대왕함, 대조영함, 왕건함, 강감찬함, 최영함</div>
+                            <div class="pfc-ships"><strong>보유함</strong>충무공이순신함, 문무대왕함, 대조영함, 왕건함, 강감찬함, 최영함</div>
                         </div>
-                        <div class="ship-class-box">
-                            <div class="ship-class-top">
-                                <span class="ship-badge">DDH-I</span>
-                                <span class="ship-class-name">광개토대왕급</span>
-                                <span class="tonnage-tag">3,900톤 · 총 3척</span>
+
+                        <div class="pfc-tile">
+                            <div class="pfc-tile-head">
+                                <div class="pfc-tile-left">
+                                    <span class="ship-badge">DDH-I</span>
+                                    <span class="ship-class-name">광개토대왕급</span>
+                                </div>
+                                <span class="pfc-tonnage">만재 3,900톤 · 3척</span>
                             </div>
-                            <div class="ship-names-sub">광개토대왕함, 을지문덕함, 양만춘함</div>
+                            <div class="pfc-ships"><strong>보유함</strong>광개토대왕함, 을지문덕함, 양만춘함</div>
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- 2. 호위함 -->
-            <div class="fleet-card" data-category="frigate">
-                <div class="fleet-card-head">
-                    <div class="fleet-card-title-row">
-                        <span class="fleet-card-title">02. 호위함 (Frigates)</span>
-                        <span class="fleet-card-count">현역 20척 + 차기 6척 계획</span>
+            <div class="fleet-card premium-fleet-card" data-category="frigate" style="display:none;">
+                <div class="pfc-header">
+                    <div class="pfc-meta-row">
+                        <span class="pfc-eng-label">SURFACE COMBATANTS · FRIGATES</span>
+                        <span class="pfc-scale-pill">현역 20척 + 차기 6척 계획</span>
                     </div>
-                    <p class="fleet-card-summary">해역함대의 주력 전투함으로 하이브리드 추진체계를 통한 저소음 대잠 능력과 다기능 위상배열레이더 기반의 대공·대함 방어력을 대폭 강화한 차기 호위함 전력입니다.</p>
+                    <h3 class="pfc-title">호위함</h3>
+                    <p class="pfc-desc">해역함대의 주력 전투함으로 하이브리드 추진체계를 통한 저소음 대잠 능력과 다기능 위상배열레이더 기반의 대공·대함 방어력을 대폭 강화한 차기 호위함 전력입니다.</p>
                 </div>
-                <div class="fleet-card-body">
-                    <div class="ship-class-grid">
-                        <div class="ship-class-box">
-                            <div class="ship-class-top">
-                                <span class="ship-badge upcoming">취역 예정</span>
-                                <span class="ship-class-name">FFX Batch-IV</span>
-                                <span class="tonnage-tag">차기 호위함 · 6척 계획</span>
+                <div class="pfc-body">
+                    <div class="pfc-grid">
+                        <div class="pfc-tile">
+                            <div class="pfc-tile-head">
+                                <div class="pfc-tile-left">
+                                    <span class="ship-badge upcoming">취역 예정</span>
+                                    <span class="ship-class-name">FFX Batch-IV</span>
+                                </div>
+                                <span class="pfc-tonnage">차기 호위함 · 6척 계획</span>
                             </div>
+                            <div class="pfc-ships"><strong>비고</strong>무장·전투체계 고도화 차기 호위함</div>
                         </div>
-                        <div class="ship-class-box">
-                            <div class="ship-class-top">
-                                <span class="ship-badge">FFG-III</span>
-                                <span class="spec-trigger" onclick="const d=JSON.parse(this.closest('.content-container').dataset.shipSpecs)['chungnam'];document.getElementById('modalShipCode').textContent=d.code;document.getElementById('modalShipTitle').textContent=d.title;document.getElementById('modalDisplacement').textContent=d.disp;document.getElementById('modalDimension').textContent=d.dim;document.getElementById('modalSpeed').textContent=d.speed;document.getElementById('modalWeapon').textContent=d.weapon;document.getElementById('modalFeature').textContent=d.feat;const img=document.getElementById('modalShipImg');img.style.objectFit='cover';img.style.padding='0';img.src=d.img;document.getElementById('shipSpecModal').style.display='flex';">충남급 <span class="arrow">›</span></span>
-                                <span class="tonnage-tag">4,300톤 · 총 6척</span>
+
+                        <div class="pfc-tile has-spec">
+                            <div class="pfc-tile-head">
+                                <div class="pfc-tile-left">
+                                    <span class="ship-badge">FFG-III</span>
+                                    <span class="spec-trigger" onclick="const d=JSON.parse(this.closest('.content-container').dataset.shipSpecs)['chungnam'];document.getElementById('modalShipCode').textContent=d.code;document.getElementById('modalShipTitle').textContent=d.title;document.getElementById('modalDisplacement').textContent=d.disp;document.getElementById('modalDimension').textContent=d.dim;document.getElementById('modalSpeed').textContent=d.speed;document.getElementById('modalWeapon').textContent=d.weapon;document.getElementById('modalFeature').textContent=d.feat;const img=document.getElementById('modalShipImg');img.style.objectFit='cover';img.style.padding='0';img.src=d.img;document.getElementById('shipSpecModal').style.display='flex';">충남급 <span class="arrow">›</span></span>
+                                </div>
+                                <span class="pfc-tonnage">만재 4,300톤 · 6척</span>
                             </div>
-                            <div class="ship-names-sub">충남함, 경북함, 전남함 등</div>
+                            <div class="pfc-ships"><strong>보유함</strong>충남함, 경북함, 전남함 등</div>
                         </div>
-                        <div class="ship-class-box">
-                            <div class="ship-class-top">
-                                <span class="ship-badge">FFG-II</span>
-                                <span class="spec-trigger" onclick="const d=JSON.parse(this.closest('.content-container').dataset.shipSpecs)['daegu'];document.getElementById('modalShipCode').textContent=d.code;document.getElementById('modalShipTitle').textContent=d.title;document.getElementById('modalDisplacement').textContent=d.disp;document.getElementById('modalDimension').textContent=d.dim;document.getElementById('modalSpeed').textContent=d.speed;document.getElementById('modalWeapon').textContent=d.weapon;document.getElementById('modalFeature').textContent=d.feat;const img=document.getElementById('modalShipImg');img.style.objectFit='cover';img.style.padding='0';img.src=d.img;document.getElementById('shipSpecModal').style.display='flex';">대구급 <span class="arrow">›</span></span>
-                                <span class="tonnage-tag">3,600톤 · 총 8척</span>
+
+                        <div class="pfc-tile has-spec">
+                            <div class="pfc-tile-head">
+                                <div class="pfc-tile-left">
+                                    <span class="ship-badge">FFG-II</span>
+                                    <span class="spec-trigger" onclick="const d=JSON.parse(this.closest('.content-container').dataset.shipSpecs)['daegu'];document.getElementById('modalShipCode').textContent=d.code;document.getElementById('modalShipTitle').textContent=d.title;document.getElementById('modalDisplacement').textContent=d.disp;document.getElementById('modalDimension').textContent=d.dim;document.getElementById('modalSpeed').textContent=d.speed;document.getElementById('modalWeapon').textContent=d.weapon;document.getElementById('modalFeature').textContent=d.feat;const img=document.getElementById('modalShipImg');img.style.objectFit='cover';img.style.padding='0';img.src=d.img;document.getElementById('shipSpecModal').style.display='flex';">대구급 <span class="arrow">›</span></span>
+                                </div>
+                                <span class="pfc-tonnage">만재 3,600톤 · 8척</span>
                             </div>
-                            <div class="ship-names-sub">대구함, 경남함, 서울함, 동해함, 대전함, 포항함, 천안함, 춘천함</div>
+                            <div class="pfc-ships"><strong>보유함</strong>대구함, 경남함, 서울함, 동해함, 대전함, 포항함, 천안함, 춘천함</div>
                         </div>
-                        <div class="ship-class-box">
-                            <div class="ship-class-top">
-                                <span class="ship-badge">FFG-I</span>
-                                <span class="ship-class-name">인천급</span>
-                                <span class="tonnage-tag">3,200톤 · 총 6척</span>
+
+                        <div class="pfc-tile">
+                            <div class="pfc-tile-head">
+                                <div class="pfc-tile-left">
+                                    <span class="ship-badge">FFG-I</span>
+                                    <span class="ship-class-name">인천급</span>
+                                </div>
+                                <span class="pfc-tonnage">만재 3,200톤 · 6척</span>
                             </div>
-                            <div class="ship-names-sub">인천함, 경기함, 전북함, 강원함, 충북함, 광주함</div>
+                            <div class="pfc-ships"><strong>보유함</strong>인천함, 경기함, 전북함, 강원함, 충북함, 광주함</div>
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- 3. 초계함 -->
-            <div class="fleet-card" data-category="frigate">
-                <div class="fleet-card-head">
-                    <div class="fleet-card-title-row">
-                        <span class="fleet-card-title">03. 초계함 (Corvettes)</span>
-                        <span class="fleet-card-count">총 24척 건조 · 순차 퇴역 중</span>
+            <div class="fleet-card premium-fleet-card" data-category="frigate" style="display:none;">
+                <div class="pfc-header">
+                    <div class="pfc-meta-row">
+                        <span class="pfc-eng-label">COASTAL DEFENSE · CORVETTES</span>
+                        <span class="pfc-scale-pill">총 24척 건조 · 순차 퇴역 중</span>
                     </div>
-                    <p class="fleet-card-summary">연안 경비 및 대잠 초계 임무를 수행해 온 핵심 연안 방어 전력으로, 신형 호위함 전력화에 따라 순차적으로 임무를 인계하고 있습니다.</p>
+                    <h3 class="pfc-title">초계함</h3>
+                    <p class="pfc-desc">연안 경비 및 대잠 초계 임무를 수행해 온 핵심 연안 방어 전력으로, 신형 호위함 전력화에 따라 순차적으로 임무를 인계하고 있습니다.</p>
                 </div>
-                <div class="fleet-card-body">
-                    <div class="ship-class-grid">
-                        <div class="ship-class-box">
-                            <div class="ship-class-top">
-                                <span class="ship-badge">PCC</span>
-                                <span class="ship-class-name">포항급</span>
-                                <span class="tonnage-tag">1,220톤 · 총 24척 건조</span>
+                <div class="pfc-body">
+                    <div class="pfc-grid">
+                        <div class="pfc-tile">
+                            <div class="pfc-tile-head">
+                                <div class="pfc-tile-left">
+                                    <span class="ship-badge">PCC</span>
+                                    <span class="ship-class-name">포항급</span>
+                                </div>
+                                <span class="pfc-tonnage">만재 1,220톤 · 24척 건조</span>
                             </div>
-                            <div class="ship-names-sub">영주함, 제천함, 속초함, 성남함 등 (순차 퇴역 진행)</div>
+                            <div class="pfc-ships"><strong>보유함</strong>영주함, 제천함, 속초함, 성남함 등 (순차 퇴역 진행)</div>
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- 4. 잠수함 -->
-            <div class="fleet-card" data-category="submarine">
-                <div class="fleet-card-head">
-                    <div class="fleet-card-title-row">
-                        <span class="fleet-card-title">04. 잠수함 (Submarines)</span>
-                        <span class="fleet-card-count">현역 21척 + 차기 3척 계획</span>
+            <div class="fleet-card premium-fleet-card" data-category="submarine" style="display:none;">
+                <div class="pfc-header">
+                    <div class="pfc-meta-row">
+                        <span class="pfc-eng-label">SUBSURFACE FORCES · SUBMARINES</span>
+                        <span class="pfc-scale-pill">현역 21척 + 차기 3척 계획</span>
                     </div>
-                    <p class="fleet-card-summary">국내 독자 설계·건조된 3,000톤급 중형 잠수함부터 공기불요추진체계(AIP)를 탑재한 1,800톤급·1,200톤급까지 운용하는 핵심 수중 전략 전력입니다.</p>
+                    <h3 class="pfc-title">잠수함</h3>
+                    <p class="pfc-desc">국내 독자 설계·건조된 3,000톤급 중형 잠수함부터 공기불요추진체계(AIP)를 탑재한 1,800톤급·1,200톤급까지 운용하는 핵심 수중 전략 전력입니다.</p>
                 </div>
-                <div class="fleet-card-body">
-                    <div class="ship-class-grid">
-                        <div class="ship-class-box">
-                            <div class="ship-class-top">
-                                <span class="ship-badge upcoming">취역 예정</span>
-                                <span class="ship-class-name">장보고-III Batch-II</span>
-                                <span class="tonnage-tag">3,600톤급 · 3척 계획</span>
+                <div class="pfc-body">
+                    <div class="pfc-grid">
+                        <div class="pfc-tile">
+                            <div class="pfc-tile-head">
+                                <div class="pfc-tile-left">
+                                    <span class="ship-badge upcoming">취역 예정</span>
+                                    <span class="ship-class-name">장보고-III Batch-II</span>
+                                </div>
+                                <span class="pfc-tonnage">3,600톤급 · 3척 계획</span>
                             </div>
-                            <div class="ship-names-sub">장영실함(선도함) 등</div>
+                            <div class="pfc-ships"><strong>건조함</strong>장영실함(선도함) 등</div>
                         </div>
-                        <div class="ship-class-box">
-                            <div class="ship-class-top">
-                                <span class="ship-badge">SS-III</span>
-                                <span class="spec-trigger" onclick="const d=JSON.parse(this.closest('.content-container').dataset.shipSpecs)['dosan'];document.getElementById('modalShipCode').textContent=d.code;document.getElementById('modalShipTitle').textContent=d.title;document.getElementById('modalDisplacement').textContent=d.disp;document.getElementById('modalDimension').textContent=d.dim;document.getElementById('modalSpeed').textContent=d.speed;document.getElementById('modalWeapon').textContent=d.weapon;document.getElementById('modalFeature').textContent=d.feat;const img=document.getElementById('modalShipImg');img.style.objectFit='cover';img.style.padding='0';img.src=d.img;document.getElementById('shipSpecModal').style.display='flex';">도산안창호급 <span class="arrow">›</span></span>
-                                <span class="tonnage-tag">수중 3,700톤 · 총 3척</span>
+
+                        <div class="pfc-tile has-spec">
+                            <div class="pfc-tile-head">
+                                <div class="pfc-tile-left">
+                                    <span class="ship-badge">SS-III</span>
+                                    <span class="spec-trigger" onclick="const d=JSON.parse(this.closest('.content-container').dataset.shipSpecs)['dosan'];document.getElementById('modalShipCode').textContent=d.code;document.getElementById('modalShipTitle').textContent=d.title;document.getElementById('modalDisplacement').textContent=d.disp;document.getElementById('modalDimension').textContent=d.dim;document.getElementById('modalSpeed').textContent=d.speed;document.getElementById('modalWeapon').textContent=d.weapon;document.getElementById('modalFeature').textContent=d.feat;const img=document.getElementById('modalShipImg');img.style.objectFit='cover';img.style.padding='0';img.src=d.img;document.getElementById('shipSpecModal').style.display='flex';">도산안창호급 <span class="arrow">›</span></span>
+                                </div>
+                                <span class="pfc-tonnage">수중 3,700톤 · 3척</span>
                             </div>
-                            <div class="ship-names-sub">도산안창호함, 안무함, 신채호함</div>
+                            <div class="pfc-ships"><strong>보유함</strong>도산안창호함, 안무함, 신채호함</div>
                         </div>
-                        <div class="ship-class-box">
-                            <div class="ship-class-top">
-                                <span class="ship-badge">SS-II</span>
-                                <span class="spec-trigger" onclick="const d=JSON.parse(this.closest('.content-container').dataset.shipSpecs)['sonwonil'];document.getElementById('modalShipCode').textContent=d.code;document.getElementById('modalShipTitle').textContent=d.title;document.getElementById('modalDisplacement').textContent=d.disp;document.getElementById('modalDimension').textContent=d.dim;document.getElementById('modalSpeed').textContent=d.speed;document.getElementById('modalWeapon').textContent=d.weapon;document.getElementById('modalFeature').textContent=d.feat;const img=document.getElementById('modalShipImg');img.style.objectFit='cover';img.style.padding='0';img.src=d.img;document.getElementById('shipSpecModal').style.display='flex';">손원일급 <span class="arrow">›</span></span>
-                                <span class="tonnage-tag">수중 1,860톤 · 총 9척</span>
+
+                        <div class="pfc-tile has-spec">
+                            <div class="pfc-tile-head">
+                                <div class="pfc-tile-left">
+                                    <span class="ship-badge">SS-II</span>
+                                    <span class="spec-trigger" onclick="const d=JSON.parse(this.closest('.content-container').dataset.shipSpecs)['sonwonil'];document.getElementById('modalShipCode').textContent=d.code;document.getElementById('modalShipTitle').textContent=d.title;document.getElementById('modalDisplacement').textContent=d.disp;document.getElementById('modalDimension').textContent=d.dim;document.getElementById('modalSpeed').textContent=d.speed;document.getElementById('modalWeapon').textContent=d.weapon;document.getElementById('modalFeature').textContent=d.feat;const img=document.getElementById('modalShipImg');img.style.objectFit='cover';img.style.padding='0';img.src=d.img;document.getElementById('shipSpecModal').style.display='flex';">손원일급 <span class="arrow">›</span></span>
+                                </div>
+                                <span class="pfc-tonnage">수중 1,860톤 · 9척</span>
                             </div>
-                            <div class="ship-names-sub">손원일함, 정지함, 안중근함, 김좌진함, 윤봉길함, 유관순함, 홍범도함, 이범석함, 신돌석함</div>
+                            <div class="pfc-ships"><strong>보유함</strong>손원일함, 정지함, 안중근함, 김좌진함, 윤봉길함, 유관순함, 홍범도함, 이범석함, 신돌석함</div>
                         </div>
-                        <div class="ship-class-box">
-                            <div class="ship-class-top">
-                                <span class="ship-badge">SS-I</span>
-                                <span class="ship-class-name">장보고급</span>
-                                <span class="tonnage-tag">수중 1,400톤 · 총 9척</span>
+
+                        <div class="pfc-tile">
+                            <div class="pfc-tile-head">
+                                <div class="pfc-tile-left">
+                                    <span class="ship-badge">SS-I</span>
+                                    <span class="ship-class-name">장보고급</span>
+                                </div>
+                                <span class="pfc-tonnage">수중 1,400톤 · 9척</span>
                             </div>
-                            <div class="ship-names-sub">장보고함, 이천함, 최무선함, 박위함, 이종무함, 정운함, 이순신함, 나대용함, 이억기함</div>
+                            <div class="pfc-ships"><strong>보유함</strong>장보고함, 이천함, 최무선함, 박위함, 이종무함, 정운함, 이순신함, 나대용함, 이억기함</div>
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- 5. 상륙함 -->
-            <div class="fleet-card" data-category="amphibious">
-                <div class="fleet-card-head">
-                    <div class="fleet-card-title-row">
-                        <span class="fleet-card-title">05. 상륙함 (Amphibious Ships)</span>
-                        <span class="fleet-card-count">총 10척</span>
+            <div class="fleet-card premium-fleet-card" data-category="amphibious" style="display:none;">
+                <div class="pfc-header">
+                    <div class="pfc-meta-row">
+                        <span class="pfc-eng-label">AMPHIBIOUS WARFARE · LANDING SHIPS</span>
+                        <span class="pfc-scale-pill">총 10척</span>
                     </div>
-                    <p class="fleet-card-summary">대형수송함을 중심으로 상륙작전 지휘 통제 및 대규모 병력·상륙장갑차·헬기 수송과 재해·재난 구조 임무를 수행합니다.</p>
+                    <h3 class="pfc-title">상륙함</h3>
+                    <p class="pfc-desc">대형수송함을 중심으로 상륙작전 지휘 통제 및 대규모 병력·상륙장갑차·헬기 수송과 재해·재난 구조 임무를 수행합니다.</p>
                 </div>
-                <div class="fleet-card-body">
-                    <div class="ship-class-grid">
-                        <div class="ship-class-box">
-                            <div class="ship-class-top">
-                                <span class="ship-badge">LPH</span>
-                                <span class="spec-trigger" onclick="const d=JSON.parse(this.closest('.content-container').dataset.shipSpecs)['dokdo'];document.getElementById('modalShipCode').textContent=d.code;document.getElementById('modalShipTitle').textContent=d.title;document.getElementById('modalDisplacement').textContent=d.disp;document.getElementById('modalDimension').textContent=d.dim;document.getElementById('modalSpeed').textContent=d.speed;document.getElementById('modalWeapon').textContent=d.weapon;document.getElementById('modalFeature').textContent=d.feat;const img=document.getElementById('modalShipImg');img.style.objectFit='cover';img.style.padding='0';img.src=d.img;document.getElementById('shipSpecModal').style.display='flex';">독도급 <span class="arrow">›</span></span>
-                                <span class="tonnage-tag">18,800톤 · 총 2척</span>
+                <div class="pfc-body">
+                    <div class="pfc-grid">
+                        <div class="pfc-tile has-spec">
+                            <div class="pfc-tile-head">
+                                <div class="pfc-tile-left">
+                                    <span class="ship-badge">LPH</span>
+                                    <span class="spec-trigger" onclick="const d=JSON.parse(this.closest('.content-container').dataset.shipSpecs)['dokdo'];document.getElementById('modalShipCode').textContent=d.code;document.getElementById('modalShipTitle').textContent=d.title;document.getElementById('modalDisplacement').textContent=d.disp;document.getElementById('modalDimension').textContent=d.dim;document.getElementById('modalSpeed').textContent=d.speed;document.getElementById('modalWeapon').textContent=d.weapon;document.getElementById('modalFeature').textContent=d.feat;const img=document.getElementById('modalShipImg');img.style.objectFit='cover';img.style.padding='0';img.src=d.img;document.getElementById('shipSpecModal').style.display='flex';">독도급 <span class="arrow">›</span></span>
+                                </div>
+                                <span class="pfc-tonnage">만재 18,800톤 · 2척</span>
                             </div>
-                            <div class="ship-names-sub">독도함, 마라도함</div>
+                            <div class="pfc-ships"><strong>보유함</strong>독도함, 마라도함</div>
                         </div>
-                        <div class="ship-class-box">
-                            <div class="ship-class-top">
-                                <span class="ship-badge">LST-II</span>
-                                <span class="ship-class-name">천왕봉급</span>
-                                <span class="tonnage-tag">7,140톤 · 총 4척</span>
+
+                        <div class="pfc-tile">
+                            <div class="pfc-tile-head">
+                                <div class="pfc-tile-left">
+                                    <span class="ship-badge">LST-II</span>
+                                    <span class="ship-class-name">천왕봉급</span>
+                                </div>
+                                <span class="pfc-tonnage">만재 7,140톤 · 4척</span>
                             </div>
-                            <div class="ship-names-sub">천왕봉함, 천자봉함, 일출봉함, 노적봉함</div>
+                            <div class="pfc-ships"><strong>보유함</strong>천왕봉함, 천자봉함, 일출봉함, 노적봉함</div>
                         </div>
-                        <div class="ship-class-box">
-                            <div class="ship-class-top">
-                                <span class="ship-badge">LST-I</span>
-                                <span class="ship-class-name">고준봉급</span>
-                                <span class="tonnage-tag">4,250톤 · 총 4척</span>
+
+                        <div class="pfc-tile">
+                            <div class="pfc-tile-head">
+                                <div class="pfc-tile-left">
+                                    <span class="ship-badge">LST-I</span>
+                                    <span class="ship-class-name">고준봉급</span>
+                                </div>
+                                <span class="pfc-tonnage">만재 4,250톤 · 4척</span>
                             </div>
-                            <div class="ship-names-sub">고준봉함, 비로봉함, 향로봉함, 성인봉함</div>
+                            <div class="pfc-ships"><strong>보유함</strong>고준봉함, 비로봉함, 향로봉함, 성인봉함</div>
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- 6. 기뢰전함 -->
-            <div class="fleet-card" data-category="amphibious">
-                <div class="fleet-card-head">
-                    <div class="fleet-card-title-row">
-                        <span class="fleet-card-title">06. 기뢰전함 (Mine Warfare Ships)</span>
-                        <span class="fleet-card-count">총 14척 (기뢰부설함 2 · 소해함 12)</span>
+            <div class="fleet-card premium-fleet-card" data-category="amphibious" style="display:none;">
+                <div class="pfc-header">
+                    <div class="pfc-meta-row">
+                        <span class="pfc-eng-label">MINE COUNTERMEASURES · MINELAYERS</span>
+                        <span class="pfc-scale-pill">총 14척 (기뢰부설 2 · 소해 12)</span>
                     </div>
-                    <p class="fleet-card-summary">주요 항만과 해상 교통로에 부설된 적 기뢰를 탐색·제거하고 전략 해역에 기뢰를 부설하는 기뢰전 전문 전력입니다.</p>
+                    <h3 class="pfc-title">기뢰전함</h3>
+                    <p class="pfc-desc">주요 항만과 해상 교통로에 부설된 적 기뢰를 탐색·제거하고 전략 해역에 기뢰를 부설하는 기뢰전 전문 전력입니다.</p>
                 </div>
-                <div class="fleet-card-body">
-                    <div class="ship-class-grid">
-                        <div class="ship-class-box">
-                            <div class="ship-class-top">
-                                <span class="ship-badge upcoming">취역 예정</span>
-                                <span class="ship-class-name">MSH-II</span>
-                                <span class="tonnage-tag">차기 소해함</span>
+                <div class="pfc-body">
+                    <div class="pfc-grid">
+                        <div class="pfc-tile">
+                            <div class="pfc-tile-head">
+                                <div class="pfc-tile-left">
+                                    <span class="ship-badge upcoming">취역 예정</span>
+                                    <span class="ship-class-name">MSH-II</span>
+                                </div>
+                                <span class="pfc-tonnage">차기 소해함</span>
                             </div>
+                            <div class="pfc-ships"><strong>비고</strong>무인기뢰처리기 탑재 차기 소해함</div>
                         </div>
-                        <div class="ship-class-box">
-                            <div class="ship-class-top">
-                                <span class="ship-badge">MLS-II</span>
-                                <span class="ship-class-name">남포급</span>
-                                <span class="tonnage-tag">4,240톤 · 총 1척</span>
+
+                        <div class="pfc-tile">
+                            <div class="pfc-tile-head">
+                                <div class="pfc-tile-left">
+                                    <span class="ship-badge">MLS-II</span>
+                                    <span class="ship-class-name">남포급</span>
+                                </div>
+                                <span class="pfc-tonnage">만재 4,240톤 · 1척</span>
                             </div>
-                            <div class="ship-names-sub">남포함 (기존 MLS-I 원산함 1척 별도 보유)</div>
+                            <div class="pfc-ships"><strong>보유함</strong>남포함 (기존 MLS-I 원산함 1척 별도 보유)</div>
                         </div>
-                        <div class="ship-class-box">
-                            <div class="ship-class-top">
-                                <span class="ship-badge">MSH</span>
-                                <span class="ship-class-name">양양급</span>
-                                <span class="tonnage-tag">880톤 · 총 6척</span>
+
+                        <div class="pfc-tile">
+                            <div class="pfc-tile-head">
+                                <div class="pfc-tile-left">
+                                    <span class="ship-badge">MSH</span>
+                                    <span class="ship-class-name">양양급</span>
+                                </div>
+                                <span class="pfc-tonnage">만재 880톤 · 6척</span>
                             </div>
-                            <div class="ship-names-sub">양양함, 옹진함, 해남함, 남해함, 홍성함, 고성함 (기존 강경급 6척 별도)</div>
+                            <div class="pfc-ships"><strong>보유함</strong>양양함, 옹진함, 해남함, 남해함, 홍성함, 고성함 (기존 강경급 6척 별도)</div>
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- 7. 지원함 -->
-            <div class="fleet-card" data-category="amphibious">
-                <div class="fleet-card-head">
-                    <div class="fleet-card-title-row">
-                        <span class="fleet-card-title">07. 지원함 (Auxiliary Ships)</span>
-                        <span class="fleet-card-count">총 8척 (군수지원 4 · 구조 3 · 훈련 1)</span>
+            <div class="fleet-card premium-fleet-card" data-category="amphibious" style="display:none;">
+                <div class="pfc-header">
+                    <div class="pfc-meta-row">
+                        <span class="pfc-eng-label">LOGISTICS & RESCUE · AUXILIARY SHIPS</span>
+                        <span class="pfc-scale-pill">총 8척 (군수지원 4 · 구조 3 · 훈련 1)</span>
                     </div>
-                    <p class="fleet-card-summary">기동전단의 원해 작전 지속 능력을 보장하는 군수지원함, 수상함·잠수함 조난 시 구조 작전을 수행하는 구조함, 사관생도 순항훈련 임무를 맡는 훈련함으로 구성됩니다.</p>
+                    <h3 class="pfc-title">지원함</h3>
+                    <p class="pfc-desc">기동전단의 원해 작전 지속 능력을 보장하는 군수지원함, 수상함·잠수함 조난 시 구조 작전을 수행하는 구조함, 사관생도 순항훈련 임무를 맡는 훈련함으로 구성됩니다.</p>
                 </div>
-                <div class="fleet-card-body">
-                    <div class="ship-class-grid">
-                        <div class="ship-class-box">
-                            <div class="ship-class-top">
-                                <span class="ship-badge">AOE-II</span>
-                                <span class="ship-class-name">소양급</span>
-                                <span class="tonnage-tag">23,000톤 · 총 1척</span>
+                <div class="pfc-body">
+                    <div class="pfc-grid">
+                        <div class="pfc-tile">
+                            <div class="pfc-tile-head">
+                                <div class="pfc-tile-left">
+                                    <span class="ship-badge">AOE-II</span>
+                                    <span class="ship-class-name">소양급</span>
+                                </div>
+                                <span class="pfc-tonnage">만재 23,000톤 · 1척</span>
                             </div>
-                            <div class="ship-names-sub">소양함</div>
+                            <div class="pfc-ships"><strong>보유함</strong>소양함</div>
                         </div>
-                        <div class="ship-class-box">
-                            <div class="ship-class-top">
-                                <span class="ship-badge">AOE-I</span>
-                                <span class="ship-class-name">천지급</span>
-                                <span class="tonnage-tag">9,200톤 · 총 3척</span>
+
+                        <div class="pfc-tile">
+                            <div class="pfc-tile-head">
+                                <div class="pfc-tile-left">
+                                    <span class="ship-badge">AOE-I</span>
+                                    <span class="ship-class-name">천지급</span>
+                                </div>
+                                <span class="pfc-tonnage">만재 9,200톤 · 3척</span>
                             </div>
-                            <div class="ship-names-sub">천지함, 대청함, 화천함</div>
+                            <div class="pfc-ships"><strong>보유함</strong>천지함, 대청함, 화천함</div>
                         </div>
-                        <div class="ship-class-box">
-                            <div class="ship-class-top">
-                                <span class="ship-badge">구조함</span>
-                                <span class="ship-class-name">통영급·강화도함</span>
-                                <span class="tonnage-tag">총 3척</span>
+
+                        <div class="pfc-tile">
+                            <div class="pfc-tile-head">
+                                <div class="pfc-tile-left">
+                                    <span class="ship-badge">구조함</span>
+                                    <span class="ship-class-name">통영급·강화도함</span>
+                                </div>
+                                <span class="pfc-tonnage">총 3척</span>
                             </div>
-                            <div class="ship-names-sub">통영함, 광양함, 강화도함</div>
+                            <div class="pfc-ships"><strong>보유함</strong>통영함, 광양함(수상함구조함), 강화도함(잠수함구조함)</div>
                         </div>
-                        <div class="ship-class-box">
-                            <div class="ship-class-top">
-                                <span class="ship-badge">훈련함</span>
-                                <span class="ship-class-name">한산도급</span>
-                                <span class="tonnage-tag">총 1척</span>
+
+                        <div class="pfc-tile">
+                            <div class="pfc-tile-head">
+                                <div class="pfc-tile-left">
+                                    <span class="ship-badge">훈련함</span>
+                                    <span class="ship-class-name">한산도급</span>
+                                </div>
+                                <span class="pfc-tonnage">총 1척</span>
                             </div>
-                            <div class="ship-names-sub">한산도함</div>
+                            <div class="pfc-ships"><strong>보유함</strong>한산도함</div>
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- 8. 고속함 -->
-            <div class="fleet-card" data-category="patrol">
-                <div class="fleet-card-head">
-                    <div class="fleet-card-title-row">
-                        <span class="fleet-card-title">08. 고속함 (Patrol Killer Guided Missile)</span>
-                        <span class="fleet-card-count">총 18척</span>
+            <div class="fleet-card premium-fleet-card" data-category="patrol" style="display:none;">
+                <div class="pfc-header">
+                    <div class="pfc-meta-row">
+                        <span class="pfc-eng-label">FAST ATTACK CRAFT · PKG</span>
+                        <span class="pfc-scale-pill">총 18척</span>
                     </div>
-                    <p class="fleet-card-summary">대함유도탄과 76mm 함포를 탑재하여 연안 및 서해 NLL 최전선에서 적 고속세력을 제압하는 고기동 유도탄고속함 전력입니다.</p>
+                    <h3 class="pfc-title">고속함</h3>
+                    <p class="pfc-desc">대함유도탄과 76mm 함포를 탑재하여 연안 및 서해 NLL 최전선에서 적 고속세력을 제압하는 고기동 유도탄고속함 전력입니다.</p>
                 </div>
-                <div class="fleet-card-body">
-                    <div class="ship-class-grid">
-                        <div class="ship-class-box">
-                            <div class="ship-class-top">
-                                <span class="ship-badge">PKG</span>
-                                <span class="spec-trigger" onclick="const d=JSON.parse(this.closest('.content-container').dataset.shipSpecs)['yunyoungha'];document.getElementById('modalShipCode').textContent=d.code;document.getElementById('modalShipTitle').textContent=d.title;document.getElementById('modalDisplacement').textContent=d.disp;document.getElementById('modalDimension').textContent=d.dim;document.getElementById('modalSpeed').textContent=d.speed;document.getElementById('modalWeapon').textContent=d.weapon;document.getElementById('modalFeature').textContent=d.feat;const img=document.getElementById('modalShipImg');img.style.objectFit='cover';img.style.padding='0';img.src=d.img;document.getElementById('shipSpecModal').style.display='flex';">윤영하급 <span class="arrow">›</span></span>
-                                <span class="tonnage-tag">570톤 · 총 18척</span>
+                <div class="pfc-body">
+                    <div class="pfc-grid">
+                        <div class="pfc-tile has-spec">
+                            <div class="pfc-tile-head">
+                                <div class="pfc-tile-left">
+                                    <span class="ship-badge">PKG</span>
+                                    <span class="spec-trigger" onclick="const d=JSON.parse(this.closest('.content-container').dataset.shipSpecs)['yunyoungha'];document.getElementById('modalShipCode').textContent=d.code;document.getElementById('modalShipTitle').textContent=d.title;document.getElementById('modalDisplacement').textContent=d.disp;document.getElementById('modalDimension').textContent=d.dim;document.getElementById('modalSpeed').textContent=d.speed;document.getElementById('modalWeapon').textContent=d.weapon;document.getElementById('modalFeature').textContent=d.feat;const img=document.getElementById('modalShipImg');img.style.objectFit='cover';img.style.padding='0';img.src=d.img;document.getElementById('shipSpecModal').style.display='flex';">윤영하급 <span class="arrow">›</span></span>
+                                </div>
+                                <span class="pfc-tonnage">만재 570톤 · 18척</span>
                             </div>
-                            <div class="ship-names-sub">윤영하함, 한상국함, 조천형함, 황도현함, 서후원함, 박동혁함 등</div>
+                            <div class="pfc-ships"><strong>보유함</strong>윤영하함, 한상국함, 조천형함, 황도현함, 서후원함, 박동혁함 등</div>
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- 9. 고속정 -->
-            <div class="fleet-card" data-category="patrol">
-                <div class="fleet-card-head">
-                    <div class="fleet-card-title-row">
-                        <span class="fleet-card-title">09. 고속정 (Patrol Killer Medium Rocket)</span>
-                        <span class="fleet-card-count">총 30여 척 배치</span>
+            <div class="fleet-card premium-fleet-card" data-category="patrol" style="display:none;">
+                <div class="pfc-header">
+                    <div class="pfc-meta-row">
+                        <span class="pfc-eng-label">PATROL BOATS · PKMR</span>
+                        <span class="pfc-scale-pill">총 30여 척 배치</span>
                     </div>
-                    <p class="fleet-card-summary">130mm 유도로켓과 원격사격통제체계를 갖추고 연안 경비 및 북방한계선(NLL) 즉각 대응 임무를 수행하는 신형 고속정 전력입니다.</p>
+                    <h3 class="pfc-title">고속정</h3>
+                    <p class="pfc-desc">130mm 유도로켓과 원격사격통제체계를 갖추고 연안 경비 및 북방한계선(NLL) 즉각 대응 임무를 수행하는 신형 고속정 전력입니다.</p>
                 </div>
-                <div class="fleet-card-body">
-                    <div class="ship-class-grid">
-                        <div class="ship-class-box">
-                            <div class="ship-class-top">
-                                <span class="ship-badge">PKMR</span>
-                                <span class="ship-class-name">참수리급(신형)</span>
-                                <span class="tonnage-tag">250톤 · 총 30여 척</span>
+                <div class="pfc-body">
+                    <div class="pfc-grid">
+                        <div class="pfc-tile">
+                            <div class="pfc-tile-head">
+                                <div class="pfc-tile-left">
+                                    <span class="ship-badge">PKMR</span>
+                                    <span class="ship-class-name">참수리급(신형)</span>
+                                </div>
+                                <span class="pfc-tonnage">만재 250톤 · 30여 척</span>
                             </div>
-                            <div class="ship-names-sub">참수리-211호정 ~ 230호정대</div>
+                            <div class="pfc-ships"><strong>편성</strong>참수리-211호정 ~ 230호정대</div>
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- 10. 항공병기 -->
-            <div class="fleet-card" data-category="aviation">
-                <div class="fleet-card-head">
-                    <div class="fleet-card-title-row">
-                        <span class="fleet-card-title">10. 항공병기 (Naval Aviation)</span>
-                        <span class="fleet-card-count">초계기 3종 · 헬기 4종 운용</span>
+            <div class="fleet-card premium-fleet-card" data-category="aviation" style="display:none;">
+                <div class="pfc-header">
+                    <div class="pfc-meta-row">
+                        <span class="pfc-eng-label">NAVAL AIR COMMAND · AVIATION</span>
+                        <span class="pfc-scale-pill">초계기 3종 · 헬기 4종 운용</span>
                     </div>
-                    <p class="fleet-card-summary">한반도 주변 해역의 광역 해상 감시·정찰, 입체적인 대잠수함 작전 및 해상·상륙 기동 지원 임무를 수행하는 해군항공사령부의 핵심 항공 전력입니다.</p>
+                    <h3 class="pfc-title">항공병기</h3>
+                    <p class="pfc-desc">한반도 주변 해역의 광역 해상 감시·정찰, 입체적인 대잠수함 작전 및 해상·상륙 기동 지원 임무를 수행하는 해군항공사령부의 핵심 항공 전력입니다.</p>
                 </div>
-                <div class="fleet-card-body">
-                    <div class="ship-class-grid">
-                        <div class="ship-class-box">
+                <div class="pfc-body">
+                    <div class="pfc-grid">
+                        <div class="pfc-tile has-spec">
                             <div class="av-group">
                                 <div class="av-row">
                                     <span class="av-badge-slot"><span class="ship-badge">해상초계기</span></span>
@@ -415,7 +546,8 @@
                                 <div class="av-row"><span class="av-badge-slot"></span><span class="ship-class-name">P-3CK</span></div>
                             </div>
                         </div>
-                        <div class="ship-class-box">
+
+                        <div class="pfc-tile has-spec">
                             <div class="av-group">
                                 <div class="av-row"><span class="av-badge-slot"><span class="ship-badge">해상작전헬기</span></span><span class="ship-class-name">슈퍼링스</span></div>
                                 <div class="av-row"><span class="av-badge-slot"></span><span class="ship-class-name">와일드캣</span></div>
@@ -425,7 +557,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="ship-class-box">
+
+                        <div class="pfc-tile">
                             <div class="av-group">
                                 <div class="av-row"><span class="av-badge-slot"><span class="ship-badge">해상기동헬기</span></span><span class="ship-class-name">UH-60P</span></div>
                             </div>
@@ -439,21 +572,12 @@
                 일치하는 함정 또는 무기체계가 없습니다. 다른 키워드로 검색해 보세요.
             </div>
         </div>
-
-        <div class="vr-banner">
-            <div class="vr-banner-text">
-                <span class="vr-badge">360° VR EXPERIENCE</span>
-                <h3>대한민국 해군 이지스함 VR로 살펴보기</h3>
-                <p>해군 공식 VR 콘텐츠를 통해 이지스 구축함의 함교, 전투지휘실 및 주요 구역을 360도 가상현실로 생생하게 체험해 보세요.</p>
-            </div>
-            <a href="https://www.navy.mil.kr/mbshome/mbs/navy/vr/vr/index.html" target="_blank" rel="noopener noreferrer" class="btn-primary">이지스함 VR 체험하기 ↗</a>
-        </div>
     </div>
 
-    <!-- [서브 탭 2: 북한 함정과 비교 (상단 우측 배지 제거 + 상세 함종·척수 비교)] -->
+    <!-- [서브 탭 2: 북한 함정과 비교] -->
     <div id="forces-sub-nk-compare" class="sub-tab-panel">
 
-        <!-- 1. 상단 핵심 전력 요약 배너 (우측 배지 제거) -->
+        <!-- 1. 상단 핵심 전력 요약 배너 -->
         <div style="background:linear-gradient(135deg, var(--navy-dark) 0%, var(--navy-blue) 100%);color:#FFF;border-radius:8px;padding:1.5rem 1.75rem;margin-bottom:1.5rem;">
             <span style="display:inline-block;background:rgba(255,255,255,.16);padding:.2rem .6rem;border-radius:4px;font-size:.76rem;font-weight:700;letter-spacing:.04em;margin-bottom:.45rem;">NAVAL CAPABILITY COMPARISON</span>
             <h3 style="margin:0;font-size:1.25rem;font-weight:700;">남·북 해군 전력 구조 및 함정 보유 현황 상세 비교</h3>
